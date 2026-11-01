@@ -29,7 +29,7 @@
         { "navn": "Squash", "billede": "billeder/squash.webp" },
         { "navn": "Peberfrugt", "billede": "billeder/peberfrugt.webp" },
         { "navn": "Æble", "billede": "billeder/aeble.webp" },
-        { "navn": "Kerner", "billede": "billeder/kerner.svg" },
+        { "navn": "Kerner", "billede": "billeder/kerner.webp" },
         { "navn": "Radiser", "billede": "billeder/radiser.svg" },
         { "navn": "Rødløg", "billede": "billeder/roedloeg.svg" },
         { "navn": "Bladselleri", "billede": "billeder/bladselleri.svg" },
