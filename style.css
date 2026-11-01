@@ -324,7 +324,9 @@ body {
 
 /* Ansvarsfraskrivelse nederst: synlig, men diskret */
 .ansvar { color: var(--daempet); font-size: 0.75rem; line-height: 1.5; max-width: 34rem; justify-self: center; text-align: center; opacity: 0.85; }
-.ansvar p { margin: 0; }
+.ansvar p { margin: 0; text-wrap: balance; }
+.ansvar span { display: block; }
+.kost-note { text-wrap: balance; }
 
 @media (prefers-reduced-motion: reduce) {
   .skaal.ryster, #indhold.ny, #indhold g.ny, .liste li.skiftet .navn, .liste li.skiftet-tilbage .navn { animation: none; }
