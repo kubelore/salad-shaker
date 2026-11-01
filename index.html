@@ -34,6 +34,8 @@
       <p class="antal"><span id="antal"></span> · <button id="del" class="del-knap" type="button">Del salat</button> <span id="del-status" class="del-status" aria-live="polite"></span></p>
       <p class="taeller" id="taeller" hidden></p>
       <p class="hint" id="hint" hidden>Du kan også ryste telefonen.</p>
+      <div class="kost" id="kost" role="group" aria-label="Kostvalg"></div>
+      <p class="kost-note" id="kost-note" hidden>Kostvalgene er vejledende. Har du allergi, så tjek altid varedeklarationen.</p>
     </section>
 
     <section class="opskrift" aria-labelledby="opskrift-titel">
@@ -51,6 +53,12 @@
     <h2 id="galleri-titel">Ingredienserne</h2>
     <div id="galleri" class="galleri-grid"></div>
   </section>
+
+  <footer class="ansvar">
+    <h2>Om billeder og kostvalg</h2>
+    <p>Billederne af ingredienserne er lavet med AI og er kun til illustration. Ingredienslister, opskrifter og kostmærker (vegetar, vegansk, glutenfri, laktosefri, low carb osv.) er lavet med hjælp fra AI og er kun vejledende.</p>
+    <p><strong>Har du allergi eller en intolerance, så tjek altid varedeklarationen på det, du køber.</strong> Fx kan ost, pålæg, sennep, sojasauce, pesto og færdigkøbte dressinger indeholde gluten, laktose, nødder eller andre allergener.</p>
+  </footer>
 </div>
 <!--INDHOLD-SLUT-->
 <script src="app.js"></script>

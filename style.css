@@ -293,6 +293,25 @@ body {
 
 .fod { color: var(--daempet); font-size: 0.8125rem; }
 
+/* Kostvalg */
+.kost { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.375rem; max-width: 26rem; margin-top: 0.25rem; }
+.kost-knap {
+  font: inherit; font-size: 0.875rem; font-weight: 700;
+  padding: 0.375rem 0.75rem; border-radius: 99px; cursor: pointer;
+  border: 1px solid var(--kant); background: var(--flade); color: var(--tekst);
+}
+.kost-knap:hover { border-color: var(--blad); }
+.kost-knap:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; }
+.kost-knap[aria-pressed="true"] { background: var(--blad); border-color: var(--blad); color: var(--flade); }
+.kost-knap[aria-pressed="true"]::before { content: "✓ "; }
+.kost-note { margin: 0; max-width: 24rem; color: var(--daempet); font-size: 0.8125rem; text-align: center; }
+
+/* Ansvarsfraskrivelse nederst */
+.ansvar { color: var(--daempet); font-size: 0.875rem; line-height: 1.5; max-width: 40rem; justify-self: center; text-align: center; border-top: 1px solid var(--kant); padding-top: 1.25rem; }
+.ansvar h2 { font-family: var(--font-display); font-weight: 600; font-size: 1rem; color: var(--tekst); margin: 0 0 0.5rem; }
+.ansvar p { margin: 0 0 0.5rem; }
+.ansvar strong { color: var(--tekst); }
+
 @media (prefers-reduced-motion: reduce) {
   .skaal.ryster, #indhold.ny, #indhold g.ny, .liste li.skiftet .navn, .liste li.skiftet-tilbage .navn { animation: none; }
 }

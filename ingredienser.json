@@ -25,7 +25,7 @@
         { "navn": "Gulerod", "billede": "billeder/gulerod.webp" },
         { "navn": "Spirer", "billede": "billeder/spirer.webp" },
         { "navn": "Agurk", "billede": "billeder/agurk.webp" },
-        { "navn": "Croutoner", "billede": "billeder/croutoner.webp" },
+        { "navn": "Croutoner", "indeholder": ["gluten", "kulhydrat"], "billede": "billeder/croutoner.webp" },
         { "navn": "Squash", "billede": "billeder/squash.webp" },
         { "navn": "Peberfrugt", "billede": "billeder/peberfrugt.webp" },
         { "navn": "Æble", "billede": "billeder/aeble.webp" },
@@ -35,64 +35,64 @@
         { "navn": "Bladselleri", "billede": "billeder/bladselleri.webp" },
         { "navn": "Fennikel", "billede": "billeder/fennikel.webp" },
         { "navn": "Broccoli", "billede": "billeder/broccoli.webp" },
-        { "navn": "Ristede løg", "billede": "billeder/ristede-loeg.webp" }
+        { "navn": "Ristede løg", "indeholder": ["gluten", "kulhydrat"], "billede": "billeder/ristede-loeg.webp" }
       ]
     },
     {
       "id": "bloedt",
       "navn": "Noget blødt",
       "ingredienser": [
-        { "navn": "Bagt sød kartoffel", "billede": "billeder/soed-kartoffel.webp" },
-        { "navn": "Ost", "billede": "billeder/ost.webp" },
+        { "navn": "Bagt sød kartoffel", "indeholder": ["kulhydrat"], "billede": "billeder/soed-kartoffel.webp" },
+        { "navn": "Ost", "indeholder": ["mælk"], "billede": "billeder/ost.webp" },
         { "navn": "Avocado", "billede": "billeder/avocado.webp" },
         { "navn": "Tomat", "billede": "billeder/tomat.webp" },
-        { "navn": "Ris", "billede": "billeder/ris.webp" },
+        { "navn": "Ris", "indeholder": ["kulhydrat"], "billede": "billeder/ris.webp" },
         { "navn": "Oliven", "billede": "billeder/oliven.webp" },
-        { "navn": "Mozzarella", "billede": "billeder/mozzarella.webp" },
-        { "navn": "Nye kartofler", "billede": "billeder/kartofler.webp" },
+        { "navn": "Mozzarella", "indeholder": ["mælk"], "billede": "billeder/mozzarella.webp" },
+        { "navn": "Nye kartofler", "indeholder": ["kulhydrat"], "billede": "billeder/kartofler.webp" },
         { "navn": "Rødbede", "billede": "billeder/roedbede.webp" },
-        { "navn": "Pasta", "billede": "billeder/pasta.webp" },
-        { "navn": "Majs", "billede": "billeder/majs.webp" }
+        { "navn": "Pasta", "indeholder": ["gluten", "kulhydrat"], "billede": "billeder/pasta.webp" },
+        { "navn": "Majs", "indeholder": ["kulhydrat"], "billede": "billeder/majs.webp" }
       ]
     },
     {
       "id": "uventet",
       "navn": "Noget uventet",
       "ingredienser": [
-        { "navn": "Vandmelon", "billede": "billeder/vandmelon.webp" },
-        { "navn": "Hytteost", "billede": "billeder/hytteost.webp" },
-        { "navn": "Hummus", "billede": "billeder/hummus.webp" },
-        { "navn": "Bacon", "billede": "billeder/bacon.svg" },
+        { "navn": "Vandmelon", "indeholder": ["kulhydrat"], "billede": "billeder/vandmelon.webp" },
+        { "navn": "Hytteost", "indeholder": ["mælk"], "billede": "billeder/hytteost.webp" },
+        { "navn": "Hummus", "indeholder": ["kulhydrat"], "billede": "billeder/hummus.webp" },
+        { "navn": "Bacon", "indeholder": ["kød"], "billede": "billeder/bacon.svg" },
         { "navn": "Syltede grøntsager", "billede": "billeder/syltede-groentsager.svg" },
         { "navn": "Krydderurter", "billede": "billeder/krydderurter.svg" },
-        { "navn": "Tørret frugt", "billede": "billeder/toerret-frugt.svg" },
+        { "navn": "Tørret frugt", "indeholder": ["kulhydrat"], "billede": "billeder/toerret-frugt.svg" },
         { "navn": "Granatæble", "billede": "billeder/granataeble.svg" },
         { "navn": "Jordbær", "billede": "billeder/jordbaer.svg" },
-        { "navn": "Mango", "billede": "billeder/mango.svg" },
-        { "navn": "Appelsin", "billede": "billeder/appelsin.svg" },
-        { "navn": "Vindruer", "billede": "billeder/vindruer.svg" },
+        { "navn": "Mango", "indeholder": ["kulhydrat"], "billede": "billeder/mango.svg" },
+        { "navn": "Appelsin", "indeholder": ["kulhydrat"], "billede": "billeder/appelsin.svg" },
+        { "navn": "Vindruer", "indeholder": ["kulhydrat"], "billede": "billeder/vindruer.svg" },
         { "navn": "Kapers", "billede": "billeder/kapers.svg" },
-        { "navn": "Gedeost", "billede": "billeder/gedeost.svg" }
+        { "navn": "Gedeost", "indeholder": ["mælk"], "billede": "billeder/gedeost.svg" }
       ]
     },
     {
       "id": "protein",
       "navn": "Protein",
       "ingredienser": [
-        { "navn": "Bønner", "billede": "billeder/boenner.svg" },
-        { "navn": "Æg", "billede": "billeder/aeg.svg" },
-        { "navn": "Tun", "billede": "billeder/tun.svg" },
-        { "navn": "Kylling", "billede": "billeder/kylling.svg" },
-        { "navn": "Bøf", "billede": "billeder/boef.svg" },
+        { "navn": "Bønner", "indeholder": ["kulhydrat"], "billede": "billeder/boenner.svg" },
+        { "navn": "Æg", "indeholder": ["æg"], "billede": "billeder/aeg.svg" },
+        { "navn": "Tun", "indeholder": ["fisk"], "billede": "billeder/tun.svg" },
+        { "navn": "Kylling", "indeholder": ["kød"], "billede": "billeder/kylling.svg" },
+        { "navn": "Bøf", "indeholder": ["kød"], "billede": "billeder/boef.svg" },
         { "navn": "Tofu", "billede": "billeder/tofu.svg" },
-        { "navn": "Ærter", "billede": "billeder/aerter.svg" },
-        { "navn": "Quinoa", "billede": "billeder/quinoa.svg" },
+        { "navn": "Ærter", "indeholder": ["kulhydrat"], "billede": "billeder/aerter.svg" },
+        { "navn": "Quinoa", "indeholder": ["kulhydrat"], "billede": "billeder/quinoa.svg" },
         { "navn": "Nødder", "billede": "billeder/noedder.svg" },
-        { "navn": "Kikærter", "billede": "billeder/kikaerter.svg" },
-        { "navn": "Rejer", "billede": "billeder/rejer.svg" },
-        { "navn": "Røget laks", "billede": "billeder/roeget-laks.svg" },
-        { "navn": "Linser", "billede": "billeder/linser.svg" },
-        { "navn": "Skinke", "billede": "billeder/skinke.svg" }
+        { "navn": "Kikærter", "indeholder": ["kulhydrat"], "billede": "billeder/kikaerter.svg" },
+        { "navn": "Rejer", "indeholder": ["fisk"], "billede": "billeder/rejer.svg" },
+        { "navn": "Røget laks", "indeholder": ["fisk"], "billede": "billeder/roeget-laks.svg" },
+        { "navn": "Linser", "indeholder": ["kulhydrat"], "billede": "billeder/linser.svg" },
+        { "navn": "Skinke", "indeholder": ["kød"], "billede": "billeder/skinke.svg" }
       ]
     },
     {
@@ -101,11 +101,11 @@
       "ingredienser": [
         { "navn": "Sennepsdressing", "farve": "#D9A520", "opskrift": ["3 spsk olivenolie", "1 spsk dijonsennep", "1 spsk æblecidereddike", "1 tsk honning"] },
         { "navn": "Tahindressing", "farve": "#C9A77A", "opskrift": ["2 spsk tahin", "1 spsk citronsaft", "3 spsk koldt vand", "½ fed revet hvidløg"] },
-        { "navn": "Yoghurtdressing", "farve": "#EFEBE0", "opskrift": ["1 dl græsk yoghurt", "1 spsk citronsaft", "1 spsk hakket dild"] },
+        { "navn": "Yoghurtdressing", "indeholder": ["mælk"], "farve": "#EFEBE0", "opskrift": ["1 dl græsk yoghurt", "1 spsk citronsaft", "1 spsk hakket dild"] },
         { "navn": "Vinaigrette", "farve": "#B5893A", "opskrift": ["3 spsk olivenolie", "1 spsk rødvinseddike", "1 tsk sennep"] },
-        { "navn": "Pestodressing", "farve": "#5E8C31", "opskrift": ["2 spsk pesto", "2 spsk olivenolie", "1 spsk citronsaft"] },
-        { "navn": "Frugtdressing", "farve": "#E86A5B", "opskrift": ["3 spsk appelsinjuice", "2 spsk olivenolie", "1 spsk mosede hindbær", "1 tsk honning"] },
-        { "navn": "Cæsardressing", "farve": "#E8DDB5", "opskrift": ["3 spsk mayonnaise", "2 spsk revet parmesan", "1 tsk citronsaft", "1 tsk dijonsennep", "½ fed revet hvidløg"] },
+        { "navn": "Pestodressing", "indeholder": ["mælk"], "farve": "#5E8C31", "opskrift": ["2 spsk pesto", "2 spsk olivenolie", "1 spsk citronsaft"] },
+        { "navn": "Frugtdressing", "indeholder": ["kulhydrat"], "farve": "#E86A5B", "opskrift": ["3 spsk appelsinjuice", "2 spsk olivenolie", "1 spsk mosede hindbær", "1 tsk honning"] },
+        { "navn": "Cæsardressing", "indeholder": ["æg", "mælk"], "farve": "#E8DDB5", "opskrift": ["3 spsk mayonnaise", "2 spsk revet parmesan", "1 tsk citronsaft", "1 tsk dijonsennep", "½ fed revet hvidløg"] },
         { "navn": "Balsamicodressing", "farve": "#5B2A1E", "opskrift": ["3 spsk olivenolie", "1 spsk balsamico", "1 tsk honning"] },
         { "navn": "Citrondressing", "farve": "#F1D54A", "opskrift": ["3 spsk olivenolie", "Revet skal og saft af ½ citron", "1 tsk honning"] },
         { "navn": "Jordnøddedressing", "farve": "#B9773A", "opskrift": ["2 spsk peanutbutter", "1 spsk soja", "1 spsk limesaft", "1 tsk honning", "2-3 spsk varmt vand"] },
