@@ -35,7 +35,7 @@
         { "navn": "Bladselleri", "billede": "billeder/bladselleri.webp" },
         { "navn": "Fennikel", "billede": "billeder/fennikel.webp" },
         { "navn": "Broccoli", "billede": "billeder/broccoli.webp" },
-        { "navn": "Ristede løg", "billede": "billeder/ristede-loeg.svg" }
+        { "navn": "Ristede løg", "billede": "billeder/ristede-loeg.webp" }
       ]
     },
     {
