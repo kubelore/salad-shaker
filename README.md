@@ -80,6 +80,7 @@ En ingrediens kan vises på tre måder:
 | `"billede"` | `"billede": "billeder/radiser.svg"` | En tegning. Upload filen til mappen `billeder` på GitHub (**Add file → Upload files**). |
 | `"farve"` | `"farve": "#E86A5B"` | Kun til dressinger: striber i den farve hen over salaten. |
 | `"opskrift"` | `"opskrift": ["3 spsk olivenolie", "1 spsk eddike"]` | Kun til dressinger: en kort ingrediensliste, der vises under salaten. |
+| `"indeholder"` | `"indeholder": ["mælk", "gluten"]` | Bruges af kostvalgene. Mulige mærker: `kød`, `fisk`, `æg`, `mælk`, `gluten`, `kulhydrat`. Udelad feltet, hvis ingrediensen passer til alle kostvalg. |
 
 Vil du have en tegning i samme stil som de andre, så bed Claude om at tegne den. Så får du en SVG-fil, der passer ind.
 
