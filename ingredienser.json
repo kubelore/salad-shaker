@@ -50,7 +50,7 @@
         { "navn": "Oliven", "billede": "billeder/oliven.webp" },
         { "navn": "Mozzarella", "billede": "billeder/mozzarella.webp" },
         { "navn": "Nye kartofler", "billede": "billeder/kartofler.webp" },
-        { "navn": "Rødbede", "billede": "billeder/roedbede.svg" },
+        { "navn": "Rødbede", "billede": "billeder/roedbede.webp" },
         { "navn": "Pasta", "billede": "billeder/pasta.svg" },
         { "navn": "Majs", "billede": "billeder/majs.svg" }
       ]
