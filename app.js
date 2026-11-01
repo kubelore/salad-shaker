@@ -133,7 +133,18 @@ function lavIkon(ingrediens) {
   return ikon;
 }
 
-const RYST_IKON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const PIL = (d) => `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${d}" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const PIL_TILBAGE = PIL("M15 5l-7 7 7 7");
+const PIL_FREM = PIL("M9 5l7 7-7 7");
+
+function lavPil(kat, retning) {
+  const knap = document.createElement("button");
+  knap.type = "button";
+  knap.className = "pil " + (retning < 0 ? "tilbage" : "frem");
+  knap.innerHTML = retning < 0 ? PIL_TILBAGE : PIL_FREM;
+  knap.addEventListener("click", () => skiftEn(kat, retning));
+  return knap;
+}
 
 function opdaterRaekke(kat, ingrediens) {
   const liste = document.getElementById("liste");
@@ -146,21 +157,22 @@ function opdaterRaekke(kat, ingrediens) {
     tekst.innerHTML = '<span class="kat"></span><span class="navn"></span>';
     tekst.querySelector(".kat").innerHTML = '<span class="kat-navn"></span> <span class="nr"></span>';
     tekst.querySelector(".kat-navn").textContent = kat.navn;
-    const knap = document.createElement("button");
-    knap.type = "button";
-    knap.className = "ryst-en";
-    knap.innerHTML = RYST_IKON;
-    knap.addEventListener("click", () => shakeEn(kat));
-    li.append(document.createElement("span"), tekst, knap);
+    const pile = document.createElement("span");
+    pile.className = "pile";
+    pile.append(lavPil(kat, -1), lavPil(kat, 1));
+    li.append(document.createElement("span"), tekst, pile);
     liste.appendChild(li);
   }
   li.firstChild.replaceWith(lavIkon(ingrediens));
   li.querySelector(".navn").textContent = ingrediens.navn;
-  const knap = li.querySelector(".ryst-en");
   const nr = kat.ingredienser.indexOf(ingrediens) + 1;
-  li.querySelector(".nr").textContent = `${nr}/${kat.ingredienser.length}`;
-  knap.setAttribute("aria-label", `Næste i ${kat.navn.toLowerCase()} (${nr} af ${kat.ingredienser.length})`);
-  knap.title = `Næste ${kat.navn.toLowerCase()} (${nr} af ${kat.ingredienser.length})`;
+  const ialt = kat.ingredienser.length;
+  li.querySelector(".nr").textContent = `${nr}/${ialt}`;
+  const navn = kat.navn.toLowerCase();
+  li.querySelector(".pil.tilbage").setAttribute("aria-label", `Forrige ${navn} (${nr} af ${ialt})`);
+  li.querySelector(".pil.tilbage").title = `Forrige ${navn}`;
+  li.querySelector(".pil.frem").setAttribute("aria-label", `Næste ${navn} (${nr} af ${ialt})`);
+  li.querySelector(".pil.frem").title = `Næste ${navn}`;
   return li;
 }
 
@@ -182,23 +194,23 @@ function shake() {
   genstart(document.getElementById("indhold"), "ny");
 }
 
-// Næste ingrediens i listen (starter forfra efter den sidste), så man kan bladre gennem dem alle.
-function naeste(kat) {
+// Gå frem (+1) eller tilbage (-1) i listen og start forfra/bagfra ved enderne, så man kan bladre gennem dem alle.
+function bladr(kat, retning) {
   const liste = kat.ingredienser;
   if (liste.length === 0) return null;
-  const i = (liste.indexOf(sidste[kat.id]) + 1) % liste.length;
+  const nu = liste.indexOf(sidste[kat.id]);
+  const i = ((nu < 0 ? 0 : nu + retning) % liste.length + liste.length) % liste.length;
   sidste[kat.id] = liste[i];
   return liste[i];
 }
 
-// Skift kun én kategori til den næste ingrediens i listen.
-function shakeEn(kat) {
-  const ingrediens = naeste(kat);
+// Skift kun én kategori til den forrige eller næste ingrediens i listen.
+function skiftEn(kat, retning) {
+  const ingrediens = bladr(kat, retning);
   if (!ingrediens) return;
   genstart(tegnKategori(kat, ingrediens), "ny");
   const li = opdaterRaekke(kat, ingrediens);
-  genstart(li, "skiftet");
-  genstart(li.querySelector(".ryst-en"), "drejer");
+  genstart(li, retning < 0 ? "skiftet-tilbage" : "skiftet");
 }
 
 function visAntal() {
