@@ -218,6 +218,21 @@ function genstart(el, klasse) {
   el.classList.add(klasse);
 }
 
+// Kokken ryster skålen på en af fire måder, aldrig den samme to gange i træk.
+const RYSTEMAADER = ["side", "hop", "rund", "vip"];
+let sidsteMaade = "";
+function rystSkaal() {
+  const skaal = document.getElementById("skaal");
+  const muligheder = RYSTEMAADER.filter((m) => m !== sidsteMaade);
+  const maade = muligheder[Math.floor(Math.random() * muligheder.length)];
+  sidsteMaade = maade;
+  for (const m of RYSTEMAADER) skaal.classList.remove("ryst-" + m);
+  void skaal.getBoundingClientRect();
+  skaal.classList.add("ryst-" + maade, "anstreng");
+  clearTimeout(rystSkaal.t);
+  rystSkaal.t = setTimeout(() => skaal.classList.remove("anstreng"), 800);
+}
+
 // Læg en ingrediens i skålen med en lille forsinkelse, så de falder i én efter én.
 function drys(gruppe, nr) {
   gruppe.style.animationDelay = `${0.25 + nr * 0.09}s`;
@@ -235,7 +250,7 @@ function shake(talt = true) {
     opdaterRaekke(kat, ingrediens);
   }
   opdaterGalleri();
-  genstart(document.getElementById("skaal"), "ryster");
+  rystSkaal();
   if (talt) {
     if (navigator.vibrate) navigator.vibrate([25, 60, 25, 60, 40]);
     taelOp();

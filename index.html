@@ -22,13 +22,42 @@
         <h1>Salad shaker</h1>
         <p class="intro">Tryk på Shake, så vælger vi én ingrediens fra hver kategori.</p>
       </header>
-      <svg id="skaal" class="skaal" viewBox="24 45 352 245" role="img" aria-labelledby="skaal-titel">
-        <title id="skaal-titel">Skål med salat</title>
+      <svg id="skaal" class="skaal" viewBox="14 -100 372 390" role="img" aria-labelledby="skaal-titel">
+        <title id="skaal-titel">En kok ryster en skål med salat</title>
         <ellipse class="skaal-bund-skygge" cx="200" cy="275" rx="120" ry="10"></ellipse>
-        <ellipse class="skaal-inde" cx="200" cy="132" rx="170" ry="42"></ellipse>
-        <g id="indhold"></g>
-        <path class="skaal-front" d="M30 132 C 34 222, 118 268, 200 268 C 282 268, 366 222, 370 132 C 318 170, 82 170, 30 132 Z"></path>
-        <path class="skaal-kant" d="M30 132 C 82 170, 318 170, 370 132"></path>
+        <g id="kok" class="kok"><g transform="translate(0 -22) scale(1.08) translate(-15 0)">
+          <path class="kok-krop" d="M118 150 C 116 80, 140 38, 200 34 C 260 38, 284 80, 282 150 Z"></path>
+          <path class="kok-knap" d="M200 52 V 140"></path>
+          <circle class="kok-knap-prik" cx="188" cy="70" r="3"></circle><circle class="kok-knap-prik" cx="212" cy="70" r="3"></circle>
+          <circle class="kok-knap-prik" cx="188" cy="96" r="3"></circle><circle class="kok-knap-prik" cx="212" cy="96" r="3"></circle>
+          <rect class="kok-hud" x="188" y="18" width="24" height="20" rx="6"></rect>
+          <g class="kok-hoved">
+            <circle class="kok-hud" cx="200" cy="-2" r="30"></circle>
+            <path class="kok-hue" d="M174 -22 h52 v-22 c 14 -4 16 -26 0 -28 c -2 -16 -22 -18 -26 -6 c -6 -12 -26 -10 -26 6 c -16 2 -14 24 0 28 Z"></path>
+            <path class="kok-hue-kant" d="M172 -24 h56"></path>
+            <circle class="kok-kind" cx="181" cy="8" r="6"></circle><circle class="kok-kind" cx="219" cy="8" r="6"></circle>
+            <g class="ansigt-glad">
+              <circle class="kok-oeje" cx="189" cy="-4" r="3.6"></circle><circle class="kok-oeje" cx="211" cy="-4" r="3.6"></circle>
+              <path class="kok-mund" d="M190 10 q 10 9 20 0"></path>
+            </g>
+            <g class="ansigt-ryst">
+              <path class="kok-streg" d="M184 -8 l 8 4 l -8 4"></path><path class="kok-streg" d="M216 -8 l -8 4 l 8 4"></path>
+              <ellipse class="kok-mund-aaben" cx="200" cy="13" rx="6" ry="7"></ellipse>
+            </g>
+          </g>
+        </g></g>
+        <g id="rystgruppe" class="rystgruppe">
+          <path class="kok-aerme-kant" d="M128 44 C 84 56, 50 88, 38 128"></path>
+          <path class="kok-aerme-kant" d="M272 44 C 316 56, 350 88, 362 128"></path>
+          <path class="kok-aerme" d="M128 44 C 84 56, 50 88, 38 128"></path>
+          <path class="kok-aerme" d="M272 44 C 316 56, 350 88, 362 128"></path>
+          <ellipse class="skaal-inde" cx="200" cy="132" rx="170" ry="42"></ellipse>
+          <g id="indhold"></g>
+          <path class="skaal-front" d="M30 132 C 34 222, 118 268, 200 268 C 282 268, 366 222, 370 132 C 318 170, 82 170, 30 132 Z"></path>
+          <path class="skaal-kant" d="M30 132 C 82 170, 318 170, 370 132"></path>
+          <circle class="kok-hud kok-haand" cx="34" cy="136" r="14"></circle>
+          <circle class="kok-hud kok-haand" cx="366" cy="136" r="14"></circle>
+        </g>
       </svg>
       <button id="shake" class="shake-knap" type="button">Shake</button>
       <p class="antal"><span id="antal"></span> · <button id="del" class="del-knap" type="button">Del salat</button> <span id="del-status" class="del-status" aria-live="polite"></span></p>
