@@ -1,4 +1,4 @@
-# Salat shaker
+# Salad shaker
 
 En simpel webside på dansk: tryk på **Shake** (eller ryst telefonen), og siden vælger én tilfældig ingrediens fra hver kategori og tegner salaten i en skål.
 

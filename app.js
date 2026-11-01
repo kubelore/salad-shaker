@@ -1,4 +1,4 @@
-// Salat shaker: vælger én tilfældig ingrediens fra hver kategori og lægger den i skålen.
+// Salad shaker: vælger én tilfældig ingrediens fra hver kategori og lægger den i skålen.
 
 // Hvor hver kategori lægges i skålen (x, y i skålens koordinater) og hvor stor den tegnes.
 const PLACERING = {
