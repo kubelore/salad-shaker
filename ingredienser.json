@@ -46,7 +46,7 @@
         { "navn": "Ost", "billede": "billeder/ost.webp" },
         { "navn": "Avocado", "billede": "billeder/avocado.webp" },
         { "navn": "Tomat", "billede": "billeder/tomat.webp" },
-        { "navn": "Ris", "billede": "billeder/ris.svg" },
+        { "navn": "Ris", "billede": "billeder/ris.webp" },
         { "navn": "Oliven", "billede": "billeder/oliven.webp" },
         { "navn": "Mozzarella", "billede": "billeder/mozzarella.svg" },
         { "navn": "Nye kartofler", "billede": "billeder/kartofler.svg" },
