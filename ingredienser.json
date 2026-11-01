@@ -11,7 +11,11 @@
         { "navn": "Kålblade", "billede": "billeder/kaalblade.svg" },
         { "navn": "Rucola", "billede": "billeder/rucola.svg" },
         { "navn": "Ærteskud", "billede": "billeder/aerteskud.svg" },
-        { "navn": "Hvidkål", "billede": "billeder/hvidkaal.svg" }
+        { "navn": "Hvidkål", "billede": "billeder/hvidkaal.svg" },
+        { "navn": "Rødkål", "billede": "billeder/roedkaal.svg" },
+        { "navn": "Icebergsalat", "billede": "billeder/iceberg.svg" },
+        { "navn": "Brøndkarse", "billede": "billeder/broendkarse.svg" },
+        { "navn": "Rosenkål", "billede": "billeder/rosenkaal.svg" }
       ]
     },
     {
@@ -25,7 +29,13 @@
         { "navn": "Squash", "billede": "billeder/squash.svg" },
         { "navn": "Peberfrugt", "billede": "billeder/peberfrugt.svg" },
         { "navn": "Æble", "billede": "billeder/aeble.svg" },
-        { "navn": "Kerner", "billede": "billeder/kerner.svg" }
+        { "navn": "Kerner", "billede": "billeder/kerner.svg" },
+        { "navn": "Radiser", "billede": "billeder/radiser.svg" },
+        { "navn": "Rødløg", "billede": "billeder/roedloeg.svg" },
+        { "navn": "Bladselleri", "billede": "billeder/bladselleri.svg" },
+        { "navn": "Fennikel", "billede": "billeder/fennikel.svg" },
+        { "navn": "Broccoli", "billede": "billeder/broccoli.svg" },
+        { "navn": "Ristede løg", "billede": "billeder/ristede-loeg.svg" }
       ]
     },
     {
@@ -37,7 +47,12 @@
         { "navn": "Avocado", "billede": "billeder/avocado.svg" },
         { "navn": "Tomat", "billede": "billeder/tomat.svg" },
         { "navn": "Ris", "billede": "billeder/ris.svg" },
-        { "navn": "Oliven", "billede": "billeder/oliven.svg" }
+        { "navn": "Oliven", "billede": "billeder/oliven.svg" },
+        { "navn": "Mozzarella", "billede": "billeder/mozzarella.svg" },
+        { "navn": "Nye kartofler", "billede": "billeder/kartofler.svg" },
+        { "navn": "Rødbede", "billede": "billeder/roedbede.svg" },
+        { "navn": "Pasta", "billede": "billeder/pasta.svg" },
+        { "navn": "Majs", "billede": "billeder/majs.svg" }
       ]
     },
     {
@@ -50,7 +65,14 @@
         { "navn": "Bacon", "billede": "billeder/bacon.svg" },
         { "navn": "Syltede grøntsager", "billede": "billeder/syltede-groentsager.svg" },
         { "navn": "Krydderurter", "billede": "billeder/krydderurter.svg" },
-        { "navn": "Tørret frugt", "billede": "billeder/toerret-frugt.svg" }
+        { "navn": "Tørret frugt", "billede": "billeder/toerret-frugt.svg" },
+        { "navn": "Granatæble", "billede": "billeder/granataeble.svg" },
+        { "navn": "Jordbær", "billede": "billeder/jordbaer.svg" },
+        { "navn": "Mango", "billede": "billeder/mango.svg" },
+        { "navn": "Appelsin", "billede": "billeder/appelsin.svg" },
+        { "navn": "Vindruer", "billede": "billeder/vindruer.svg" },
+        { "navn": "Kapers", "billede": "billeder/kapers.svg" },
+        { "navn": "Gedeost", "billede": "billeder/gedeost.svg" }
       ]
     },
     {
@@ -65,7 +87,12 @@
         { "navn": "Tofu", "billede": "billeder/tofu.svg" },
         { "navn": "Ærter", "billede": "billeder/aerter.svg" },
         { "navn": "Quinoa", "billede": "billeder/quinoa.svg" },
-        { "navn": "Nødder", "billede": "billeder/noedder.svg" }
+        { "navn": "Nødder", "billede": "billeder/noedder.svg" },
+        { "navn": "Kikærter", "billede": "billeder/kikaerter.svg" },
+        { "navn": "Rejer", "billede": "billeder/rejer.svg" },
+        { "navn": "Røget laks", "billede": "billeder/roeget-laks.svg" },
+        { "navn": "Linser", "billede": "billeder/linser.svg" },
+        { "navn": "Skinke", "billede": "billeder/skinke.svg" }
       ]
     },
     {
@@ -77,7 +104,13 @@
         { "navn": "Yoghurtdressing", "farve": "#EFEBE0" },
         { "navn": "Vinaigrette", "farve": "#B5893A" },
         { "navn": "Pestodressing", "farve": "#5E8C31" },
-        { "navn": "Frugtdressing", "farve": "#E86A5B" }
+        { "navn": "Frugtdressing", "farve": "#E86A5B" },
+        { "navn": "Cæsardressing", "farve": "#E8DDB5" },
+        { "navn": "Balsamicodressing", "farve": "#5B2A1E" },
+        { "navn": "Citrondressing", "farve": "#F1D54A" },
+        { "navn": "Jordnøddedressing", "farve": "#B9773A" },
+        { "navn": "Sesamdressing", "farve": "#C99A5A" },
+        { "navn": "Lime-koriander-dressing", "farve": "#8DBF4A" }
       ]
     }
   ]
