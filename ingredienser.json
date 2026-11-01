@@ -24,7 +24,7 @@
       "ingredienser": [
         { "navn": "Gulerod", "billede": "billeder/gulerod.webp" },
         { "navn": "Spirer", "billede": "billeder/spirer.webp" },
-        { "navn": "Agurk", "billede": "billeder/agurk.svg" },
+        { "navn": "Agurk", "billede": "billeder/agurk.webp" },
         { "navn": "Croutoner", "billede": "billeder/croutoner.svg" },
         { "navn": "Squash", "billede": "billeder/squash.svg" },
         { "navn": "Peberfrugt", "billede": "billeder/peberfrugt.svg" },
