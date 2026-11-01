@@ -69,74 +69,104 @@ function tegnDressing(gruppe, ingrediens) {
   }
 }
 
-function shake() {
-  const valgt = kategorier.map((kat) => ({ kat, ingrediens: vaelg(kat) })).filter((v) => v.ingrediens);
-
-  // Skålen
-  const gruppe = document.getElementById("indhold");
-  gruppe.replaceChildren();
-  for (const { kat, ingrediens } of valgt) {
-    if (kat.id === "dressing") continue;
-    tegnIngrediens(gruppe, ingrediens, PLACERING[kat.id] || STANDARD_PLACERING);
+// Lag i skålen: én gruppe pr. kategori, så en enkelt kategori kan skiftes ud.
+function kategoriGruppe(kat) {
+  const indhold = document.getElementById("indhold");
+  let gruppe = indhold.querySelector(`g[data-kat="${kat.id}"]`);
+  if (!gruppe) {
+    gruppe = document.createElementNS(SVG_NS, "g");
+    gruppe.dataset.kat = kat.id;
+    // Dressingen ligger altid øverst.
+    if (kat.id === "dressing") indhold.appendChild(gruppe);
+    else indhold.insertBefore(gruppe, indhold.querySelector('g[data-kat="dressing"]'));
   }
-  const dressing = valgt.find((v) => v.kat.id === "dressing");
-  if (dressing) tegnDressing(gruppe, dressing.ingrediens);
-
-  // Listen
-  const liste = document.getElementById("liste");
-  liste.replaceChildren(
-    ...valgt.map(({ kat, ingrediens }) => {
-      const li = document.createElement("li");
-      const ikon = document.createElement("span");
-      if (ingrediens.billede) {
-        ikon.className = "ikon";
-        const img = document.createElement("img");
-        img.src = ingrediens.billede;
-        img.alt = "";
-        ikon.appendChild(img);
-      } else if (ingrediens.farve && !ingrediens.emoji) {
-        ikon.className = "prik";
-        ikon.style.background = ingrediens.farve;
-      } else {
-        ikon.className = "ikon";
-        ikon.textContent = ingrediens.emoji || "•";
-      }
-      ikon.setAttribute("aria-hidden", "true");
-      const tekst = document.createElement("span");
-      tekst.innerHTML = '<span class="kat"></span><span class="navn"></span>';
-      tekst.querySelector(".kat").textContent = kat.navn;
-      tekst.querySelector(".navn").textContent = ingrediens.navn;
-      li.append(ikon, tekst);
-      return li;
-    })
-  );
-
-  // Animation
-  const skaal = document.getElementById("skaal");
-  skaal.classList.remove("ryster");
-  gruppe.classList.remove("ny");
-  void skaal.getBoundingClientRect();
-  skaal.classList.add("ryster");
-  gruppe.classList.add("ny");
+  return gruppe;
 }
 
-function visAlle() {
-  const boks = document.getElementById("alle-liste");
-  boks.replaceChildren(
-    ...kategorier.map((kat) => {
-      const div = document.createElement("div");
-      const h = document.createElement("h3");
-      h.textContent = `${kat.navn} (${kat.ingredienser.length})`;
-      const ul = document.createElement("ul");
-      for (const ing of kat.ingredienser) {
-        const li = document.createElement("li");
-        li.textContent = ing.navn;
-        ul.appendChild(li);
-      }
-      div.append(h, ul);
-      return div;
-    })
-  );
+function tegnKategori(kat, ingrediens) {
+  const gruppe = kategoriGruppe(kat);
+  gruppe.replaceChildren();
+  if (kat.id === "dressing") tegnDressing(gruppe, ingrediens);
+  else tegnIngrediens(gruppe, ingrediens, PLACERING[kat.id] || STANDARD_PLACERING);
+  return gruppe;
+}
+
+function lavIkon(ingrediens) {
+  const ikon = document.createElement("span");
+  if (ingrediens.billede) {
+    ikon.className = "ikon";
+    const img = document.createElement("img");
+    img.src = ingrediens.billede;
+    img.alt = "";
+    ikon.appendChild(img);
+  } else if (ingrediens.farve && !ingrediens.emoji) {
+    ikon.className = "prik";
+    ikon.style.background = ingrediens.farve;
+  } else {
+    ikon.className = "ikon";
+    ikon.textContent = ingrediens.emoji || "•";
+  }
+  ikon.setAttribute("aria-hidden", "true");
+  return ikon;
+}
+
+const RYST_IKON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+function opdaterRaekke(kat, ingrediens) {
+  const liste = document.getElementById("liste");
+  let li = liste.querySelector(`li[data-kat="${kat.id}"]`);
+  if (!li) {
+    li = document.createElement("li");
+    li.dataset.kat = kat.id;
+    const tekst = document.createElement("span");
+    tekst.className = "tekst";
+    tekst.innerHTML = '<span class="kat"></span><span class="navn"></span>';
+    tekst.querySelector(".kat").textContent = kat.navn;
+    const knap = document.createElement("button");
+    knap.type = "button";
+    knap.className = "ryst-en";
+    knap.innerHTML = RYST_IKON;
+    knap.addEventListener("click", () => shakeEn(kat));
+    li.append(document.createElement("span"), tekst, knap);
+    liste.appendChild(li);
+  }
+  li.firstChild.replaceWith(lavIkon(ingrediens));
+  li.querySelector(".navn").textContent = ingrediens.navn;
+  const knap = li.querySelector(".ryst-en");
+  knap.setAttribute("aria-label", `Skift ${ingrediens.navn} ud med noget andet fra ${kat.navn.toLowerCase()}`);
+  knap.title = `Skift ${kat.navn.toLowerCase()}`;
+  return li;
+}
+
+function genstart(el, klasse) {
+  el.classList.remove(klasse);
+  void el.getBoundingClientRect();
+  el.classList.add(klasse);
+}
+
+// Shake hele salaten.
+function shake() {
+  for (const kat of kategorier) {
+    const ingrediens = vaelg(kat);
+    if (!ingrediens) continue;
+    tegnKategori(kat, ingrediens);
+    opdaterRaekke(kat, ingrediens);
+  }
+  genstart(document.getElementById("skaal"), "ryster");
+  genstart(document.getElementById("indhold"), "ny");
+}
+
+// Shake kun én kategori.
+function shakeEn(kat) {
+  const ingrediens = vaelg(kat);
+  if (!ingrediens) return;
+  genstart(tegnKategori(kat, ingrediens), "ny");
+  const li = opdaterRaekke(kat, ingrediens);
+  genstart(li, "skiftet");
+  genstart(li.querySelector(".ryst-en"), "drejer");
+}
+
+function visAntal() {
   const antal = kategorier.reduce((sum, k) => sum * Math.max(1, k.ingredienser.length), 1);
   document.getElementById("antal").textContent = `${antal.toLocaleString("da-DK")} mulige salater`;
 }
@@ -172,7 +202,7 @@ async function startRystSensor() {
 hentIngredienser()
   .then((data) => {
     kategorier = data.kategorier;
-    visAlle();
+    visAntal();
     shake();
     document.getElementById("shake").addEventListener("click", () => {
       shake();
