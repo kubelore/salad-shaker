@@ -8,7 +8,7 @@
         { "navn": "Spinat", "billede": "billeder/spinat.webp" },
         { "navn": "Grønkål", "billede": "billeder/groenkaal.webp" },
         { "navn": "Bladbede", "billede": "billeder/bladbede.webp" },
-        { "navn": "Kålblade", "billede": "billeder/kaalblade.svg" },
+        { "navn": "Kålblade", "billede": "billeder/kaalblade.webp" },
         { "navn": "Rucola", "billede": "billeder/rucola.svg" },
         { "navn": "Ærteskud", "billede": "billeder/aerteskud.svg" },
         { "navn": "Hvidkål", "billede": "billeder/hvidkaal.svg" },
