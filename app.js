@@ -100,8 +100,11 @@ function lavIkon(ingrediens) {
     img.alt = "";
     ikon.appendChild(img);
   } else if (ingrediens.farve && !ingrediens.emoji) {
-    ikon.className = "prik";
-    ikon.style.background = ingrediens.farve;
+    ikon.className = "ikon";
+    const klat = document.createElement("span");
+    klat.className = "klat";
+    klat.style.background = ingrediens.farve;
+    ikon.appendChild(klat);
   } else {
     ikon.className = "ikon";
     ikon.textContent = ingrediens.emoji || "•";

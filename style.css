@@ -70,16 +70,18 @@ body {
   align-items: start;
 }
 @media (min-width: 760px) {
-  .hoved { grid-template-columns: 1.1fr 1fr; }
+  .hoved { grid-template-columns: 1.1fr 1fr; column-gap: 3rem; align-items: center; }
 }
 
 .skaal-kort {
   display: grid;
   justify-items: center;
   gap: 1rem;
+  align-content: start;
   min-width: 0;
 }
-.skaal { width: 100%; max-width: 30rem; height: auto; overflow: visible; }
+.top { justify-self: stretch; }
+.skaal { width: 100%; height: auto; overflow: visible; margin-top: 1rem; }
 .skaal-inde { fill: var(--skaal-inde); stroke: var(--skaal-kant); stroke-width: 3; }
 .skaal-front { fill: var(--skaal); }
 .skaal-kant { fill: none; stroke: var(--skaal-kant); stroke-width: 4; stroke-linecap: round; }
@@ -136,15 +138,27 @@ body {
 .liste { list-style: none; margin: 0; padding: 0; display: grid; }
 .liste li {
   display: grid;
-  grid-template-columns: 2.25rem 1fr auto;
+  grid-template-columns: 2.75rem 1fr auto;
   align-items: center;
   column-gap: 0.75rem;
   padding-block: 0.625rem;
   border-top: 1px solid var(--kant);
 }
 .liste li:first-child { border-top: none; }
-.liste .ikon { font-size: 1.6rem; text-align: center; line-height: 1; }
-.liste .ikon img { width: 2.25rem; height: 2.25rem; display: block; margin: 0 auto; }
+.liste .ikon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--skaal-inde);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.liste .ikon { position: relative; }
+.liste .ikon img { position: absolute; width: 170%; height: 170%; max-width: none; left: -35%; top: -40%; }
+.liste .ikon .klat { width: 55%; height: 55%; border-radius: 50%; box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.12); }
 .liste .prik { width: 1.25rem; height: 1.25rem; border-radius: 50%; margin: 0 auto; border: 1px solid var(--kant); }
 .liste .kat {
   display: block;
@@ -164,7 +178,7 @@ body {
   .intro { font-size: 0.9375rem; margin-top: 0.25rem; }
   .hoved { gap: 0.75rem; }
   .skaal-kort { gap: 0.25rem; }
-  .skaal { max-width: 22rem; }
+  .skaal { max-width: 22rem; margin-top: 0.25rem; }
   .shake-knap {
     position: fixed;
     z-index: 5;
@@ -179,11 +193,10 @@ body {
   .opskrift { padding: 1rem; border-radius: 0.875rem; }
   .opskrift h2 { font-size: 1.125rem; margin-bottom: 0.25rem; }
 
-  .liste li { grid-template-columns: 1.75rem 1fr auto; column-gap: 0.5rem; padding-block: 0.5rem; }
+  .liste li { grid-template-columns: 2.5rem 1fr auto; column-gap: 0.5rem; padding-block: 0.5rem; }
   .ryst-en { width: 2.25rem; height: 2.25rem; }
 
-  .liste .ikon { font-size: 1.35rem; }
-  .liste .ikon img { width: 1.75rem; height: 1.75rem; }
+  .liste .ikon { width: 2.5rem; height: 2.5rem; font-size: 1.35rem; }
   .liste .prik { width: 1rem; height: 1rem; }
   .liste .kat { font-size: 0.6875rem; }
   .liste .navn { font-size: 1rem; line-height: 1.25; overflow-wrap: break-word; hyphens: auto; }
