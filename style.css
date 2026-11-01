@@ -223,6 +223,22 @@ body {
 .dressing-opskrift ul { margin: 0; padding-left: 1.125rem; display: grid; gap: 0.125rem; }
 .dressing-opskrift p { margin: 0.5rem 0 0; color: var(--daempet); font-size: 0.875rem; }
 .pile { display: flex; gap: 0.375rem; }
+.udelad { position: relative; padding: 0; border: none; background: none; cursor: pointer; border-radius: 50%; }
+.udelad:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; }
+.udelad .maerke {
+  position: absolute; right: -0.25rem; top: -0.25rem;
+  width: 1.125rem; height: 1.125rem; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 0.875rem; font-weight: 700; line-height: 1;
+  background: var(--flade); color: var(--accent); border: 1px solid var(--kant);
+}
+.udelad:hover .maerke { background: var(--accent); color: var(--accent-tekst); border-color: var(--accent); }
+.liste li.udeladt .udelad .maerke { background: var(--blad); color: var(--flade); border-color: var(--blad); }
+.liste li.udeladt .ikon { opacity: 0.25; filter: grayscale(1); }
+.liste li.udeladt .navn { color: var(--daempet); font-weight: 400; font-style: italic; }
+.liste li.udeladt .nr { display: none; }
+.liste li.udeladt .pile { opacity: 0.3; }
+.pile button:disabled { cursor: default; }
 .laas {
   width: 2.5rem; height: 2.5rem; border-radius: 50%;
   border: 1px solid transparent; background: none; color: var(--daempet);
