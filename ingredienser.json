@@ -1,0 +1,84 @@
+{
+  "kategorier": [
+    {
+      "id": "base",
+      "navn": "Base",
+      "ingredienser": [
+        { "navn": "Hjertesalat", "billede": "billeder/hjertesalat.svg" },
+        { "navn": "Spinat", "billede": "billeder/spinat.svg" },
+        { "navn": "Grønkål", "billede": "billeder/groenkaal.svg" },
+        { "navn": "Bladbede", "billede": "billeder/bladbede.svg" },
+        { "navn": "Kålblade", "billede": "billeder/kaalblade.svg" },
+        { "navn": "Rucola", "billede": "billeder/rucola.svg" },
+        { "navn": "Ærteskud", "billede": "billeder/aerteskud.svg" },
+        { "navn": "Hvidkål", "billede": "billeder/hvidkaal.svg" }
+      ]
+    },
+    {
+      "id": "sproedt",
+      "navn": "Noget sprødt",
+      "ingredienser": [
+        { "navn": "Gulerod", "billede": "billeder/gulerod.svg" },
+        { "navn": "Spirer", "billede": "billeder/spirer.svg" },
+        { "navn": "Agurk", "billede": "billeder/agurk.svg" },
+        { "navn": "Croutoner", "billede": "billeder/croutoner.svg" },
+        { "navn": "Squash", "billede": "billeder/squash.svg" },
+        { "navn": "Peberfrugt", "billede": "billeder/peberfrugt.svg" },
+        { "navn": "Æble", "billede": "billeder/aeble.svg" },
+        { "navn": "Kerner", "billede": "billeder/kerner.svg" }
+      ]
+    },
+    {
+      "id": "bloedt",
+      "navn": "Noget blødt",
+      "ingredienser": [
+        { "navn": "Bagt sød kartoffel", "billede": "billeder/soed-kartoffel.svg" },
+        { "navn": "Ost", "billede": "billeder/ost.svg" },
+        { "navn": "Avocado", "billede": "billeder/avocado.svg" },
+        { "navn": "Tomat", "billede": "billeder/tomat.svg" },
+        { "navn": "Ris", "billede": "billeder/ris.svg" },
+        { "navn": "Oliven", "billede": "billeder/oliven.svg" }
+      ]
+    },
+    {
+      "id": "uventet",
+      "navn": "Noget uventet",
+      "ingredienser": [
+        { "navn": "Vandmelon", "billede": "billeder/vandmelon.svg" },
+        { "navn": "Hytteost", "billede": "billeder/hytteost.svg" },
+        { "navn": "Hummus", "billede": "billeder/hummus.svg" },
+        { "navn": "Bacon", "billede": "billeder/bacon.svg" },
+        { "navn": "Syltede grøntsager", "billede": "billeder/syltede-groentsager.svg" },
+        { "navn": "Krydderurter", "billede": "billeder/krydderurter.svg" },
+        { "navn": "Tørret frugt", "billede": "billeder/toerret-frugt.svg" }
+      ]
+    },
+    {
+      "id": "protein",
+      "navn": "Protein",
+      "ingredienser": [
+        { "navn": "Bønner", "billede": "billeder/boenner.svg" },
+        { "navn": "Æg", "billede": "billeder/aeg.svg" },
+        { "navn": "Tun", "billede": "billeder/tun.svg" },
+        { "navn": "Kylling", "billede": "billeder/kylling.svg" },
+        { "navn": "Bøf", "billede": "billeder/boef.svg" },
+        { "navn": "Tofu", "billede": "billeder/tofu.svg" },
+        { "navn": "Ærter", "billede": "billeder/aerter.svg" },
+        { "navn": "Quinoa", "billede": "billeder/quinoa.svg" },
+        { "navn": "Nødder", "billede": "billeder/noedder.svg" }
+      ]
+    },
+    {
+      "id": "dressing",
+      "navn": "Dressing",
+      "ingredienser": [
+        { "navn": "Sennepsdressing", "farve": "#D9A520" },
+        { "navn": "Tahindressing", "farve": "#C9A77A" },
+        { "navn": "Yoghurtdressing", "farve": "#EFEBE0" },
+        { "navn": "Vinaigrette", "farve": "#B5893A" },
+        { "navn": "Pestodressing", "farve": "#5E8C31" },
+        { "navn": "Frugtdressing", "farve": "#E86A5B" }
+      ]
+    }
+  ]
+}

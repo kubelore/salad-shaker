@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Salat shaker</title>
+<meta name="description" content="Tryk på Shake og få en tilfældig salat med én ingrediens fra hver kategori.">
+<meta name="theme-color" content="#EEF3EA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111915" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A5%97%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--INDHOLD-START-->
+<div class="side">
+  <header class="top">
+    <h1>Salat shaker</h1>
+    <p class="intro">Tryk på Shake, så vælger vi én ingrediens fra hver kategori.</p>
+  </header>
+
+  <main class="hoved">
+    <section class="skaal-kort" aria-label="Din salat">
+      <svg id="skaal" class="skaal" viewBox="0 45 400 245" role="img" aria-labelledby="skaal-titel">
+        <title id="skaal-titel">Skål med salat</title>
+        <ellipse class="skaal-bund-skygge" cx="200" cy="275" rx="120" ry="10"></ellipse>
+        <ellipse class="skaal-inde" cx="200" cy="132" rx="170" ry="42"></ellipse>
+        <g id="indhold"></g>
+        <path class="skaal-front" d="M30 132 C 34 222, 118 268, 200 268 C 282 268, 366 222, 370 132 C 318 170, 82 170, 30 132 Z"></path>
+        <path class="skaal-kant" d="M30 132 C 82 170, 318 170, 370 132"></path>
+      </svg>
+      <button id="shake" class="shake-knap" type="button">Shake</button>
+      <p class="antal" id="antal"></p>
+      <p class="hint" id="hint" hidden>Du kan også ryste telefonen.</p>
+    </section>
+
+    <section class="opskrift" aria-labelledby="opskrift-titel">
+      <h2 id="opskrift-titel">Din salat</h2>
+      <ol id="liste" class="liste" aria-live="polite"></ol>
+    </section>
+  </main>
+
+  <details class="alle">
+    <summary>Se alle ingredienser</summary>
+    <div id="alle-liste" class="alle-liste"></div>
+  </details>
+
+</div>
+<!--INDHOLD-SLUT-->
+<script src="app.js"></script>
+</body>
+</html>
