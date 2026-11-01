@@ -190,6 +190,7 @@ function shake() {
     tegnKategori(kat, ingrediens);
     opdaterRaekke(kat, ingrediens);
   }
+  opdaterGalleri();
   genstart(document.getElementById("skaal"), "ryster");
   genstart(document.getElementById("indhold"), "ny");
 }
@@ -211,6 +212,39 @@ function skiftEn(kat, retning) {
   genstart(tegnKategori(kat, ingrediens), "ny");
   const li = opdaterRaekke(kat, ingrediens);
   genstart(li, retning < 0 ? "skiftet-tilbage" : "skiftet");
+  opdaterGalleri();
+}
+
+// Store billeder af de valgte ingredienser nederst på siden (uden dressing).
+function opdaterGalleri() {
+  const galleri = document.getElementById("galleri");
+  galleri.replaceChildren(
+    ...kategorier
+      .filter((kat) => kat.id !== "dressing" && sidste[kat.id])
+      .map((kat) => {
+        const ingrediens = sidste[kat.id];
+        const fig = document.createElement("figure");
+        fig.className = "kort";
+        const ramme = document.createElement("div");
+        ramme.className = "ramme";
+        if (ingrediens.billede) {
+          const img = document.createElement("img");
+          img.src = ingrediens.billede;
+          img.alt = ingrediens.navn;
+          img.loading = "lazy";
+          ramme.appendChild(img);
+        } else {
+          ramme.textContent = ingrediens.emoji || "•";
+          ramme.classList.add("emoji");
+        }
+        const tekst = document.createElement("figcaption");
+        tekst.innerHTML = '<span class="kat"></span><span class="navn"></span>';
+        tekst.querySelector(".kat").textContent = kat.navn;
+        tekst.querySelector(".navn").textContent = ingrediens.navn;
+        fig.append(ramme, tekst);
+        return fig;
+      })
+  );
 }
 
 function visAntal() {

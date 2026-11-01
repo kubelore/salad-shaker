@@ -63,6 +63,7 @@ body {
 }
 .intro { margin: 0.5rem 0 0; color: var(--daempet); font-size: 1.0625rem; }
 
+.side > .hoved { padding: 0; }
 .hoved {
   display: grid;
   gap: 2rem;
@@ -178,7 +179,7 @@ body {
   .intro { font-size: 0.9375rem; margin-top: 0.25rem; }
   .hoved { gap: 0.75rem; }
   .skaal-kort { gap: 0.25rem; }
-  .skaal { max-width: 22rem; margin-top: 0.25rem; }
+  .skaal { max-width: 22rem; margin-top: 1.25rem; }
   .shake-knap {
     position: fixed;
     z-index: 5;
@@ -237,6 +238,32 @@ body {
 .liste li.skiftet-tilbage .navn { animation: ind-venstre 0.3s ease-out; }
 @keyframes ind-hoejre { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: none; } }
 @keyframes ind-venstre { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
+
+.galleri { display: grid; gap: 1rem; }
+.galleri h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; margin: 0; }
+.galleri-grid { display: grid; gap: 1rem; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.kort { margin: 0; display: grid; gap: 0.5rem; min-width: 0; }
+.kort .ramme {
+  aspect-ratio: 1;
+  max-width: 100%;
+  border-radius: 1rem;
+  background: var(--flade);
+  border: 1px solid var(--kant);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  font-size: 4rem;
+}
+.kort .ramme { position: relative; }
+.kort .ramme img { position: absolute; inset: 0.5rem; width: calc(100% - 1rem); height: calc(100% - 1rem); object-fit: contain; }
+.kort figcaption .kat { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--daempet); }
+.kort figcaption .navn { display: block; font-weight: 700; }
+@media (max-width: 759px) {
+  .galleri-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+  .galleri-grid .kort:first-child { grid-column: 1 / -1; }
+  .galleri-grid .kort:first-child .ramme { aspect-ratio: 16 / 9; }
+  .galleri h2 { font-size: 1.25rem; }
+}
 
 .fod { color: var(--daempet); font-size: 0.8125rem; }
 
