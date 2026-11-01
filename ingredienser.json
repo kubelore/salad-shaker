@@ -8,7 +8,7 @@
         { "navn": "Spinat", "maengde": [40, "g"], "saeson": [4, 5, 6, 9, 10], "tip": "Brug babyspinat rå.", "billede": "billeder/spinat.webp" },
         { "navn": "Grønkål", "maengde": [40, "g"], "saeson": [10, 11, 12, 1, 2, 3], "tip": "Fjern de hårde stilke, og massér bladene et minut med lidt olie og salt.", "billede": "billeder/groenkaal.webp" },
         { "navn": "Bladbede", "maengde": [40, "g"], "saeson": [6, 7, 8, 9, 10], "tip": "Skær stilkene i små stykker og bladene i strimler.", "billede": "billeder/bladbede.webp" },
-        { "navn": "Kålblade", "maengde": [40, "g"], "saeson": [8, 9, 10, 11, 12], "tip": "Skær i tynde strimler, og massér dem med lidt olie.", "billede": "billeder/kaalblade.webp" },
+        { "navn": "Kålblade", "maengde": [40, "g"], "saeson": [8, 9, 10, 11, 12], "tip": "Skær den tykke midterribbe ud, og skær bladene i tynde strimler.", "billede": "billeder/kaalblade.webp" },
         { "navn": "Rucola", "maengde": [30, "g"], "saeson": [5, 6, 7, 8, 9, 10], "billede": "billeder/rucola.webp" },
         { "navn": "Ærteskud", "maengde": [30, "g"], "billede": "billeder/aerteskud.webp" },
         { "navn": "Hvidkål", "maengde": [60, "g"], "saeson": [7, 8, 9, 10, 11, 12, 1, 2, 3], "tip": "Snit kålen fint, drys med lidt salt, og klem og ælt den med hænderne i 1-2 minutter. Så bliver den blødere og lettere at spise.", "billede": "billeder/hvidkaal.webp" },
@@ -52,7 +52,7 @@
         { "navn": "Nye kartofler", "indeholder": ["kulhydrat"], "maengde": [125, "g"], "saeson": [6, 7, 8], "tip": "Kog dem 15 min, halvér dem, og vend dem i dressingen, mens de er lune.", "billede": "billeder/kartofler.webp" },
         { "navn": "Rødbede", "maengde": [75, "g"], "saeson": [7, 8, 9, 10, 11, 12, 1, 2, 3], "tip": "Bag hele rødbeder 45 min ved 200 °C, eller riv dem rå.", "billede": "billeder/roedbede.webp" },
         { "navn": "Pasta", "indeholder": ["gluten", "kulhydrat"], "maengde": [40, "g"], "tip": "Mængden er tør pasta. Kog den al dente, og skyl den i koldt vand.", "billede": "billeder/pasta.webp" },
-        { "navn": "Majs", "indeholder": ["kulhydrat"], "maengde": [50, "g"], "tip": "Dræn majs fra dåse godt, eller rist dem kort på panden.", "billede": "billeder/majs.webp" }
+        { "navn": "Majs", "indeholder": ["kulhydrat"], "maengde": [50, "g"], "tip": "Dræn majsene godt. Vil du have mere smag, så rist dem 4-5 min på en tør, meget varm pande, til de får brune pletter.", "billede": "billeder/majs.webp" }
       ]
     },
     {
@@ -88,7 +88,7 @@
         { "navn": "Ærter", "indeholder": ["kulhydrat"], "maengde": [50, "g"], "tip": "Frosne ærter skal bare tø op.", "billede": "billeder/aerter.svg" },
         { "navn": "Quinoa", "indeholder": ["kulhydrat"], "maengde": [30, "g"], "tip": "Mængden er rå quinoa. Skyl den, kog den 12 min, og lad den køle af.", "billede": "billeder/quinoa.svg" },
         { "navn": "Nødder", "maengde": [1, "håndfuld"], "tip": "Rist dem kort på en tør pande, og hak dem groft.", "billede": "billeder/noedder.svg" },
-        { "navn": "Kikærter", "indeholder": ["kulhydrat"], "maengde": [60, "g"], "tip": "Dræn dem, dup dem tørre, og rist dem 20 min ved 200 °C, så bliver de sprøde.", "billede": "billeder/kikaerter.svg" },
+        { "navn": "Kikærter", "indeholder": ["kulhydrat"], "maengde": [60, "g"], "tip": "Dræn dem, dup dem tørre, og bag dem 20 min i ovnen ved 200 °C, så bliver de sprøde.", "billede": "billeder/kikaerter.svg" },
         { "navn": "Rejer", "indeholder": ["fisk"], "maengde": [75, "g"], "billede": "billeder/rejer.svg" },
         { "navn": "Røget laks", "indeholder": ["fisk"], "maengde": [50, "g"], "tip": "Riv den i strimler.", "billede": "billeder/roeget-laks.svg" },
         { "navn": "Linser", "indeholder": ["kulhydrat"], "maengde": [30, "g"], "tip": "Mængden er tørre linser. Kog grønne linser 20 min, så de stadig har bid.", "billede": "billeder/linser.svg" },
