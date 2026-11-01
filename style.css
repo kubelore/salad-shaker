@@ -203,6 +203,7 @@ body {
 }
 
 .liste .tekst { min-width: 0; }
+.liste .nr { margin-left: 0.25rem; opacity: 0.75; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
 
 .dressing-opskrift {
   margin-top: 1rem;

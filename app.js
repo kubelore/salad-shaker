@@ -144,7 +144,8 @@ function opdaterRaekke(kat, ingrediens) {
     const tekst = document.createElement("span");
     tekst.className = "tekst";
     tekst.innerHTML = '<span class="kat"></span><span class="navn"></span>';
-    tekst.querySelector(".kat").textContent = kat.navn;
+    tekst.querySelector(".kat").innerHTML = '<span class="kat-navn"></span> <span class="nr"></span>';
+    tekst.querySelector(".kat-navn").textContent = kat.navn;
     const knap = document.createElement("button");
     knap.type = "button";
     knap.className = "ryst-en";
@@ -156,8 +157,10 @@ function opdaterRaekke(kat, ingrediens) {
   li.firstChild.replaceWith(lavIkon(ingrediens));
   li.querySelector(".navn").textContent = ingrediens.navn;
   const knap = li.querySelector(".ryst-en");
-  knap.setAttribute("aria-label", `Skift ${ingrediens.navn} ud med noget andet fra ${kat.navn.toLowerCase()}`);
-  knap.title = `Skift ${kat.navn.toLowerCase()}`;
+  const nr = kat.ingredienser.indexOf(ingrediens) + 1;
+  li.querySelector(".nr").textContent = `${nr}/${kat.ingredienser.length}`;
+  knap.setAttribute("aria-label", `Næste i ${kat.navn.toLowerCase()} (${nr} af ${kat.ingredienser.length})`);
+  knap.title = `Næste ${kat.navn.toLowerCase()} (${nr} af ${kat.ingredienser.length})`;
   return li;
 }
 
@@ -179,9 +182,18 @@ function shake() {
   genstart(document.getElementById("indhold"), "ny");
 }
 
-// Shake kun én kategori.
+// Næste ingrediens i listen (starter forfra efter den sidste), så man kan bladre gennem dem alle.
+function naeste(kat) {
+  const liste = kat.ingredienser;
+  if (liste.length === 0) return null;
+  const i = (liste.indexOf(sidste[kat.id]) + 1) % liste.length;
+  sidste[kat.id] = liste[i];
+  return liste[i];
+}
+
+// Skift kun én kategori til den næste ingrediens i listen.
 function shakeEn(kat) {
-  const ingrediens = vaelg(kat);
+  const ingrediens = naeste(kat);
   if (!ingrediens) return;
   genstart(tegnKategori(kat, ingrediens), "ny");
   const li = opdaterRaekke(kat, ingrediens);
