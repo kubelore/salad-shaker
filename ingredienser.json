@@ -4,7 +4,7 @@
       "id": "base",
       "navn": "Base",
       "ingredienser": [
-        { "navn": "Hjertesalat", "billede": "billeder/hjertesalat.svg" },
+        { "navn": "Hjertesalat", "billede": "billeder/hjertesalat.webp" },
         { "navn": "Spinat", "billede": "billeder/spinat.svg" },
         { "navn": "Grønkål", "billede": "billeder/groenkaal.svg" },
         { "navn": "Bladbede", "billede": "billeder/bladbede.svg" },
