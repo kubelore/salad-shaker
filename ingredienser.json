@@ -42,7 +42,7 @@
       "id": "bloedt",
       "navn": "Noget blødt",
       "ingredienser": [
-        { "navn": "Bagt sød kartoffel", "billede": "billeder/soed-kartoffel.svg" },
+        { "navn": "Bagt sød kartoffel", "billede": "billeder/soed-kartoffel.webp" },
         { "navn": "Ost", "billede": "billeder/ost.svg" },
         { "navn": "Avocado", "billede": "billeder/avocado.svg" },
         { "navn": "Tomat", "billede": "billeder/tomat.svg" },
