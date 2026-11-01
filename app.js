@@ -296,7 +296,15 @@ function opdaterRaekke(kat, ingrediens) {
 
 function visDetaljer(li, ingrediens) {
   const m = [maengdeTekst(ingrediens), hjemme.has(ingrediens.navn) ? "har du hjemme" : ""].filter(Boolean).join(" · ");
-  li.querySelector(".maengde").textContent = m;
+  const el = li.querySelector(".maengde");
+  el.textContent = m;
+  // Sæsonmærke: kun når "I sæson nu" er valgt, og kun på råvarer med en sæson.
+  if (valgtKost.has("saeson") && ingrediens.saeson && iSaeson(ingrediens)) {
+    const maerke = document.createElement("span");
+    maerke.className = "saeson-maerke";
+    maerke.textContent = "I sæson";
+    el.append(maerke);
+  }
   li.querySelector(".tip").textContent = ingrediens.tip || "";
 }
 function opdaterAlleRaekker() {
