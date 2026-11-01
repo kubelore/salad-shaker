@@ -5,8 +5,8 @@
       "navn": "Base",
       "ingredienser": [
         { "navn": "Hjertesalat", "billede": "billeder/hjertesalat.webp" },
-        { "navn": "Spinat", "billede": "billeder/spinat.svg" },
-        { "navn": "Grønkål", "billede": "billeder/groenkaal.svg" },
+        { "navn": "Spinat", "billede": "billeder/spinat.webp" },
+        { "navn": "Grønkål", "billede": "billeder/groenkaal.webp" },
         { "navn": "Bladbede", "billede": "billeder/bladbede.svg" },
         { "navn": "Kålblade", "billede": "billeder/kaalblade.svg" },
         { "navn": "Rucola", "billede": "billeder/rucola.svg" },
