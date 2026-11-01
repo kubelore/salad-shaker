@@ -61,7 +61,7 @@
       "ingredienser": [
         { "navn": "Vandmelon", "billede": "billeder/vandmelon.webp" },
         { "navn": "Hytteost", "billede": "billeder/hytteost.webp" },
-        { "navn": "Hummus", "billede": "billeder/hummus.svg" },
+        { "navn": "Hummus", "billede": "billeder/hummus.webp" },
         { "navn": "Bacon", "billede": "billeder/bacon.svg" },
         { "navn": "Syltede grøntsager", "billede": "billeder/syltede-groentsager.svg" },
         { "navn": "Krydderurter", "billede": "billeder/krydderurter.svg" },
