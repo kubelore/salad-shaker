@@ -12,10 +12,6 @@
   --skaal-kant: #4A7FA3;
   --skaal-inde: #DDE7DF;
   --skygge: rgba(28, 43, 34, 0.12);
-  --hud: #F2C9A0;
-  --jakke: #FFFFFF;
-  --jakke-kant: #C9D3CB;
-  --guld: #E9B419;
   --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --font-tekst: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
 }
@@ -23,14 +19,14 @@
   :root:not([data-theme="light"]) {
     --bg: #111915; --flade: #1A251F; --tekst: #E4ECE5; --daempet: #9CB0A1; --kant: #2C3B32;
     --accent: #E2678C; --accent-tekst: #1A0A10; --blad: #7DBB78;
-    --skaal: #3B7298; --skaal-kant: #5A93BA; --skaal-inde: #2A3A31; --skygge: rgba(0, 0, 0, 0.35); --jakke: #E9EEEA; --jakke-kant: #9DAAA0;
+    --skaal: #3B7298; --skaal-kant: #5A93BA; --skaal-inde: #2A3A31; --skygge: rgba(0, 0, 0, 0.35);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #111915; --flade: #1A251F; --tekst: #E4ECE5; --daempet: #9CB0A1; --kant: #2C3B32;
   --accent: #E2678C; --accent-tekst: #1A0A10; --blad: #7DBB78;
-  --skaal: #3B7298; --skaal-kant: #5A93BA; --skaal-inde: #2A3A31; --skygge: rgba(0, 0, 0, 0.35); --jakke: #E9EEEA; --jakke-kant: #9DAAA0;
+  --skaal: #3B7298; --skaal-kant: #5A93BA; --skaal-inde: #2A3A31; --skygge: rgba(0, 0, 0, 0.35);
   color-scheme: dark;
 }
 
@@ -94,116 +90,13 @@ body {
 .skaal text { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; dominant-baseline: central; text-anchor: middle; }
 .dressing { fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: 0.9; }
 
-/* Kokken bag skålen */
-.kok-krop { fill: var(--jakke); stroke: var(--jakke-kant); stroke-width: 2.5; }
-.kok-knap { stroke: var(--jakke-kant); stroke-width: 2; }
-.kok-knap-prik { fill: var(--jakke-kant); }
-.kok-hud { fill: var(--hud); }
-.kok-hue { fill: var(--jakke); stroke: var(--jakke-kant); stroke-width: 2.5; stroke-linejoin: round; }
-.kok-hue-kant { stroke: var(--jakke-kant); stroke-width: 2.5; stroke-linecap: round; }
-.kok-kind { fill: #E8907A; opacity: 0.45; }
-.kok-oeje { fill: #2A2320; }
-.kok-mund, .kok-streg { fill: none; stroke: #2A2320; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
-.kok-mund-aaben { fill: #7A2E2A; }
-.kok-aerme { fill: none; stroke: var(--jakke); stroke-width: 24; stroke-linecap: round; }
-.kok-aerme-kant { fill: none; stroke: var(--jakke-kant); stroke-width: 29; stroke-linecap: round; }
-.kok-haand { stroke: color-mix(in srgb, var(--hud) 70%, black); stroke-width: 1.5; }
-.ansigt-ryst { display: none; }
-/* Kokkens udstyr, som kommer med titlerne */
-.toerklaede path { fill: var(--accent); }
-.toerklaede circle { fill: color-mix(in srgb, var(--accent) 75%, black); }
-.overskaeg { fill: #5B3A24; }
-.solbriller path { fill: #1B1B1F; }
-.solbrille-stang { fill: none !important; stroke: #1B1B1F; stroke-width: 3; }
-.hue-baand { fill: var(--guld); }
-.medalje circle { fill: var(--guld); stroke: color-mix(in srgb, var(--guld) 70%, black); stroke-width: 1.5; }
-.medalje-baand { fill: none; stroke: #2E5E7E; stroke-width: 4; stroke-linejoin: round; }
-.krone { fill: var(--guld); stroke: color-mix(in srgb, var(--guld) 70%, black); stroke-width: 1.5; stroke-linejoin: round; }
-.aura-straaler { fill: var(--guld); opacity: 0.55; transform-box: view-box; transform-origin: 200px 0; animation: drej 14s linear infinite; }
-@keyframes drej { to { transform: rotate(360deg); } }
-
-/* Titel og fremskridt under knappen */
-.titel { display: grid; justify-items: center; gap: 0.3rem; width: min(17rem, 100%); }
-.titel-navn { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 1.125rem; color: var(--blad); }
-.titel-bar { width: 100%; height: 0.5rem; border-radius: 99px; background: var(--kant); overflow: hidden; }
-.titel-bar span { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--blad); transition: width 0.4s ease-out; }
-.titel-tekst { margin: 0; color: var(--daempet); font-size: 0.8125rem; text-align: center; font-variant-numeric: tabular-nums; }
-.titel.fejr .titel-navn { animation: fejr 0.9s ease-out; }
-@keyframes fejr { 0% { transform: scale(1); } 30% { transform: scale(1.35) rotate(-3deg); color: var(--accent); } 60% { transform: scale(0.95); } 100% { transform: none; } }
-.ny-titel { margin: 0; min-height: 1.25rem; font-weight: 700; color: var(--accent); opacity: 0; text-align: center; }
-.ny-titel.vis { animation: ny-titel 3s ease-out forwards; }
-@keyframes ny-titel { 0% { opacity: 0; transform: translateY(6px); } 10%, 80% { opacity: 1; transform: none; } 100% { opacity: 0; } }
-.skaal.anstreng .ansigt-ryst { display: inline; }
-.skaal.anstreng .ansigt-glad { display: none; }
-.kok, .rystgruppe, .kok-hoved { transform-box: view-box; }
-.rystgruppe { transform-origin: 200px 190px; }
-.kok { transform-origin: 200px 150px; }
-.kok-hoved { transform-origin: 200px 20px; }
-
-/* Fire måder at ryste på. JavaScript vælger en tilfældig. */
-.skaal.ryst-side .rystgruppe { animation: side 0.7s ease-in-out; }
-.skaal.ryst-side .kok { animation: side-kok 0.7s ease-in-out; }
-@keyframes side {
-  0%, 100% { transform: none; }
-  15% { transform: translateX(-16px) rotate(-4deg); }
-  35% { transform: translateX(16px) rotate(4deg); }
-  55% { transform: translateX(-12px) rotate(-3deg); }
-  75% { transform: translateX(8px) rotate(2deg); }
-}
-@keyframes side-kok {
-  0%, 100% { transform: none; }
-  15% { transform: translateX(-5px) rotate(-1.5deg); }
-  35% { transform: translateX(5px) rotate(1.5deg); }
-  55% { transform: translateX(-4px); }
-  75% { transform: translateX(2px); }
-}
-.skaal.ryst-hop .rystgruppe { animation: hop 0.75s cubic-bezier(.3,.7,.4,1); }
-.skaal.ryst-hop .kok { animation: hop-kok 0.75s ease-out; }
-.skaal.ryst-hop #indhold { animation: hop-indhold 0.75s ease-out; }
-@keyframes hop {
-  0%, 100% { transform: none; }
-  20% { transform: translateY(10px) scale(1.04, 0.95); }
-  45% { transform: translateY(-34px); }
-  70% { transform: translateY(4px) scale(1.03, 0.97); }
-}
-@keyframes hop-kok {
-  0%, 100% { transform: none; }
-  20% { transform: translateY(6px); }
-  45% { transform: translateY(-10px); }
-}
-@keyframes hop-indhold {
-  0%, 30%, 100% { transform: none; }
-  55% { transform: translateY(-26px); }
-}
-.skaal.ryst-rund .rystgruppe { animation: rund 0.8s linear; }
-.skaal.ryst-rund .kok-hoved { animation: rund-hoved 0.8s linear; }
-@keyframes rund {
-  0%, 100% { transform: none; }
-  12.5% { transform: translate(-12px, -6px) rotate(-3deg); }
-  25% { transform: translate(-16px, 4px); }
-  37.5% { transform: translate(-6px, 12px) rotate(2deg); }
-  50% { transform: translate(8px, 10px); }
-  62.5% { transform: translate(16px, 2px) rotate(3deg); }
-  75% { transform: translate(12px, -8px); }
-  87.5% { transform: translate(2px, -10px) rotate(-1deg); }
-}
-@keyframes rund-hoved {
-  0%, 100% { transform: none; }
-  25% { transform: rotate(-8deg); }
-  75% { transform: rotate(8deg); }
-}
-.skaal.ryst-vip .rystgruppe { animation: vip 0.8s ease-in-out; }
-.skaal.ryst-vip .kok { animation: vip-kok 0.8s ease-in-out; }
-@keyframes vip {
-  0%, 100% { transform: none; }
-  25% { transform: rotate(-12deg) translateY(-6px); }
-  55% { transform: rotate(12deg) translateY(-6px); }
-  80% { transform: rotate(-4deg); }
-}
-@keyframes vip-kok {
-  0%, 100% { transform: none; }
-  25% { transform: rotate(-4deg); }
-  55% { transform: rotate(4deg); }
+.skaal.ryster { animation: ryst 0.6s ease-in-out; transform-origin: 50% 90%; }
+@keyframes ryst {
+  0%, 100% { transform: rotate(0); }
+  20% { transform: rotate(-6deg) translateX(-6px); }
+  40% { transform: rotate(5deg) translateX(6px); }
+  60% { transform: rotate(-4deg) translateX(-4px); }
+  80% { transform: rotate(2deg) translateX(2px); }
 }
 #indhold.ny, #indhold g.ny { animation: drys 0.55s cubic-bezier(.3,1.5,.5,1) backwards; }
 @keyframes drys {
@@ -348,6 +241,7 @@ body {
 }
 .del-knap:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; border-radius: 4px; }
 .del-status { color: var(--blad); font-weight: 700; }
+.taeller { margin: 0; color: var(--daempet); font-size: 0.8125rem; text-align: center; }
 .pil {
   width: 2.5rem;
   height: 2.5rem;
@@ -400,5 +294,5 @@ body {
 .fod { color: var(--daempet); font-size: 0.8125rem; }
 
 @media (prefers-reduced-motion: reduce) {
-  .skaal [class], .titel.fejr .titel-navn, .ny-titel.vis, #indhold.ny, #indhold g.ny, .liste li.skiftet .navn, .liste li.skiftet-tilbage .navn { animation: none; }
+  .skaal.ryster, #indhold.ny, #indhold g.ny, .liste li.skiftet .navn, .liste li.skiftet-tilbage .navn { animation: none; }
 }

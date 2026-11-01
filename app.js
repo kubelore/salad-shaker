@@ -218,21 +218,6 @@ function genstart(el, klasse) {
   el.classList.add(klasse);
 }
 
-// Kokken ryster skålen på en af fire måder, aldrig den samme to gange i træk.
-const RYSTEMAADER = ["side", "hop", "rund", "vip"];
-let sidsteMaade = "";
-function rystSkaal() {
-  const skaal = document.getElementById("skaal");
-  const muligheder = RYSTEMAADER.filter((m) => m !== sidsteMaade);
-  const maade = muligheder[Math.floor(Math.random() * muligheder.length)];
-  sidsteMaade = maade;
-  for (const m of RYSTEMAADER) skaal.classList.remove("ryst-" + m);
-  void skaal.getBoundingClientRect();
-  skaal.classList.add("ryst-" + maade, "anstreng");
-  clearTimeout(rystSkaal.t);
-  rystSkaal.t = setTimeout(() => skaal.classList.remove("anstreng"), 800);
-}
-
 // Læg en ingrediens i skålen med en lille forsinkelse, så de falder i én efter én.
 function drys(gruppe, nr) {
   gruppe.style.animationDelay = `${0.25 + nr * 0.09}s`;
@@ -250,7 +235,7 @@ function shake(talt = true) {
     opdaterRaekke(kat, ingrediens);
   }
   opdaterGalleri();
-  rystSkaal();
+  genstart(document.getElementById("skaal"), "ryster");
   if (talt) {
     if (navigator.vibrate) navigator.vibrate([25, 60, 25, 60, 40]);
     taelOp();
@@ -258,60 +243,16 @@ function shake(talt = true) {
   opdaterLink();
 }
 
-// Titler: kokken (brugerens avatar) får nyt udstyr, jo flere salater man ryster.
-const TITLER = [
-  { fra: 0, navn: "Køkkenlærling" },
-  { fra: 5, navn: "Salatskyller" },        // rødt tørklæde
-  { fra: 15, navn: "Grøntsagsjonglør" },   // overskæg
-  { fra: 30, navn: "Dressingmester" },     // høj kokkehue
-  { fra: 60, navn: "Sous-chef" },          // solbriller
-  { fra: 100, navn: "Køkkenchef" },        // guldbånd og medalje
-  { fra: 200, navn: "Salatlegende" },      // krone
-  { fra: 500, navn: "Grøntsagsguru" },     // gylden aura
-];
-function niveau(n) {
-  let i = 0;
-  while (i + 1 < TITLER.length && n >= TITLER[i + 1].fra) i++;
-  return i;
+// Tæller for rystede salater, gemt i browseren.
+function visTaeller() {
+  const n = Number(lager.hent("rystet")) || 0;
+  const el = document.getElementById("taeller");
+  el.textContent = n === 1 ? "Du har rystet 1 salat" : `Du har rystet ${n.toLocaleString("da-DK")} salater`;
+  el.hidden = n === 0;
 }
-function antalRystet() { return Number(lager.hent("rystet")) || 0; }
-
-function visTitel() {
-  const n = antalRystet();
-  const i = niveau(n);
-  const nu = TITLER[i], naeste = TITLER[i + 1];
-  document.getElementById("titel-navn").textContent = nu.navn;
-  const salater = n === 1 ? "1 salat" : `${n.toLocaleString("da-DK")} salater`;
-  let tekst = `${salater} rystet`;
-  let andel = 1;
-  if (naeste) {
-    const mangler = naeste.fra - n;
-    tekst += ` · ${mangler} til ${naeste.navn}`;
-    andel = (n - nu.fra) / (naeste.fra - nu.fra);
-  }
-  document.getElementById("titel-tekst").textContent = tekst;
-  document.getElementById("titel-fyld").style.width = `${Math.round(andel * 100)}%`;
-  // Vis kokkens udstyr for trinnet (trin tælles fra 1).
-  for (const el of document.querySelectorAll("#kok [data-fra], #kok [data-til]")) {
-    const fra = Number(el.dataset.fra || 0), til = Number(el.dataset.til || 99);
-    el.style.display = i + 1 >= fra && i + 1 < til ? "" : "none";
-  }
-}
-
 function taelOp() {
-  const foer = niveau(antalRystet());
-  lager.gem("rystet", antalRystet() + 1);
-  const efter = niveau(antalRystet());
-  visTitel();
-  if (efter > foer) fejr(TITLER[efter].navn);
-}
-
-function fejr(navn) {
-  const el = document.getElementById("ny-titel");
-  el.textContent = `Ny titel: ${navn}!`;
-  genstart(el, "vis");
-  genstart(document.getElementById("titel"), "fejr");
-  if (navigator.vibrate) navigator.vibrate([60, 40, 60, 40, 120]);
+  lager.gem("rystet", (Number(lager.hent("rystet")) || 0) + 1);
+  visTaeller();
 }
 
 // Del-link: adressen husker den aktuelle salat som numre, fx ?s=3-7-1-9-4-2.
@@ -452,7 +393,7 @@ hentIngredienser()
   .then((data) => {
     kategorier = data.kategorier;
     visAntal();
-    visTitel();
+    visTaeller();
     if (!laesLink()) shake(false);
     document.getElementById("del").addEventListener("click", del);
     document.getElementById("shake").addEventListener("click", () => {
