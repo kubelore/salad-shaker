@@ -13,7 +13,7 @@
         { "navn": "Ærteskud", "billede": "billeder/aerteskud.webp" },
         { "navn": "Hvidkål", "billede": "billeder/hvidkaal.webp" },
         { "navn": "Rødkål", "billede": "billeder/roedkaal.webp" },
-        { "navn": "Icebergsalat", "billede": "billeder/iceberg.svg" },
+        { "navn": "Icebergsalat", "billede": "billeder/iceberg.webp" },
         { "navn": "Brøndkarse", "billede": "billeder/broendkarse.svg" },
         { "navn": "Rosenkål", "billede": "billeder/rosenkaal.svg" }
       ]
