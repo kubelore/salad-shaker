@@ -15,6 +15,7 @@
   --hud: #F2C9A0;
   --jakke: #FFFFFF;
   --jakke-kant: #C9D3CB;
+  --guld: #E9B419;
   --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --font-tekst: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
 }
@@ -108,6 +109,30 @@ body {
 .kok-aerme-kant { fill: none; stroke: var(--jakke-kant); stroke-width: 29; stroke-linecap: round; }
 .kok-haand { stroke: color-mix(in srgb, var(--hud) 70%, black); stroke-width: 1.5; }
 .ansigt-ryst { display: none; }
+/* Kokkens udstyr, som kommer med titlerne */
+.toerklaede path { fill: var(--accent); }
+.toerklaede circle { fill: color-mix(in srgb, var(--accent) 75%, black); }
+.overskaeg { fill: #5B3A24; }
+.solbriller path { fill: #1B1B1F; }
+.solbrille-stang { fill: none !important; stroke: #1B1B1F; stroke-width: 3; }
+.hue-baand { fill: var(--guld); }
+.medalje circle { fill: var(--guld); stroke: color-mix(in srgb, var(--guld) 70%, black); stroke-width: 1.5; }
+.medalje-baand { fill: none; stroke: #2E5E7E; stroke-width: 4; stroke-linejoin: round; }
+.krone { fill: var(--guld); stroke: color-mix(in srgb, var(--guld) 70%, black); stroke-width: 1.5; stroke-linejoin: round; }
+.aura-straaler { fill: var(--guld); opacity: 0.55; transform-box: view-box; transform-origin: 200px 0; animation: drej 14s linear infinite; }
+@keyframes drej { to { transform: rotate(360deg); } }
+
+/* Titel og fremskridt under knappen */
+.titel { display: grid; justify-items: center; gap: 0.3rem; width: min(17rem, 100%); }
+.titel-navn { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 1.125rem; color: var(--blad); }
+.titel-bar { width: 100%; height: 0.5rem; border-radius: 99px; background: var(--kant); overflow: hidden; }
+.titel-bar span { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--blad); transition: width 0.4s ease-out; }
+.titel-tekst { margin: 0; color: var(--daempet); font-size: 0.8125rem; text-align: center; font-variant-numeric: tabular-nums; }
+.titel.fejr .titel-navn { animation: fejr 0.9s ease-out; }
+@keyframes fejr { 0% { transform: scale(1); } 30% { transform: scale(1.35) rotate(-3deg); color: var(--accent); } 60% { transform: scale(0.95); } 100% { transform: none; } }
+.ny-titel { margin: 0; min-height: 1.25rem; font-weight: 700; color: var(--accent); opacity: 0; text-align: center; }
+.ny-titel.vis { animation: ny-titel 3s ease-out forwards; }
+@keyframes ny-titel { 0% { opacity: 0; transform: translateY(6px); } 10%, 80% { opacity: 1; transform: none; } 100% { opacity: 0; } }
 .skaal.anstreng .ansigt-ryst { display: inline; }
 .skaal.anstreng .ansigt-glad { display: none; }
 .kok, .rystgruppe, .kok-hoved { transform-box: view-box; }
@@ -323,7 +348,6 @@ body {
 }
 .del-knap:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; border-radius: 4px; }
 .del-status { color: var(--blad); font-weight: 700; }
-.taeller { margin: 0; color: var(--daempet); font-size: 0.8125rem; text-align: center; }
 .pil {
   width: 2.5rem;
   height: 2.5rem;
@@ -376,5 +400,5 @@ body {
 .fod { color: var(--daempet); font-size: 0.8125rem; }
 
 @media (prefers-reduced-motion: reduce) {
-  .skaal [class], #indhold.ny, #indhold g.ny, .liste li.skiftet .navn, .liste li.skiftet-tilbage .navn { animation: none; }
+  .skaal [class], .titel.fejr .titel-navn, .ny-titel.vis, #indhold.ny, #indhold g.ny, .liste li.skiftet .navn, .liste li.skiftet-tilbage .navn { animation: none; }
 }
