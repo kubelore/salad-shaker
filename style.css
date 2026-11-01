@@ -173,6 +173,33 @@ body {
   color: var(--daempet);
 }
 .liste .navn { display: block; font-weight: 700; font-size: 1.125rem; }
+.liste .maengde { display: block; font-size: 0.875rem; color: var(--blad); font-weight: 700; font-variant-numeric: tabular-nums; }
+.liste .maengde:empty, .liste .tip:empty { display: none; }
+.liste .tip { display: block; font-size: 0.8125rem; color: var(--daempet); line-height: 1.4; margin-top: 0.125rem; }
+.liste li.udeladt .maengde, .liste li.udeladt .tip { display: none; }
+
+.opskrift-top { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; }
+.opskrift-top h2 { margin: 0; }
+.personer-vaelger { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; color: var(--daempet); }
+.personer { display: flex; border: 1px solid var(--kant); border-radius: 99px; overflow: hidden; }
+.personer button {
+  font: inherit; font-weight: 700; font-size: 0.875rem; min-width: 2.25rem; height: 2rem;
+  border: none; background: var(--flade); color: var(--tekst); cursor: pointer; padding: 0 0.5rem;
+}
+.personer button + button { border-left: 1px solid var(--kant); }
+.personer button[aria-pressed="true"] { background: var(--blad); color: var(--flade); }
+.personer button:focus-visible { outline: 3px solid var(--blad); outline-offset: -3px; }
+.dressing-til { font-family: var(--font-tekst); font-weight: 400; font-size: 0.875rem; color: var(--daempet); }
+
+.hjemme { margin-top: 1rem; border-top: 1px solid var(--kant); padding-top: 0.75rem; }
+.hjemme summary { cursor: pointer; font-family: var(--font-display); font-weight: 600; font-size: 1rem; padding-block: 0.25rem; }
+.hjemme summary:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; border-radius: 4px; }
+.hjemme-intro { margin: 0.5rem 0 0.75rem; font-size: 0.875rem; color: var(--daempet); }
+.hjemme-ryd { font: inherit; color: var(--accent); font-weight: 700; background: none; border: none; padding: 0; margin-left: 0.25rem; cursor: pointer; text-decoration: underline; }
+.hjemme-gruppe + .hjemme-gruppe { margin-top: 0.75rem; }
+.hjemme-gruppe h4 { margin: 0 0 0.375rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--daempet); font-weight: 400; }
+.hjemme-knapper { display: flex; flex-wrap: wrap; gap: 0.375rem; }
+.hjemme-knapper .kost-knap { font-size: 0.8125rem; padding: 0.3125rem 0.625rem; }
 
 .hint { margin: 0; color: var(--blad); font-size: 0.875rem; font-weight: 700; text-align: center; }
 

@@ -21,6 +21,12 @@ const laast = new Set(); // kategorier som Shake ikke rører
 const udeladt = new Set(); // kategorier der er taget ud af salaten
 
 // Kostvalg: hvert valg udelukker ingredienser med bestemte mærker i "indeholder".
+// Lille lager i browseren. Virker siden også uden (fx i privat vindue).
+const lager = {
+  hent(n) { try { return localStorage.getItem(n); } catch (e) { return null; } },
+  gem(n, v) { try { localStorage.setItem(n, v); } catch (e) {} },
+};
+
 const KOST = [
   { id: "vegetar", navn: "Vegetar", uden: ["kød", "fisk"] },
   { id: "pescetar", navn: "Pescetar", uden: ["kød"] },
@@ -28,7 +34,10 @@ const KOST = [
   { id: "glutenfri", navn: "Glutenfri", uden: ["gluten"] },
   { id: "laktosefri", navn: "Laktosefri", uden: ["mælk"] },
   { id: "lowcarb", navn: "Low carb", uden: ["kulhydrat"] },
+  { id: "saeson", navn: "I sæson nu", uden: [] }, // danske råvarer i sæson denne måned
 ];
+const MAANED = new Date().getMonth() + 1;
+const iSaeson = (i) => !i.saeson || i.saeson.includes(MAANED);
 const valgtKost = new Set();
 function udelukket() {
   const s = new Set();
@@ -38,18 +47,48 @@ function udelukket() {
 // Ingredienserne i en kategori, som passer til kostvalget.
 function tilladt(kat) {
   const uden = udelukket();
-  return kat.ingredienser.filter((i) => !(i.indeholder || []).some((x) => uden.has(x)));
+  return kat.ingredienser.filter((i) => passer(i, uden));
 }
-function passer(ingrediens) {
-  const uden = udelukket();
+function passer(ingrediens, uden = udelukket()) {
+  if (valgtKost.has("saeson") && !iSaeson(ingrediens)) return false;
   return !(ingrediens.indeholder || []).some((x) => uden.has(x));
 }
 
-// Lille lager i browseren. Virker siden også uden (fx i privat vindue).
-const lager = {
-  hent(n) { try { return localStorage.getItem(n); } catch (e) { return null; } },
-  gem(n, v) { try { localStorage.setItem(n, v); } catch (e) {} },
-};
+// Det har jeg hjemme: Shake vælger blandt dem, hvis der er nogen i kategorien.
+const hjemme = new Set();
+try { (JSON.parse(lager.hent("hjemme")) || []).forEach((n) => hjemme.add(n)); } catch (e) {}
+
+// Antal personer, som mængder og dressing regnes ud fra. Opskrifterne er skrevet til 2.
+let personer = Number(lager.hent("personer")) || 2;
+const FLERTAL = { "håndfuld": "håndfulde", skive: "skiver", stilk: "stilke", "dåse": "dåser", kugle: "kugler" };
+const BROEK = { 0.25: "¼", 0.5: "½", 0.75: "¾" };
+function visTal(x) {
+  const hel = Math.floor(x), rest = Math.round((x - hel) * 4) / 4;
+  if (rest === 1) return String(hel + 1);
+  if (!rest) return String(hel);
+  return (hel ? hel : "") + BROEK[rest];
+}
+function maengdeTekst(ingrediens) {
+  if (!ingrediens.maengde) return "";
+  const [pr, enhed] = ingrediens.maengde;
+  let x = pr * personer;
+  if (enhed === "g") {
+    x = x < 100 ? Math.round(x / 5) * 5 : Math.round(x / 10) * 10;
+    return `${x} g`;
+  }
+  x = Math.max(0.25, Math.round(x * 4) / 4);
+  const ord = x > 1 && FLERTAL[enhed] ? FLERTAL[enhed] : enhed;
+  return `${visTal(x)} ${ord}`;
+}
+// Skalér tallene i en opskriftslinje (skrevet til 2 personer).
+function skalerLinje(linje) {
+  const f = personer / 2;
+  if (f === 1) return linje;
+  const tal = (s) => (s === "½" ? 0.5 : Number(s));
+  return linje.replace(/(\d+|½)(?:-(\d+))?/g, (_, a, b) => visTal(tal(a) * f) + (b ? "-" + visTal(tal(b) * f) : ""));
+}
+
+
 
 async function hentIngredienser() {
   if (window.INGREDIENSER) return window.INGREDIENSER;
@@ -59,7 +98,9 @@ async function hentIngredienser() {
 }
 
 function vaelg(kat) {
-  const liste = tilladt(kat);
+  let liste = tilladt(kat);
+  const harJeg = liste.filter((i) => hjemme.has(i.navn));
+  if (harJeg.length) liste = harJeg;
   if (liste.length === 0) return null;
   let i = Math.floor(Math.random() * liste.length);
   // Undgå at få præcis den samme ingrediens to gange i træk.
@@ -144,7 +185,7 @@ function visDressingOpskrift(ingrediens) {
   document.getElementById("dressing-liste").replaceChildren(
     ...ingrediens.opskrift.map((linje) => {
       const li = document.createElement("li");
-      li.textContent = tilpasLinje(linje);
+      li.textContent = skalerLinje(tilpasLinje(linje));
       return li;
     })
   );
@@ -222,7 +263,7 @@ function opdaterRaekke(kat, ingrediens) {
     li.dataset.kat = kat.id;
     const tekst = document.createElement("span");
     tekst.className = "tekst";
-    tekst.innerHTML = '<span class="kat"></span><span class="navn"></span>';
+    tekst.innerHTML = '<span class="kat"></span><span class="navn"></span><span class="maengde"></span><span class="tip"></span>';
     tekst.querySelector(".kat").innerHTML = '<span class="kat-navn"></span> <span class="nr"></span>';
     tekst.querySelector(".kat-navn").textContent = kat.navn;
     const pile = document.createElement("span");
@@ -247,9 +288,87 @@ function opdaterRaekke(kat, ingrediens) {
   li.querySelector(".pil.tilbage").title = `Forrige ${navn}`;
   li.querySelector(".pil.frem").setAttribute("aria-label", `Næste ${navn} (${nr} af ${ialt})`);
   li.querySelector(".pil.frem").title = `Næste ${navn}`;
+  visDetaljer(li, ingrediens);
   visLaas(kat);
   visUdeladt(kat);
   return li;
+}
+
+function visDetaljer(li, ingrediens) {
+  const m = [maengdeTekst(ingrediens), hjemme.has(ingrediens.navn) ? "har du hjemme" : ""].filter(Boolean).join(" · ");
+  li.querySelector(".maengde").textContent = m;
+  li.querySelector(".tip").textContent = ingrediens.tip || "";
+}
+function opdaterAlleRaekker() {
+  for (const kat of kategorier) if (sidste[kat.id]) opdaterRaekke(kat, sidste[kat.id]);
+  if (sidste.dressing && !udeladt.has("dressing")) visDressingOpskrift(sidste.dressing);
+}
+
+// Vælger til antal personer.
+function lavPersoner() {
+  const boks = document.getElementById("personer");
+  for (const n of [1, 2, 4, 6]) {
+    const knap = document.createElement("button");
+    knap.type = "button";
+    knap.textContent = n;
+    knap.dataset.n = n;
+    knap.setAttribute("aria-label", n === 1 ? "1 person" : `${n} personer`);
+    knap.addEventListener("click", () => {
+      personer = n;
+      lager.gem("personer", n);
+      visPersoner();
+      opdaterAlleRaekker();
+    });
+    boks.appendChild(knap);
+  }
+  visPersoner();
+}
+function visPersoner() {
+  for (const k of document.querySelectorAll("#personer button")) k.setAttribute("aria-pressed", Number(k.dataset.n) === personer);
+  document.getElementById("dressing-til").textContent = personer === 1 ? "1 person" : `${personer} personer`;
+}
+
+// Det har jeg hjemme: knapper for alle ingredienser, grupperet efter kategori.
+function lavHjemme() {
+  const boks = document.getElementById("hjemme-liste");
+  for (const kat of kategorier) {
+    if (kat.id === "dressing") continue;
+    const gruppe = document.createElement("div");
+    gruppe.className = "hjemme-gruppe";
+    const h = document.createElement("h4");
+    h.textContent = kat.navn;
+    const knapper = document.createElement("div");
+    knapper.className = "hjemme-knapper";
+    for (const i of kat.ingredienser) {
+      const knap = document.createElement("button");
+      knap.type = "button";
+      knap.className = "kost-knap";
+      knap.textContent = i.navn;
+      knap.dataset.navn = i.navn;
+      knap.addEventListener("click", () => {
+        if (hjemme.has(i.navn)) hjemme.delete(i.navn);
+        else hjemme.add(i.navn);
+        lager.gem("hjemme", JSON.stringify([...hjemme]));
+        visHjemme();
+        opdaterAlleRaekker();
+      });
+      knapper.appendChild(knap);
+    }
+    gruppe.append(h, knapper);
+    boks.appendChild(gruppe);
+  }
+  document.getElementById("hjemme-ryd").addEventListener("click", () => {
+    hjemme.clear();
+    lager.gem("hjemme", "[]");
+    visHjemme();
+    opdaterAlleRaekker();
+  });
+  visHjemme();
+}
+function visHjemme() {
+  for (const k of document.querySelectorAll("#hjemme-liste .kost-knap")) k.setAttribute("aria-pressed", hjemme.has(k.dataset.navn));
+  document.getElementById("hjemme-antal").textContent = hjemme.size ? ` (${hjemme.size})` : "";
+  document.getElementById("hjemme-ryd").hidden = hjemme.size === 0;
 }
 
 // Tag en kategori ud af salaten, eller sæt den ind igen.
@@ -453,8 +572,8 @@ function lavKostKnapper() {
   visKost();
 }
 function visKost() {
-  for (const knap of document.querySelectorAll(".kost-knap")) knap.setAttribute("aria-pressed", valgtKost.has(knap.dataset.kost));
-  document.getElementById("kost-note").hidden = valgtKost.size === 0;
+  for (const knap of document.querySelectorAll("#kost .kost-knap")) knap.setAttribute("aria-pressed", valgtKost.has(knap.dataset.kost));
+  document.getElementById("kost-note").hidden = ![...valgtKost].some((k) => k !== "saeson");
 }
 function skiftKost(id) {
   if (valgtKost.has(id)) valgtKost.delete(id);
@@ -517,6 +636,8 @@ hentIngredienser()
   .then((data) => {
     kategorier = data.kategorier;
     lavKostKnapper();
+    lavPersoner();
+    lavHjemme();
     visAntal();
     visTaeller();
     if (!laesLink()) shake(false);
