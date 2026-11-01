@@ -60,7 +60,7 @@
       "navn": "Noget uventet",
       "ingredienser": [
         { "navn": "Vandmelon", "billede": "billeder/vandmelon.webp" },
-        { "navn": "Hytteost", "billede": "billeder/hytteost.svg" },
+        { "navn": "Hytteost", "billede": "billeder/hytteost.webp" },
         { "navn": "Hummus", "billede": "billeder/hummus.svg" },
         { "navn": "Bacon", "billede": "billeder/bacon.svg" },
         { "navn": "Syltede grøntsager", "billede": "billeder/syltede-groentsager.svg" },
