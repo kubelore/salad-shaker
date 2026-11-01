@@ -34,10 +34,7 @@ const KOST = [
   { id: "glutenfri", navn: "Glutenfri", uden: ["gluten"] },
   { id: "laktosefri", navn: "Laktosefri", uden: ["mælk"] },
   { id: "lowcarb", navn: "Low carb", uden: ["kulhydrat"] },
-  { id: "saeson", navn: "I sæson nu", uden: [] }, // danske råvarer i sæson denne måned
 ];
-const MAANED = new Date().getMonth() + 1;
-const iSaeson = (i) => !i.saeson || i.saeson.includes(MAANED);
 const valgtKost = new Set();
 function udelukket() {
   const s = new Set();
@@ -50,7 +47,6 @@ function tilladt(kat) {
   return kat.ingredienser.filter((i) => passer(i, uden));
 }
 function passer(ingrediens, uden = udelukket()) {
-  if (valgtKost.has("saeson") && !iSaeson(ingrediens)) return false;
   return !(ingrediens.indeholder || []).some((x) => uden.has(x));
 }
 
@@ -296,15 +292,7 @@ function opdaterRaekke(kat, ingrediens) {
 
 function visDetaljer(li, ingrediens) {
   const m = [maengdeTekst(ingrediens), hjemme.has(ingrediens.navn) ? "har du hjemme" : ""].filter(Boolean).join(" · ");
-  const el = li.querySelector(".maengde");
-  el.textContent = m;
-  // Sæsonmærke: kun når "I sæson nu" er valgt, og kun på råvarer med en sæson.
-  if (valgtKost.has("saeson") && ingrediens.saeson && iSaeson(ingrediens)) {
-    const maerke = document.createElement("span");
-    maerke.className = "saeson-maerke";
-    maerke.textContent = "I sæson";
-    el.append(maerke);
-  }
+  li.querySelector(".maengde").textContent = m;
   li.querySelector(".tip").textContent = ingrediens.tip || "";
 }
 function opdaterAlleRaekker() {
@@ -581,7 +569,7 @@ function lavKostKnapper() {
 }
 function visKost() {
   for (const knap of document.querySelectorAll("#kost .kost-knap")) knap.setAttribute("aria-pressed", valgtKost.has(knap.dataset.kost));
-  document.getElementById("kost-note").hidden = ![...valgtKost].some((k) => k !== "saeson");
+  document.getElementById("kost-note").hidden = valgtKost.size === 0;
 }
 function skiftKost(id) {
   if (valgtKost.has(id)) valgtKost.delete(id);

@@ -83,7 +83,6 @@ En ingrediens kan vises på tre måder:
 | `"indeholder"` | `"indeholder": ["mælk", "gluten"]` | Bruges af kostvalgene. Mulige mærker: `kød`, `fisk`, `æg`, `mælk`, `gluten`, `kulhydrat`. Udelad feltet, hvis ingrediensen passer til alle kostvalg. |
 | `"maengde"` | `"maengde": [40, "g"]` | Mængde pr. person. Enheder: `g`, `stk`, `spsk`, `tsk`, `håndfuld`, `skive`, `stilk`, `dåse`, `bundt`. Siden ganger op til det valgte antal personer. |
 | `"tip"` | `"tip": "Rist dem på en tør pande."` | Et kort tilberedningstip, der vises under ingrediensen. |
-| `"saeson"` | `"saeson": [6, 7, 8]` | Måneder (1-12), hvor ingrediensen er i sæson i Danmark. Udelad feltet, hvis den kan fås hele året. Bruges af "I sæson nu". |
 
 Vil du have en tegning i samme stil som de andre, så bed Claude om at tegne den. Så får du en SVG-fil, der passer ind.
 
