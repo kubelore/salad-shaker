@@ -320,13 +320,11 @@ body {
 .kost-knap:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; }
 .kost-knap[aria-pressed="true"] { background: var(--blad); border-color: var(--blad); color: var(--flade); }
 .kost-knap[aria-pressed="true"]::before { content: "✓ "; }
-.kost-note { margin: 0; max-width: 24rem; color: var(--daempet); font-size: 0.8125rem; text-align: center; }
+.kost-note { margin: 0; max-width: 24rem; color: var(--daempet); font-size: 0.75rem; text-align: center; opacity: 0.85; }
 
-/* Ansvarsfraskrivelse nederst */
-.ansvar { color: var(--daempet); font-size: 0.875rem; line-height: 1.5; max-width: 40rem; justify-self: center; text-align: center; border-top: 1px solid var(--kant); padding-top: 1.25rem; }
-.ansvar h2 { font-family: var(--font-display); font-weight: 600; font-size: 1rem; color: var(--tekst); margin: 0 0 0.5rem; }
-.ansvar p { margin: 0 0 0.5rem; }
-.ansvar strong { color: var(--tekst); }
+/* Ansvarsfraskrivelse nederst: synlig, men diskret */
+.ansvar { color: var(--daempet); font-size: 0.75rem; line-height: 1.5; max-width: 34rem; justify-self: center; text-align: center; opacity: 0.85; }
+.ansvar p { margin: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   .skaal.ryster, #indhold.ny, #indhold g.ny, .liste li.skiftet .navn, .liste li.skiftet-tilbage .navn { animation: none; }
