@@ -11,8 +11,8 @@
         { "navn": "Kålblade", "maengde": [40, "g"], "saeson": [8, 9, 10, 11, 12], "tip": "Skær i tynde strimler, og massér dem med lidt olie.", "billede": "billeder/kaalblade.webp" },
         { "navn": "Rucola", "maengde": [30, "g"], "saeson": [5, 6, 7, 8, 9, 10], "billede": "billeder/rucola.webp" },
         { "navn": "Ærteskud", "maengde": [30, "g"], "billede": "billeder/aerteskud.webp" },
-        { "navn": "Hvidkål", "maengde": [60, "g"], "saeson": [7, 8, 9, 10, 11, 12, 1, 2, 3], "tip": "Snit fint, og massér med en knivspids salt, så kålen bliver mør.", "billede": "billeder/hvidkaal.webp" },
-        { "navn": "Rødkål", "maengde": [60, "g"], "saeson": [8, 9, 10, 11, 12, 1, 2, 3], "tip": "Snit fint, og massér med en knivspids salt, så kålen bliver mør.", "billede": "billeder/roedkaal.webp" },
+        { "navn": "Hvidkål", "maengde": [60, "g"], "saeson": [7, 8, 9, 10, 11, 12, 1, 2, 3], "tip": "Snit kålen fint, drys med lidt salt, og klem og ælt den med hænderne i 1-2 minutter. Så bliver den blødere og lettere at spise.", "billede": "billeder/hvidkaal.webp" },
+        { "navn": "Rødkål", "maengde": [60, "g"], "saeson": [8, 9, 10, 11, 12, 1, 2, 3], "tip": "Snit kålen fint, drys med lidt salt, og klem og ælt den med hænderne i 1-2 minutter. Så bliver den blødere og lettere at spise.", "billede": "billeder/roedkaal.webp" },
         { "navn": "Icebergsalat", "maengde": [60, "g"], "saeson": [6, 7, 8, 9], "tip": "Skær i tynde strimler.", "billede": "billeder/iceberg.webp" },
         { "navn": "Brøndkarse", "maengde": [25, "g"], "saeson": [4, 5, 6, 7, 8, 9, 10], "tip": "Klip bladene af lige før servering.", "billede": "billeder/broendkarse.webp" },
         { "navn": "Rosenkål", "maengde": [75, "g"], "saeson": [9, 10, 11, 12, 1, 2], "tip": "Snit dem tyndt og spis dem rå, eller halvér dem og bag dem 15 min ved 200 °C.", "billede": "billeder/rosenkaal.webp" }
