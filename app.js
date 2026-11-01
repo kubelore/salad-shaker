@@ -17,6 +17,13 @@ const DRESSING_STRIBER = [
 const SVG_NS = "http://www.w3.org/2000/svg";
 let kategorier = [];
 let sidste = {};
+const laast = new Set(); // kategorier som Shake ikke rører
+
+// Lille lager i browseren. Virker siden også uden (fx i privat vindue).
+const lager = {
+  hent(n) { try { return localStorage.getItem(n); } catch (e) { return null; } },
+  gem(n, v) { try { localStorage.setItem(n, v); } catch (e) {} },
+};
 
 async function hentIngredienser() {
   if (window.INGREDIENSER) return window.INGREDIENSER;
@@ -146,6 +153,34 @@ function lavPil(kat, retning) {
   return knap;
 }
 
+const LAAS_AABEN = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8 11V7a4 4 0 0 1 7.5-1.9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+const LAAS_LUKKET = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor" stroke="currentColor" stroke-width="2.2"/><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+
+function lavLaas(kat) {
+  const knap = document.createElement("button");
+  knap.type = "button";
+  knap.className = "laas";
+  knap.addEventListener("click", () => {
+    if (laast.has(kat.id)) laast.delete(kat.id);
+    else laast.add(kat.id);
+    visLaas(kat);
+  });
+  return knap;
+}
+
+function visLaas(kat) {
+  const li = document.querySelector(`#liste li[data-kat="${kat.id}"]`);
+  if (!li) return;
+  const er = laast.has(kat.id);
+  const knap = li.querySelector(".laas");
+  knap.innerHTML = er ? LAAS_LUKKET : LAAS_AABEN;
+  knap.setAttribute("aria-pressed", er);
+  const navn = kat.navn.toLowerCase();
+  knap.setAttribute("aria-label", er ? `Lås ${navn} op` : `Behold ${navn}, når du ryster`);
+  knap.title = er ? "Låst: bliver, når du ryster" : "Lås, så den bliver, når du ryster";
+  li.classList.toggle("laast", er);
+}
+
 function opdaterRaekke(kat, ingrediens) {
   const liste = document.getElementById("liste");
   let li = liste.querySelector(`li[data-kat="${kat.id}"]`);
@@ -159,7 +194,7 @@ function opdaterRaekke(kat, ingrediens) {
     tekst.querySelector(".kat-navn").textContent = kat.navn;
     const pile = document.createElement("span");
     pile.className = "pile";
-    pile.append(lavPil(kat, -1), lavPil(kat, 1));
+    pile.append(lavLaas(kat), lavPil(kat, -1), lavPil(kat, 1));
     li.append(document.createElement("span"), tekst, pile);
     liste.appendChild(li);
   }
@@ -173,6 +208,7 @@ function opdaterRaekke(kat, ingrediens) {
   li.querySelector(".pil.tilbage").title = `Forrige ${navn}`;
   li.querySelector(".pil.frem").setAttribute("aria-label", `Næste ${navn} (${nr} af ${ialt})`);
   li.querySelector(".pil.frem").title = `Næste ${navn}`;
+  visLaas(kat);
   return li;
 }
 
@@ -182,17 +218,87 @@ function genstart(el, klasse) {
   el.classList.add(klasse);
 }
 
-// Shake hele salaten.
-function shake() {
+// Læg en ingrediens i skålen med en lille forsinkelse, så de falder i én efter én.
+function drys(gruppe, nr) {
+  gruppe.style.animationDelay = `${0.25 + nr * 0.09}s`;
+  genstart(gruppe, "ny");
+}
+
+// Shake hele salaten (låste kategorier bliver liggende).
+function shake(talt = true) {
+  let nr = 0;
   for (const kat of kategorier) {
+    if (laast.has(kat.id) && sidste[kat.id]) continue;
     const ingrediens = vaelg(kat);
     if (!ingrediens) continue;
-    tegnKategori(kat, ingrediens);
+    drys(tegnKategori(kat, ingrediens), nr++);
     opdaterRaekke(kat, ingrediens);
   }
   opdaterGalleri();
   genstart(document.getElementById("skaal"), "ryster");
-  genstart(document.getElementById("indhold"), "ny");
+  if (talt) {
+    if (navigator.vibrate) navigator.vibrate([25, 60, 25, 60, 40]);
+    taelOp();
+  }
+  opdaterLink();
+}
+
+// Tæller for rystede salater, gemt i browseren.
+function visTaeller() {
+  const n = Number(lager.hent("rystet")) || 0;
+  const el = document.getElementById("taeller");
+  el.textContent = n === 1 ? "Du har rystet 1 salat" : `Du har rystet ${n.toLocaleString("da-DK")} salater`;
+  el.hidden = n === 0;
+}
+function taelOp() {
+  lager.gem("rystet", (Number(lager.hent("rystet")) || 0) + 1);
+  visTaeller();
+}
+
+// Del-link: adressen husker den aktuelle salat som numre, fx ?s=3-7-1-9-4-2.
+function opdaterLink() {
+  const s = kategorier.map((k) => k.ingredienser.indexOf(sidste[k.id]) + 1).join("-");
+  history.replaceState(null, "", `${location.pathname}?s=${s}`);
+}
+function laesLink() {
+  const s = new URLSearchParams(location.search).get("s");
+  if (!s) return false;
+  const tal = s.split("-").map(Number);
+  let fundet = false;
+  kategorier.forEach((kat, i) => {
+    const ingrediens = kat.ingredienser[tal[i] - 1];
+    if (!ingrediens) return;
+    sidste[kat.id] = ingrediens;
+    fundet = true;
+  });
+  if (!fundet) return false;
+  // Kategorier der ikke stod i linket, får en tilfældig.
+  for (const kat of kategorier) if (!sidste[kat.id]) vaelg(kat);
+  for (const kat of kategorier) {
+    if (!sidste[kat.id]) continue;
+    tegnKategori(kat, sidste[kat.id]);
+    opdaterRaekke(kat, sidste[kat.id]);
+  }
+  opdaterGalleri();
+  return true;
+}
+async function del() {
+  const url = location.href;
+  const tekst = "Prøv denne salat";
+  const status = document.getElementById("del-status");
+  try {
+    if (navigator.share) {
+      await navigator.share({ title: "Salad shaker", text: tekst, url });
+      return;
+    }
+    await navigator.clipboard.writeText(url);
+    status.textContent = "Link kopieret";
+  } catch (e) {
+    if (e && e.name === "AbortError") return;
+    status.textContent = "Kopiér adressen i browseren for at dele";
+  }
+  clearTimeout(del.t);
+  del.t = setTimeout(() => (status.textContent = ""), 2500);
 }
 
 // Gå frem (+1) eller tilbage (-1) i listen og start forfra/bagfra ved enderne, så man kan bladre gennem dem alle.
@@ -209,10 +315,13 @@ function bladr(kat, retning) {
 function skiftEn(kat, retning) {
   const ingrediens = bladr(kat, retning);
   if (!ingrediens) return;
-  genstart(tegnKategori(kat, ingrediens), "ny");
+  const gruppe = tegnKategori(kat, ingrediens);
+  gruppe.style.animationDelay = "0s";
+  genstart(gruppe, "ny");
   const li = opdaterRaekke(kat, ingrediens);
   genstart(li, retning < 0 ? "skiftet-tilbage" : "skiftet");
   opdaterGalleri();
+  opdaterLink();
 }
 
 // Store billeder af de valgte ingredienser nederst på siden (uden dressing).
@@ -284,7 +393,9 @@ hentIngredienser()
   .then((data) => {
     kategorier = data.kategorier;
     visAntal();
-    shake();
+    visTaeller();
+    if (!laesLink()) shake(false);
+    document.getElementById("del").addEventListener("click", del);
     document.getElementById("shake").addEventListener("click", () => {
       shake();
       startRystSensor();

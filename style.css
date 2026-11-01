@@ -98,8 +98,12 @@ body {
   60% { transform: rotate(-4deg) translateX(-4px); }
   80% { transform: rotate(2deg) translateX(2px); }
 }
-#indhold.ny, #indhold g.ny { animation: drys 0.45s ease-out; }
-@keyframes drys { from { opacity: 0.2; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+#indhold.ny, #indhold g.ny { animation: drys 0.55s cubic-bezier(.3,1.5,.5,1) backwards; }
+@keyframes drys {
+  0% { opacity: 0; transform: translateY(-70px); }
+  60% { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
 
 .shake-knap {
   font-family: var(--font-display);
@@ -195,7 +199,10 @@ body {
   .opskrift h2 { font-size: 1.125rem; margin-bottom: 0.25rem; }
 
   .liste li { grid-template-columns: 2.5rem 1fr auto; column-gap: 0.5rem; padding-block: 0.5rem; }
-  .pil { width: 2.25rem; height: 2.25rem; }
+  .pil, .laas { width: 2.125rem; height: 2.125rem; }
+  .laas { width: 1.875rem; }
+  .pile { gap: 0.1875rem; }
+  .liste .kat { letter-spacing: 0.04em; }
 
   .liste .ikon { width: 2.5rem; height: 2.5rem; font-size: 1.35rem; }
   .liste .prik { width: 1rem; height: 1rem; }
@@ -216,6 +223,25 @@ body {
 .dressing-opskrift ul { margin: 0; padding-left: 1.125rem; display: grid; gap: 0.125rem; }
 .dressing-opskrift p { margin: 0.5rem 0 0; color: var(--daempet); font-size: 0.875rem; }
 .pile { display: flex; gap: 0.375rem; }
+.laas {
+  width: 2.5rem; height: 2.5rem; border-radius: 50%;
+  border: 1px solid transparent; background: none; color: var(--daempet);
+  display: grid; place-items: center; cursor: pointer; padding: 0;
+}
+.laas svg { width: 1.125rem; height: 1.125rem; }
+.laas:hover { color: var(--accent); }
+.laas:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; }
+.laas[aria-pressed="true"] { color: var(--accent-tekst); background: var(--accent); }
+.liste li.laast .ikon { box-shadow: 0 0 0 2px var(--accent); }
+
+.del-knap {
+  font: inherit; color: var(--accent); font-weight: 700;
+  background: none; border: none; padding: 0.25rem 0.125rem; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.del-knap:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; border-radius: 4px; }
+.del-status { color: var(--blad); font-weight: 700; }
+.taeller { margin: 0; color: var(--daempet); font-size: 0.8125rem; text-align: center; }
 .pil {
   width: 2.5rem;
   height: 2.5rem;
