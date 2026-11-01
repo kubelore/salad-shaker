@@ -99,18 +99,18 @@
       "id": "dressing",
       "navn": "Dressing",
       "ingredienser": [
-        { "navn": "Sennepsdressing", "farve": "#D9A520" },
-        { "navn": "Tahindressing", "farve": "#C9A77A" },
-        { "navn": "Yoghurtdressing", "farve": "#EFEBE0" },
-        { "navn": "Vinaigrette", "farve": "#B5893A" },
-        { "navn": "Pestodressing", "farve": "#5E8C31" },
-        { "navn": "Frugtdressing", "farve": "#E86A5B" },
-        { "navn": "Cæsardressing", "farve": "#E8DDB5" },
-        { "navn": "Balsamicodressing", "farve": "#5B2A1E" },
-        { "navn": "Citrondressing", "farve": "#F1D54A" },
-        { "navn": "Jordnøddedressing", "farve": "#B9773A" },
-        { "navn": "Sesamdressing", "farve": "#C99A5A" },
-        { "navn": "Lime-koriander-dressing", "farve": "#8DBF4A" }
+        { "navn": "Sennepsdressing", "farve": "#D9A520", "opskrift": ["3 spsk olivenolie", "1 spsk dijonsennep", "1 spsk æblecidereddike", "1 tsk honning"] },
+        { "navn": "Tahindressing", "farve": "#C9A77A", "opskrift": ["2 spsk tahin", "1 spsk citronsaft", "3 spsk koldt vand", "½ fed revet hvidløg"] },
+        { "navn": "Yoghurtdressing", "farve": "#EFEBE0", "opskrift": ["1 dl græsk yoghurt", "1 spsk citronsaft", "1 spsk hakket dild"] },
+        { "navn": "Vinaigrette", "farve": "#B5893A", "opskrift": ["3 spsk olivenolie", "1 spsk rødvinseddike", "1 tsk sennep"] },
+        { "navn": "Pestodressing", "farve": "#5E8C31", "opskrift": ["2 spsk pesto", "2 spsk olivenolie", "1 spsk citronsaft"] },
+        { "navn": "Frugtdressing", "farve": "#E86A5B", "opskrift": ["3 spsk appelsinjuice", "2 spsk olivenolie", "1 spsk mosede hindbær", "1 tsk honning"] },
+        { "navn": "Cæsardressing", "farve": "#E8DDB5", "opskrift": ["3 spsk mayonnaise", "2 spsk revet parmesan", "1 tsk citronsaft", "1 tsk dijonsennep", "½ fed revet hvidløg"] },
+        { "navn": "Balsamicodressing", "farve": "#5B2A1E", "opskrift": ["3 spsk olivenolie", "1 spsk balsamico", "1 tsk honning"] },
+        { "navn": "Citrondressing", "farve": "#F1D54A", "opskrift": ["3 spsk olivenolie", "Revet skal og saft af ½ citron", "1 tsk honning"] },
+        { "navn": "Jordnøddedressing", "farve": "#B9773A", "opskrift": ["2 spsk peanutbutter", "1 spsk soja", "1 spsk limesaft", "1 tsk honning", "2-3 spsk varmt vand"] },
+        { "navn": "Sesamdressing", "farve": "#C99A5A", "opskrift": ["1 spsk sesamolie", "1 spsk soja", "1 spsk riseddike", "1 tsk honning", "1 tsk ristede sesamfrø"] },
+        { "navn": "Lime-koriander-dressing", "farve": "#8DBF4A", "opskrift": ["3 spsk olivenolie", "Saft af 1 lime", "1 lille bundt hakket koriander", "1 tsk honning"] }
       ]
     }
   ]

@@ -79,6 +79,7 @@ En ingrediens kan vises på tre måder:
 | `"emoji"` | `"emoji": "🌸"` | En emoji i skålen og på listen. Det er den hurtigste løsning. |
 | `"billede"` | `"billede": "billeder/radiser.svg"` | En tegning. Upload filen til mappen `billeder` på GitHub (**Add file → Upload files**). |
 | `"farve"` | `"farve": "#E86A5B"` | Kun til dressinger: striber i den farve hen over salaten. |
+| `"opskrift"` | `"opskrift": ["3 spsk olivenolie", "1 spsk eddike"]` | Kun til dressinger: en kort ingrediensliste, der vises under salaten. |
 
 Vil du have en tegning i samme stil som de andre, så bed Claude om at tegne den. Så får du en SVG-fil, der passer ind.
 

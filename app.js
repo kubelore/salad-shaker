@@ -86,9 +86,29 @@ function kategoriGruppe(kat) {
 function tegnKategori(kat, ingrediens) {
   const gruppe = kategoriGruppe(kat);
   gruppe.replaceChildren();
-  if (kat.id === "dressing") tegnDressing(gruppe, ingrediens);
+  if (kat.id === "dressing") {
+    tegnDressing(gruppe, ingrediens);
+    visDressingOpskrift(ingrediens);
+  }
   else tegnIngrediens(gruppe, ingrediens, PLACERING[kat.id] || STANDARD_PLACERING);
   return gruppe;
+}
+
+function visDressingOpskrift(ingrediens) {
+  const boks = document.getElementById("dressing-opskrift");
+  if (!ingrediens.opskrift || ingrediens.opskrift.length === 0) {
+    boks.hidden = true;
+    return;
+  }
+  document.getElementById("dressing-navn").textContent = ingrediens.navn.toLowerCase();
+  document.getElementById("dressing-liste").replaceChildren(
+    ...ingrediens.opskrift.map((linje) => {
+      const li = document.createElement("li");
+      li.textContent = linje;
+      return li;
+    })
+  );
+  boks.hidden = false;
 }
 
 function lavIkon(ingrediens) {

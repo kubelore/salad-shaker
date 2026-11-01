@@ -203,6 +203,16 @@ body {
 }
 
 .liste .tekst { min-width: 0; }
+
+.dressing-opskrift {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: var(--bg);
+}
+.dressing-opskrift h3 { margin: 0 0 0.5rem; font-family: var(--font-display); font-weight: 600; font-size: 1rem; }
+.dressing-opskrift ul { margin: 0; padding-left: 1.125rem; display: grid; gap: 0.125rem; }
+.dressing-opskrift p { margin: 0.5rem 0 0; color: var(--daempet); font-size: 0.875rem; }
 .ryst-en {
   width: 2.5rem;
   height: 2.5rem;
