@@ -23,7 +23,7 @@
       "navn": "Noget sprødt",
       "ingredienser": [
         { "navn": "Gulerod", "billede": "billeder/gulerod.webp" },
-        { "navn": "Spirer", "billede": "billeder/spirer.svg" },
+        { "navn": "Spirer", "billede": "billeder/spirer.webp" },
         { "navn": "Agurk", "billede": "billeder/agurk.svg" },
         { "navn": "Croutoner", "billede": "billeder/croutoner.svg" },
         { "navn": "Squash", "billede": "billeder/squash.svg" },
