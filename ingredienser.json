@@ -43,8 +43,8 @@
       "navn": "Noget blødt",
       "ingredienser": [
         { "navn": "Bagt sød kartoffel", "billede": "billeder/soed-kartoffel.webp" },
-        { "navn": "Ost", "billede": "billeder/ost.svg" },
-        { "navn": "Avocado", "billede": "billeder/avocado.svg" },
+        { "navn": "Ost", "billede": "billeder/ost.webp" },
+        { "navn": "Avocado", "billede": "billeder/avocado.webp" },
         { "navn": "Tomat", "billede": "billeder/tomat.svg" },
         { "navn": "Ris", "billede": "billeder/ris.svg" },
         { "navn": "Oliven", "billede": "billeder/oliven.svg" },
