@@ -52,14 +52,14 @@
         { "navn": "Nye kartofler", "billede": "billeder/kartofler.webp" },
         { "navn": "Rødbede", "billede": "billeder/roedbede.webp" },
         { "navn": "Pasta", "billede": "billeder/pasta.webp" },
-        { "navn": "Majs", "billede": "billeder/majs.svg" }
+        { "navn": "Majs", "billede": "billeder/majs.webp" }
       ]
     },
     {
       "id": "uventet",
       "navn": "Noget uventet",
       "ingredienser": [
-        { "navn": "Vandmelon", "billede": "billeder/vandmelon.svg" },
+        { "navn": "Vandmelon", "billede": "billeder/vandmelon.webp" },
         { "navn": "Hytteost", "billede": "billeder/hytteost.svg" },
         { "navn": "Hummus", "billede": "billeder/hummus.svg" },
         { "navn": "Bacon", "billede": "billeder/bacon.svg" },
