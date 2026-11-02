@@ -87,7 +87,7 @@
         { "navn": "Tofu", "maengde": [100, "g"], "tip": "Pres vandet ud, skær i tern, og steg dem sprøde i lidt olie.", "billede": "billeder/tofu.webp" },
         { "navn": "Ærter", "indeholder": ["kulhydrat"], "maengde": [50, "g"], "tip": "Frosne ærter skal bare tø op.", "billede": "billeder/aerter.webp" },
         { "navn": "Quinoa", "indeholder": ["kulhydrat"], "maengde": [30, "g"], "tip": "Mængden er rå quinoa. Skyl den, kog den 12 min, og lad den køle af.", "billede": "billeder/quinoa.webp" },
-        { "navn": "Nødder", "maengde": [1, "håndfuld"], "tip": "Rist dem kort på en tør pande, og hak dem groft.", "billede": "billeder/noedder.svg" },
+        { "navn": "Nødder", "maengde": [1, "håndfuld"], "tip": "Rist dem kort på en tør pande, og hak dem groft.", "billede": "billeder/noedder.webp" },
         { "navn": "Kikærter", "indeholder": ["kulhydrat"], "maengde": [60, "g"], "tip": "Dræn dem, dup dem tørre, og bag dem 20 min i ovnen ved 200 °C, så bliver de sprøde.", "billede": "billeder/kikaerter.svg" },
         { "navn": "Rejer", "indeholder": ["fisk"], "maengde": [75, "g"], "billede": "billeder/rejer.svg" },
         { "navn": "Røget laks", "indeholder": ["fisk"], "maengde": [50, "g"], "tip": "Riv den i strimler.", "billede": "billeder/roeget-laks.svg" },
