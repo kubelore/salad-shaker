@@ -11,11 +11,6 @@ const PLACERING = {
   protein: { str: 60, pos: [[192, 106], [282, 142]] },
 };
 const STANDARD_PLACERING = { str: 54, pos: [[200, 120], [140, 130]] };
-const DRESSING_STRIBER = [
-  "M96 120 C 138 88, 172 150, 210 110 S 280 88, 308 124",
-  "M124 140 C 162 120, 198 158, 236 132 S 280 118, 296 140",
-];
-
 const SVG_NS = "http://www.w3.org/2000/svg";
 let kategorier = [];
 let sidste = {};
@@ -132,27 +127,33 @@ function tegnIngrediens(gruppe, ingrediens, placering) {
   }
 }
 
+// Dressingen står som en flaske ved siden af skålen, fyldt med dressingens farve.
+const FLASKE = "M358 264 Q348 264 348 254 L348 204 Q348 190 361 183 L361 160 L375 160 L375 183 Q388 190 388 204 L388 254 Q388 264 378 264 Z";
 function tegnDressing(gruppe, ingrediens) {
-  for (const d of DRESSING_STRIBER) {
-    const p = document.createElementNS(SVG_NS, "path");
-    p.setAttribute("d", d);
-    p.setAttribute("class", "dressing");
-    p.setAttribute("stroke", ingrediens.farve || "#D9A520");
-    p.setAttribute("stroke-width", 4.5);
-    gruppe.appendChild(p);
-  }
+  const el = (navn, attr) => {
+    const e = document.createElementNS(SVG_NS, navn);
+    for (const [k, v] of Object.entries(attr)) e.setAttribute(k, v);
+    gruppe.appendChild(e);
+    return e;
+  };
+  el("ellipse", { class: "flaske-skygge", cx: 368, cy: 264, rx: 24, ry: 4 });
+  el("path", { class: "flaske-glas", d: FLASKE });
+  el("rect", { x: 346, y: 206, width: 44, height: 60, fill: ingrediens.farve || "#D9A520", "clip-path": "url(#flaske-form)", class: "flaske-indhold" });
+  el("rect", { class: "flaske-etiket", x: 348, y: 222, width: 40, height: 20 });
+  el("path", { class: "flaske-kant", d: FLASKE });
+  el("path", { class: "flaske-glans", d: "M354 206 L354 252" });
+  el("rect", { class: "flaske-prop", x: 360, y: 147, width: 16, height: 15, rx: 3 });
 }
 
 // Lag i skålen: én gruppe pr. kategori, så en enkelt kategori kan skiftes ud.
 function kategoriGruppe(kat) {
-  const indhold = document.getElementById("indhold");
+  // Dressingen står i flasken foran skålen; resten ligger i skålen.
+  const indhold = document.getElementById(kat.id === "dressing" ? "flaske" : "indhold");
   let gruppe = indhold.querySelector(`g[data-kat="${kat.id}"]`);
   if (!gruppe) {
     gruppe = document.createElementNS(SVG_NS, "g");
     gruppe.dataset.kat = kat.id;
-    // Dressingen ligger altid øverst.
-    if (kat.id === "dressing") indhold.appendChild(gruppe);
-    else indhold.insertBefore(gruppe, indhold.querySelector('g[data-kat="dressing"]'));
+    indhold.appendChild(gruppe);
   }
   return gruppe;
 }
