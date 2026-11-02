@@ -84,7 +84,7 @@
         { "navn": "Tun", "indeholder": ["fisk"], "maengde": [0.5, "dåse"], "tip": "Dræn den godt.", "billede": "billeder/tun.webp" },
         { "navn": "Kylling", "indeholder": ["kød"], "maengde": [100, "g"], "tip": "Steg brystet 5-6 min på hver side, lad det hvile, og skær det i skiver.", "billede": "billeder/kylling.webp" },
         { "navn": "Bøf", "indeholder": ["kød"], "maengde": [100, "g"], "tip": "Steg kødet på en meget varm pande, lad det hvile 5 min, og skær det tyndt på tværs af fibrene.", "billede": "billeder/boef.webp" },
-        { "navn": "Tofu", "maengde": [100, "g"], "tip": "Pres vandet ud, skær i tern, og steg dem sprøde i lidt olie.", "billede": "billeder/tofu.svg" },
+        { "navn": "Tofu", "maengde": [100, "g"], "tip": "Pres vandet ud, skær i tern, og steg dem sprøde i lidt olie.", "billede": "billeder/tofu.webp" },
         { "navn": "Ærter", "indeholder": ["kulhydrat"], "maengde": [50, "g"], "tip": "Frosne ærter skal bare tø op.", "billede": "billeder/aerter.svg" },
         { "navn": "Quinoa", "indeholder": ["kulhydrat"], "maengde": [30, "g"], "tip": "Mængden er rå quinoa. Skyl den, kog den 12 min, og lad den køle af.", "billede": "billeder/quinoa.svg" },
         { "navn": "Nødder", "maengde": [1, "håndfuld"], "tip": "Rist dem kort på en tør pande, og hak dem groft.", "billede": "billeder/noedder.svg" },
