@@ -66,7 +66,7 @@
         { "navn": "Syltede grøntsager", "maengde": [2, "spsk"], "billede": "billeder/syltede-groentsager.webp" },
         { "navn": "Krydderurter", "maengde": [0.25, "bundt"], "tip": "Pluk bladene, og hak dem groft lige før servering.", "billede": "billeder/krydderurter.webp" },
         { "navn": "Tørret frugt", "indeholder": ["kulhydrat"], "maengde": [1, "spsk"], "tip": "Hak frugten groft.", "billede": "billeder/toerret-frugt.webp" },
-        { "navn": "Granatæble", "maengde": [2, "spsk"], "tip": "Halvér frugten, og bank kernerne ud med en ske over en skål.", "billede": "billeder/granataeble.svg" },
+        { "navn": "Granatæble", "maengde": [2, "spsk"], "tip": "Halvér frugten, og bank kernerne ud med en ske over en skål.", "billede": "billeder/granataeble.webp" },
         { "navn": "Jordbær", "maengde": [5, "stk"], "tip": "Skær dem i kvarte.", "billede": "billeder/jordbaer.svg" },
         { "navn": "Mango", "indeholder": ["kulhydrat"], "maengde": [0.25, "stk"], "billede": "billeder/mango.svg" },
         { "navn": "Appelsin", "indeholder": ["kulhydrat"], "maengde": [0.5, "stk"], "tip": "Skær skrællen af med en kniv, og skær frugtkødet i skiver.", "billede": "billeder/appelsin.svg" },
