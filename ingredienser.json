@@ -72,7 +72,7 @@
         { "navn": "Appelsin", "indeholder": ["kulhydrat"], "maengde": [0.5, "stk"], "tip": "Skær skrællen af med en kniv, og skær frugtkødet i skiver.", "billede": "billeder/appelsin.webp" },
         { "navn": "Vindruer", "indeholder": ["kulhydrat"], "maengde": [10, "stk"], "tip": "Halvér dem.", "billede": "billeder/vindruer.webp" },
         { "navn": "Kapers", "maengde": [1, "tsk"], "tip": "Skyl dem, hvis de er saltede.", "billede": "billeder/kapers.webp" },
-        { "navn": "Gedeost", "indeholder": ["mælk"], "maengde": [30, "g"], "tip": "Smuldr den med fingrene.", "billede": "billeder/gedeost.svg" }
+        { "navn": "Gedeost", "indeholder": ["mælk"], "maengde": [30, "g"], "tip": "Smuldr den med fingrene.", "billede": "billeder/gedeost.webp" }
       ]
     },
     {
