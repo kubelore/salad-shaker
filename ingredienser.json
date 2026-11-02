@@ -69,7 +69,7 @@
         { "navn": "Granatæble", "maengde": [2, "spsk"], "tip": "Halvér frugten, og bank kernerne ud med en ske over en skål.", "billede": "billeder/granataeble.webp" },
         { "navn": "Jordbær", "maengde": [5, "stk"], "tip": "Skær dem i kvarte.", "billede": "billeder/jordbaer.webp" },
         { "navn": "Mango", "indeholder": ["kulhydrat"], "maengde": [0.25, "stk"], "billede": "billeder/mango.webp" },
-        { "navn": "Appelsin", "indeholder": ["kulhydrat"], "maengde": [0.5, "stk"], "tip": "Skær skrællen af med en kniv, og skær frugtkødet i skiver.", "billede": "billeder/appelsin.svg" },
+        { "navn": "Appelsin", "indeholder": ["kulhydrat"], "maengde": [0.5, "stk"], "tip": "Skær skrællen af med en kniv, og skær frugtkødet i skiver.", "billede": "billeder/appelsin.webp" },
         { "navn": "Vindruer", "indeholder": ["kulhydrat"], "maengde": [10, "stk"], "tip": "Halvér dem.", "billede": "billeder/vindruer.svg" },
         { "navn": "Kapers", "maengde": [1, "tsk"], "tip": "Skyl dem, hvis de er saltede.", "billede": "billeder/kapers.svg" },
         { "navn": "Gedeost", "indeholder": ["mælk"], "maengde": [30, "g"], "tip": "Smuldr den med fingrene.", "billede": "billeder/gedeost.svg" }
