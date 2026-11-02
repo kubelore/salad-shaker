@@ -127,8 +127,7 @@ function tegnIngrediens(gruppe, ingrediens, placering) {
   }
 }
 
-// Dressingen står som en flaske ved siden af skålen, fyldt med dressingens farve.
-const FLASKE = "M358 264 Q348 264 348 254 L348 204 Q348 190 361 183 L361 160 L375 160 L375 183 Q388 190 388 204 L388 254 Q388 264 378 264 Z";
+// Dressingen står i en lille skål med en ske ved siden af den store skål, i dressingens farve.
 function tegnDressing(gruppe, ingrediens) {
   const el = (navn, attr) => {
     const e = document.createElementNS(SVG_NS, navn);
@@ -136,18 +135,17 @@ function tegnDressing(gruppe, ingrediens) {
     gruppe.appendChild(e);
     return e;
   };
-  el("ellipse", { class: "flaske-skygge", cx: 368, cy: 264, rx: 24, ry: 4 });
-  el("path", { class: "flaske-glas", d: FLASKE });
-  el("rect", { x: 346, y: 206, width: 44, height: 60, fill: ingrediens.farve || "#D9A520", "clip-path": "url(#flaske-form)", class: "flaske-indhold" });
-  el("rect", { class: "flaske-etiket", x: 348, y: 222, width: 40, height: 20 });
-  el("path", { class: "flaske-kant", d: FLASKE });
-  el("path", { class: "flaske-glans", d: "M354 206 L354 252" });
-  el("rect", { class: "flaske-prop", x: 360, y: 147, width: 16, height: 15, rx: 3 });
+  el("ellipse", { class: "flaske-skygge", cx: 368, cy: 264, rx: 28, ry: 4 });
+  el("path", { class: "dip-skaal", d: "M340 236 Q342 263 368 263 Q394 263 396 236 Z" });
+  el("ellipse", { class: "dip-skaal", cx: 368, cy: 236, rx: 28, ry: 7 });
+  el("ellipse", { cx: 368, cy: 237, rx: 24, ry: 5, fill: ingrediens.farve || "#D9A520" });
+  el("path", { class: "dip-ske", d: "M374 236 L398 196" });
+  el("path", { class: "dip-ske-glans", d: "M374 236 L398 196" });
 }
 
 // Lag i skålen: én gruppe pr. kategori, så en enkelt kategori kan skiftes ud.
 function kategoriGruppe(kat) {
-  // Dressingen står i flasken foran skålen; resten ligger i skålen.
+  // Dressingen står i sin egen lille skål foran den store; resten ligger i skålen.
   const indhold = document.getElementById(kat.id === "dressing" ? "flaske" : "indhold");
   let gruppe = indhold.querySelector(`g[data-kat="${kat.id}"]`);
   if (!gruppe) {
