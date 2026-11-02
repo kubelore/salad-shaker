@@ -2,16 +2,18 @@
 
 // Hvor hver kategori lægges i skålen (x, y i skålens koordinater) og hvor stor den tegnes.
 const PLACERING = {
-  base:    { str: 64, pos: [[118, 86], [282, 86], [200, 68], [90, 128], [140, 104], [200, 94], [260, 104], [310, 128], [170, 134], [235, 134]] },
-  sproedt: { str: 36, pos: [[122, 110], [226, 84], [290, 124]] },
-  bloedt:  { str: 36, pos: [[166, 88], [266, 100], [146, 134]] },
-  uventet: { str: 36, pos: [[202, 120], [104, 120], [306, 104]] },
-  protein: { str: 36, pos: [[186, 72], [242, 122], [130, 94]] },
+  // Basen er en lav bunke, der fylder skålens åbning. Den nederste del skjules af skålens forkant.
+  base:    { str: 84, pos: [[92, 132], [150, 116], [200, 108], [250, 116], [308, 132], [140, 146], [200, 140], [260, 146]] },
+  // Toppings: to store klatter pr. ingrediens, spredt ud over bunken.
+  sproedt: { str: 54, pos: [[132, 106], [228, 140]] },
+  bloedt:  { str: 54, pos: [[252, 104], [112, 140]] },
+  uventet: { str: 54, pos: [[170, 138], [302, 116]] },
+  protein: { str: 60, pos: [[192, 106], [282, 142]] },
 };
-const STANDARD_PLACERING = { str: 36, pos: [[200, 110], [150, 120], [250, 115]] };
+const STANDARD_PLACERING = { str: 54, pos: [[200, 120], [140, 130]] };
 const DRESSING_STRIBER = [
-  "M92 108 C 135 72, 170 140, 210 96 S 282 70, 312 112",
-  "M120 126 C 160 104, 196 146, 236 118 S 282 102, 300 126",
+  "M96 120 C 138 88, 172 150, 210 110 S 280 88, 308 124",
+  "M124 140 C 162 120, 198 158, 236 132 S 280 118, 296 140",
 ];
 
 const SVG_NS = "http://www.w3.org/2000/svg";
@@ -106,7 +108,9 @@ function vaelg(kat) {
 }
 
 function tegnIngrediens(gruppe, ingrediens, placering) {
-  for (const [x, y] of placering.pos) {
+  for (let [x, y] of placering.pos) {
+    x += Math.round(Math.random() * 10 - 5);
+    y += Math.round(Math.random() * 6 - 3);
     if (ingrediens.billede) {
       const img = document.createElementNS(SVG_NS, "image");
       const s = placering.str * 1.3;
@@ -134,7 +138,7 @@ function tegnDressing(gruppe, ingrediens) {
     p.setAttribute("d", d);
     p.setAttribute("class", "dressing");
     p.setAttribute("stroke", ingrediens.farve || "#D9A520");
-    p.setAttribute("stroke-width", 7);
+    p.setAttribute("stroke-width", 4.5);
     gruppe.appendChild(p);
   }
 }
