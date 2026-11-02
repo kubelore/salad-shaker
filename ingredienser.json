@@ -62,7 +62,7 @@
         { "navn": "Vandmelon", "indeholder": ["kulhydrat"], "maengde": [100, "g"], "billede": "billeder/vandmelon.webp" },
         { "navn": "Hytteost", "indeholder": ["mælk"], "maengde": [50, "g"], "billede": "billeder/hytteost.webp" },
         { "navn": "Hummus", "indeholder": ["kulhydrat"], "maengde": [2, "spsk"], "billede": "billeder/hummus.webp" },
-        { "navn": "Bacon", "indeholder": ["kød"], "maengde": [2, "skive"], "tip": "Steg skiverne sprøde, lad dem dryppe af, og bræk dem i stykker.", "billede": "billeder/bacon.svg" },
+        { "navn": "Bacon", "indeholder": ["kød"], "maengde": [2, "skive"], "tip": "Steg skiverne sprøde, lad dem dryppe af, og bræk dem i stykker.", "billede": "billeder/bacon.webp" },
         { "navn": "Syltede grøntsager", "maengde": [2, "spsk"], "billede": "billeder/syltede-groentsager.svg" },
         { "navn": "Krydderurter", "maengde": [0.25, "bundt"], "tip": "Pluk bladene, og hak dem groft lige før servering.", "billede": "billeder/krydderurter.svg" },
         { "navn": "Tørret frugt", "indeholder": ["kulhydrat"], "maengde": [1, "spsk"], "tip": "Hak frugten groft.", "billede": "billeder/toerret-frugt.svg" },
