@@ -82,7 +82,7 @@
         { "navn": "Bønner", "indeholder": ["kulhydrat"], "maengde": [60, "g"], "tip": "Skyl bønner fra dåse godt i koldt vand.", "billede": "billeder/boenner.webp" },
         { "navn": "Æg", "indeholder": ["æg"], "maengde": [1, "stk"], "tip": "Kog dem 8 min, køl dem af i koldt vand, og skær dem i kvarte.", "billede": "billeder/aeg.webp" },
         { "navn": "Tun", "indeholder": ["fisk"], "maengde": [0.5, "dåse"], "tip": "Dræn den godt.", "billede": "billeder/tun.webp" },
-        { "navn": "Kylling", "indeholder": ["kød"], "maengde": [100, "g"], "tip": "Steg brystet 5-6 min på hver side, lad det hvile, og skær det i skiver.", "billede": "billeder/kylling.svg" },
+        { "navn": "Kylling", "indeholder": ["kød"], "maengde": [100, "g"], "tip": "Steg brystet 5-6 min på hver side, lad det hvile, og skær det i skiver.", "billede": "billeder/kylling.webp" },
         { "navn": "Bøf", "indeholder": ["kød"], "maengde": [100, "g"], "tip": "Steg kødet på en meget varm pande, lad det hvile 5 min, og skær det tyndt på tværs af fibrene.", "billede": "billeder/boef.svg" },
         { "navn": "Tofu", "maengde": [100, "g"], "tip": "Pres vandet ud, skær i tern, og steg dem sprøde i lidt olie.", "billede": "billeder/tofu.svg" },
         { "navn": "Ærter", "indeholder": ["kulhydrat"], "maengde": [50, "g"], "tip": "Frosne ærter skal bare tø op.", "billede": "billeder/aerter.svg" },
