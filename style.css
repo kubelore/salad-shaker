@@ -83,6 +83,9 @@ body {
 }
 .top { justify-self: stretch; text-align: center; }
 .skaal { width: 100%; height: auto; overflow: visible; margin-top: 1rem; }
+.skaal-inde { fill: var(--skaal-inde); stroke: var(--skaal-kant); stroke-width: 3; }
+.skaal-front { fill: var(--skaal); }
+.skaal-kant { fill: none; stroke: var(--skaal-kant); stroke-width: 4; stroke-linecap: round; }
 .skaal-bund-skygge { fill: var(--skygge); }
 .skaal text { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; dominant-baseline: central; text-anchor: middle; }
 .flaske-skygge { fill: var(--skygge); }
