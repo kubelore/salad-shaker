@@ -144,7 +144,8 @@ body {
 .liste li {
   display: grid;
   grid-template-columns: 2.75rem 1fr auto;
-  align-items: center;
+  /* Top-justeret, så ikon og pile står stille, selvom tippet fylder forskelligt. */
+  align-items: start;
   column-gap: 0.75rem;
   padding-block: 0.625rem;
   border-top: 1px solid var(--kant);
@@ -249,7 +250,8 @@ body {
 .dressing-opskrift h3 { margin: 0 0 0.5rem; font-family: var(--font-display); font-weight: 600; font-size: 1rem; }
 .dressing-opskrift ul { margin: 0; padding-left: 1.125rem; display: grid; gap: 0.125rem; }
 .dressing-opskrift p { margin: 0.5rem 0 0; color: var(--daempet); font-size: 0.875rem; }
-.pile { display: flex; gap: 0.375rem; }
+.pile { display: flex; align-items: center; gap: 0.375rem; margin-top: 0.375rem; }
+.liste .udelad { margin-top: 0.375rem; }
 .udelad { position: relative; padding: 0; border: none; background: none; cursor: pointer; border-radius: 50%; }
 .udelad:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; }
 .udelad .maerke {
