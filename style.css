@@ -91,9 +91,11 @@ body {
 .flaske-skygge { fill: var(--skygge); }
 .glas { fill: rgba(255, 255, 255, 0.55); }
 .glas-overflade { filter: brightness(1.15); }
-.glas-bund { stroke: rgba(255, 255, 255, 0.6); stroke-width: 1.5; }
 .glas-kant { fill: none; stroke: var(--skaal-kant); stroke-width: 2; stroke-linejoin: round; }
-.glas-top { fill: none; stroke: var(--skaal-kant); stroke-width: 2; }
+.krydderi { fill: rgba(70, 40, 20, 0.6); }
+.flaske-prop { fill: #F7F5EF; stroke: rgba(0, 0, 0, 0.2); stroke-width: 0.8; }
+.flaske-ring { fill: #D2342B; }
+.flaske-wire { fill: none; stroke: #9AA3AA; stroke-width: 1.4; stroke-linecap: round; }
 .glas-glans { stroke: rgba(255, 255, 255, 0.8); stroke-width: 2.5; stroke-linecap: round; }
 #flaske g.ny { animation: stil-flaske 0.45s ease-out backwards; transform-box: fill-box; transform-origin: 50% 100%; }
 @keyframes stil-flaske { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }

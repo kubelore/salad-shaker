@@ -127,8 +127,9 @@ function tegnIngrediens(gruppe, ingrediens, placering) {
   }
 }
 
-// Dressingen står i et lille shotglas ved siden af skålen, tegnet i samme stil som skålen.
-const GLAS = "M354 214 L386 214 L382 266 Q382 270 378 270 L362 270 Q358 270 358 266 Z";
+// Dressingen står i en lille flaske med patentlåg ved siden af skålen, tegnet i samme stil som skålen.
+const FLASKE = "M359 272 Q354 272 354 267 L354 228 Q354 216 364 208 L364 190 L376 190 L376 208 Q386 216 386 228 L386 267 Q386 272 381 272 Z";
+const KRYDDERI = [[360, 244], [372, 240], [380, 252], [364, 258], [376, 262], [368, 250], [381, 238], [358, 264]];
 function tegnDressing(gruppe, ingrediens) {
   const el = (navn, attr) => {
     const e = document.createElementNS(SVG_NS, navn);
@@ -137,15 +138,18 @@ function tegnDressing(gruppe, ingrediens) {
     return e;
   };
   const farve = ingrediens.farve || "#D9A520";
-  el("ellipse", { class: "flaske-skygge", cx: 370, cy: 271, rx: 20, ry: 3 });
-  el("path", { class: "glas", d: GLAS });
-  // Dressingen fylder glasset op til 2/3, med en flad overflade øverst.
-  el("path", { d: "M356.5 232 L383.5 232 L382 266 Q382 270 378 270 L362 270 Q358 270 358 266 Z", fill: farve });
-  el("ellipse", { cx: 370, cy: 232, rx: 13.5, ry: 2.6, fill: farve, class: "glas-overflade" });
-  el("path", { class: "glas-bund", d: "M358 262 L382 262" });
-  el("path", { class: "glas-kant", d: GLAS });
-  el("ellipse", { class: "glas-top", cx: 370, cy: 214, rx: 16, ry: 3 });
-  el("path", { class: "glas-glans", d: "M359 220 L361.5 258" });
+  el("ellipse", { class: "flaske-skygge", cx: 370, cy: 273, rx: 22, ry: 3 });
+  el("path", { class: "glas", d: FLASKE });
+  // Dressingen fylder flasken op til skuldrene.
+  el("path", { d: "M355.5 234 L384.5 234 L384.5 267 Q384.5 270.5 381 270.5 L359 270.5 Q355.5 270.5 355.5 267 Z", fill: farve });
+  el("ellipse", { cx: 370, cy: 234, rx: 14.5, ry: 2.2, fill: farve, class: "glas-overflade" });
+  for (const [x, y] of KRYDDERI) el("circle", { cx: x, cy: y, r: 0.9, class: "krydderi" });
+  el("path", { class: "glas-kant", d: FLASKE });
+  el("path", { class: "glas-glans", d: "M358.5 230 L358.5 264" });
+  // Patentlåg: hvid prop, rød gummiring og ståltråd.
+  el("path", { class: "flaske-wire", d: "M362 182 L361 197 Q360 200 363 200 M378 182 L379 197 Q380 200 377 200" });
+  el("rect", { class: "flaske-ring", x: 363, y: 185.5, width: 14, height: 3, rx: 1 });
+  el("rect", { class: "flaske-prop", x: 363.5, y: 176, width: 13, height: 10, rx: 4 });
 }
 
 // Lag i skålen: én gruppe pr. kategori, så en enkelt kategori kan skiftes ud.
