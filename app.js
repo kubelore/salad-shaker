@@ -127,8 +127,8 @@ function tegnIngrediens(gruppe, ingrediens, placering) {
   }
 }
 
-// Dressingen står i en lille skål med en ske ved siden af den store skål.
-// Fotoet af den tomme skål ligger bagerst, dressingens farve i midten, og skålens forkant og skeens skaft forrest.
+// Dressingen står i et lille shotglas ved siden af skålen, tegnet i samme stil som skålen.
+const GLAS = "M354 214 L386 214 L382 266 Q382 270 378 270 L362 270 Q358 270 358 266 Z";
 function tegnDressing(gruppe, ingrediens) {
   const el = (navn, attr) => {
     const e = document.createElementNS(SVG_NS, navn);
@@ -136,12 +136,16 @@ function tegnDressing(gruppe, ingrediens) {
     gruppe.appendChild(e);
     return e;
   };
-  const billede = { x: 306.3, y: 183.3, width: 100.3, height: 100.3 };
-  el("ellipse", { class: "flaske-skygge", cx: 355, cy: 265, rx: 32, ry: 4 });
-  el("image", { href: "billeder/dip-bag.webp", ...billede });
-  el("ellipse", { cx: 354.6, cy: 236, rx: 31, ry: 13.4, fill: ingrediens.farve || "#D9A520" });
-  el("ellipse", { class: "dip-glans", cx: 354.6, cy: 236, rx: 31, ry: 13.4 });
-  el("image", { href: "billeder/dip-for.webp", ...billede });
+  const farve = ingrediens.farve || "#D9A520";
+  el("ellipse", { class: "flaske-skygge", cx: 370, cy: 271, rx: 20, ry: 3 });
+  el("path", { class: "glas", d: GLAS });
+  // Dressingen fylder glasset op til 2/3, med en flad overflade øverst.
+  el("path", { d: "M356.5 232 L383.5 232 L382 266 Q382 270 378 270 L362 270 Q358 270 358 266 Z", fill: farve });
+  el("ellipse", { cx: 370, cy: 232, rx: 13.5, ry: 2.6, fill: farve, class: "glas-overflade" });
+  el("path", { class: "glas-bund", d: "M358 262 L382 262" });
+  el("path", { class: "glas-kant", d: GLAS });
+  el("ellipse", { class: "glas-top", cx: 370, cy: 214, rx: 16, ry: 3 });
+  el("path", { class: "glas-glans", d: "M359 220 L361.5 258" });
 }
 
 // Lag i skålen: én gruppe pr. kategori, så en enkelt kategori kan skiftes ud.

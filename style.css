@@ -89,7 +89,12 @@ body {
 .skaal-bund-skygge { fill: var(--skygge); }
 .skaal text { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; dominant-baseline: central; text-anchor: middle; }
 .flaske-skygge { fill: var(--skygge); }
-.dip-glans { fill: url(#dip-lys); }
+.glas { fill: rgba(255, 255, 255, 0.55); }
+.glas-overflade { filter: brightness(1.15); }
+.glas-bund { stroke: rgba(255, 255, 255, 0.6); stroke-width: 1.5; }
+.glas-kant { fill: none; stroke: var(--skaal-kant); stroke-width: 2; stroke-linejoin: round; }
+.glas-top { fill: none; stroke: var(--skaal-kant); stroke-width: 2; }
+.glas-glans { stroke: rgba(255, 255, 255, 0.8); stroke-width: 2.5; stroke-linecap: round; }
 #flaske g.ny { animation: stil-flaske 0.45s ease-out backwards; transform-box: fill-box; transform-origin: 50% 100%; }
 @keyframes stil-flaske { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
 
