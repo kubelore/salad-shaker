@@ -127,7 +127,8 @@ function tegnIngrediens(gruppe, ingrediens, placering) {
   }
 }
 
-// Dressingen står i en lille skål med en ske ved siden af den store skål, i dressingens farve.
+// Dressingen står i en lille skål med en ske ved siden af den store skål.
+// Fotoet af den tomme skål ligger bagerst, dressingens farve i midten, og skålens forkant og skeens skaft forrest.
 function tegnDressing(gruppe, ingrediens) {
   const el = (navn, attr) => {
     const e = document.createElementNS(SVG_NS, navn);
@@ -135,12 +136,12 @@ function tegnDressing(gruppe, ingrediens) {
     gruppe.appendChild(e);
     return e;
   };
-  el("ellipse", { class: "flaske-skygge", cx: 368, cy: 264, rx: 28, ry: 4 });
-  el("path", { class: "dip-skaal", d: "M340 236 Q342 263 368 263 Q394 263 396 236 Z" });
-  el("ellipse", { class: "dip-skaal", cx: 368, cy: 236, rx: 28, ry: 7 });
-  el("ellipse", { cx: 368, cy: 237, rx: 24, ry: 5, fill: ingrediens.farve || "#D9A520" });
-  el("path", { class: "dip-ske", d: "M374 236 L398 196" });
-  el("path", { class: "dip-ske-glans", d: "M374 236 L398 196" });
+  const billede = { x: 306.3, y: 183.3, width: 100.3, height: 100.3 };
+  el("ellipse", { class: "flaske-skygge", cx: 355, cy: 265, rx: 32, ry: 4 });
+  el("image", { href: "billeder/dip-bag.webp", ...billede });
+  el("ellipse", { cx: 354.6, cy: 235.5, rx: 32, ry: 14.1, fill: ingrediens.farve || "#D9A520" });
+  el("ellipse", { class: "dip-glans", cx: 354.6, cy: 235.5, rx: 32, ry: 14.1 });
+  el("image", { href: "billeder/dip-for.webp", ...billede });
 }
 
 // Lag i skålen: én gruppe pr. kategori, så en enkelt kategori kan skiftes ud.
