@@ -139,8 +139,8 @@ function tegnDressing(gruppe, ingrediens) {
   const billede = { x: 306.3, y: 183.3, width: 100.3, height: 100.3 };
   el("ellipse", { class: "flaske-skygge", cx: 355, cy: 265, rx: 32, ry: 4 });
   el("image", { href: "billeder/dip-bag.webp", ...billede });
-  el("ellipse", { cx: 354.6, cy: 235.5, rx: 32, ry: 14.1, fill: ingrediens.farve || "#D9A520" });
-  el("ellipse", { class: "dip-glans", cx: 354.6, cy: 235.5, rx: 32, ry: 14.1 });
+  el("ellipse", { cx: 354.6, cy: 236, rx: 31, ry: 13.4, fill: ingrediens.farve || "#D9A520" });
+  el("ellipse", { class: "dip-glans", cx: 354.6, cy: 236, rx: 31, ry: 13.4 });
   el("image", { href: "billeder/dip-for.webp", ...billede });
 }
 
