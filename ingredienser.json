@@ -94,7 +94,7 @@
         { "navn": "Linser", "indeholder": ["kulhydrat"], "maengde": [30, "g"], "tip": "Mængden er tørre linser. Kog grønne linser 20 min, så de stadig har bid.", "billede": "billeder/linser.webp" },
         { "navn": "Skinke", "indeholder": ["kød"], "maengde": [2, "skive"], "tip": "Brug lufttørret skinke som serrano eller parma, og riv skiverne i strimler. Kogt hamburgerryg kan også bruges.", "billede": "billeder/skinke.webp" },
         { "navn": "Cashewnødder", "maengde": [1, "håndfuld"], "tip": "Rist dem gyldne på en tør pande, og lad dem køle af.", "billede": "billeder/cashew.webp" },
-        { "navn": "Jordnødder", "maengde": [1, "håndfuld"], "tip": "Brug usaltede ristede jordnødder, og hak dem groft.", "billede": "billeder/noedder.svg" }
+        { "navn": "Peanuts", "maengde": [1, "håndfuld"], "tip": "Brug usaltede ristede peanuts, og hak dem groft.", "billede": "billeder/peanuts.webp" }
       ]
     },
     {
