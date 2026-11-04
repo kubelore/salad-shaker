@@ -25,7 +25,7 @@
         { "navn": "Gulerod", "maengde": [0.5, "stk"], "tip": "Riv groft, eller skræl tynde bånd med en kartoffelskræller.", "billede": "billeder/gulerod.webp" },
         { "navn": "Spirer", "maengde": [0.5, "håndfuld"], "billede": "billeder/spirer.webp" },
         { "navn": "Agurk", "maengde": [0.25, "stk"], "tip": "Halvér på langs, og skrab kernerne ud, så salaten ikke bliver vandet.", "billede": "billeder/agurk.webp" },
-        { "navn": "Croutoner", "indeholder": ["gluten", "kulhydrat"], "maengde": [1, "håndfuld"], "tip": "Rist terninger af gammelt brød gyldne på panden i lidt olie.", "billede": "billeder/croutoner.webp" },
+        { "navn": "Croutoner", "indeholder": ["gluten", "kulhydrat"], "maengde": [1, "håndfuld"], "tip": "Riv gammelt brød i mundrette stykker, og rist dem gyldne på panden i lidt olivenolie.", "billede": "billeder/croutoner.webp" },
         { "navn": "Squash", "maengde": [0.25, "stk"], "tip": "Skær tynde bånd med en kartoffelskræller, eller grill skiverne kort.", "billede": "billeder/squash.webp" },
         { "navn": "Peberfrugt", "maengde": [0.5, "stk"], "billede": "billeder/peberfrugt.webp" },
         { "navn": "Æble", "maengde": [0.5, "stk"], "tip": "Skær det lige før servering, eller vend det i citronsaft, så det ikke bliver brunt.", "billede": "billeder/aeble.webp" },
