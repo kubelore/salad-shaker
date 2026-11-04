@@ -389,27 +389,30 @@ body {
 }
 .favorit-fjern:hover { color: var(--accent); }
 
-/* Installér som app */
-.installer { margin: 0; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.875rem; color: var(--daempet); text-align: center; }
-.installer-luk { font-size: 1.125rem; line-height: 1; color: var(--daempet); background: none; border: none; cursor: pointer; padding: 0.25rem 0.375rem; border-radius: 4px; }
+/* Installér som app: nederst på siden, adskilt fra salaten */
+.installer { margin: 0 0 0.75rem; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.25rem 0.5rem; font-size: 0.8125rem; color: var(--daempet); }
+.installer-knap { font: inherit; font-weight: 700; color: var(--blad); background: none; border: none; padding: 0.25rem; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.installer-knap:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; border-radius: 4px; }
+.installer-luk { font-size: 1rem; line-height: 1; color: var(--daempet); background: none; border: none; cursor: pointer; padding: 0.25rem 0.375rem; border-radius: 4px; }
 .installer-luk:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; }
 [hidden] { display: none !important; }
 
 /* Del salat og Gem: to ens knapper under Shake */
-.handlinger { position: relative; display: flex; justify-content: center; gap: 0.625rem; }
+.handlinger { position: relative; display: flex; justify-content: center; gap: 1.5rem; margin-top: 0.25rem; }
 .handling {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  font: inherit; font-weight: 700; font-size: 0.9375rem; color: var(--accent);
-  background: var(--flade); border: 1.5px solid var(--kant); border-radius: 99px;
-  padding: 0.5rem 1.125rem; cursor: pointer; min-height: 2.5rem;
+  display: inline-flex; align-items: center; gap: 0.375rem;
+  font: inherit; font-size: 0.875rem; color: var(--daempet);
+  background: none; border: none; border-radius: 6px;
+  padding: 0.375rem 0.25rem; cursor: pointer; min-height: 2.25rem;
   touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
-.handling svg { width: 1.125rem; height: 1.125rem; flex-shrink: 0; }
-.handling:hover { border-color: var(--accent); }
+.handling svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+.handling:hover { color: var(--tekst); }
 .handling:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; }
-.gem-knap[aria-pressed="true"] { border-color: var(--accent); }
+.gem-knap[aria-pressed="true"] svg { color: var(--accent); }
 .gem-knap[aria-pressed="true"] path { fill: currentColor; }
 .gem-knap.pust svg { animation: pust 0.4s ease; }
 @keyframes pust { 40% { transform: scale(1.35); } }
 @media (prefers-reduced-motion: reduce) { .gem-knap.pust svg { animation: none; } }
 .del-status { position: absolute; top: 100%; left: 0; right: 0; margin-top: 0.25rem; text-align: center; color: var(--blad); font-weight: 700; font-size: 0.8125rem; }
+.ansvar .installer span { display: inline; }
