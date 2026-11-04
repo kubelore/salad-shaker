@@ -108,7 +108,7 @@ function tegnIngrediens(gruppe, ingrediens, placering) {
     y += Math.round(Math.random() * 6 - 3);
     if (ingrediens.billede) {
       const img = document.createElementNS(SVG_NS, "image");
-      const s = placering.str * 1.3;
+      const s = placering.str * 1.3 * (ingrediens.skala || 1);
       img.setAttribute("href", ingrediens.billede);
       img.setAttribute("x", x - s / 2);
       img.setAttribute("y", y - s / 2);

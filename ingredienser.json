@@ -51,7 +51,7 @@
         { "navn": "Mozzarella", "indeholder": ["mælk"], "maengde": [60, "g"], "tip": "Skær i skiver, eller riv den i stykker.", "billede": "billeder/mozzarella.webp" },
         { "navn": "Nye kartofler", "indeholder": ["kulhydrat"], "maengde": [125, "g"], "tip": "Kog dem 15 min, halvér dem, og vend dem i dressingen, mens de er lune.", "billede": "billeder/kartofler.webp" },
         { "navn": "Rødbede", "maengde": [75, "g"], "tip": "Bag hele rødbeder 45 min ved 200 °C, eller riv dem rå.", "billede": "billeder/roedbede.webp" },
-        { "navn": "Pasta", "indeholder": ["gluten", "kulhydrat"], "maengde": [40, "g"], "tip": "Mængden er tør pasta. Kog den al dente, og skyl den i koldt vand.", "billede": "billeder/pasta.webp" },
+        { "navn": "Pasta", "indeholder": ["gluten", "kulhydrat"], "maengde": [40, "g"], "tip": "Mængden er tør pasta. Kog den al dente, og skyl den i koldt vand.", "billede": "billeder/pasta.webp", "skala": 1.5 },
         { "navn": "Majs", "indeholder": ["kulhydrat"], "maengde": [50, "g"], "tip": "Dræn majsene godt. Vil du have mere smag, så rist dem 4-5 min på en tør, meget varm pande, til de får brune pletter.", "billede": "billeder/majs.webp" },
         { "navn": "Bulgur", "indeholder": ["gluten", "kulhydrat"], "maengde": [30, "g"], "tip": "Mængden er tør bulgur. Hæld kogende vand over, lad den trække 15 min, og løsn den med en gaffel.", "billede": "billeder/bulgur.webp" }
       ]
