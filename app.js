@@ -231,7 +231,15 @@ function lavPil(kat, retning) {
   knap.type = "button";
   knap.className = "pil " + (retning < 0 ? "tilbage" : "frem");
   knap.innerHTML = retning < 0 ? PIL_TILBAGE : PIL_FREM;
-  knap.addEventListener("click", () => skiftEn(kat, retning));
+  knap.addEventListener("click", () => {
+    // Hold pilen samme sted på skærmen: siden må ikke blive kortere (så browseren ruller), og flytter
+    // noget over pilen sig, ruller vi tilsvarende tilbage. Så kan man klikke flere gange samme sted.
+    const foer = knap.getBoundingClientRect().top;
+    document.body.style.minHeight = document.documentElement.scrollHeight + "px";
+    skiftEn(kat, retning);
+    const efter = knap.getBoundingClientRect().top;
+    if (Math.abs(efter - foer) > 0.5) window.scrollBy(0, efter - foer);
+  });
   return knap;
 }
 

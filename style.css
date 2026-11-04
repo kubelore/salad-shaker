@@ -71,7 +71,7 @@ body {
   align-items: start;
 }
 @media (min-width: 760px) {
-  .hoved { grid-template-columns: 1.1fr 1fr; column-gap: 3rem; align-items: center; }
+  .hoved { grid-template-columns: 1.1fr 1fr; column-gap: 3rem; align-items: start; }
 }
 
 .skaal-kort {
