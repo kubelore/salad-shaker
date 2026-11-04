@@ -370,3 +370,36 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .skaal.ryster, #indhold.ny, #indhold g.ny, #flaske g.ny, .liste li.skiftet .navn, .liste li.skiftet-tilbage .navn { animation: none; }
 }
+
+/* Gem salat (hjerte) og Mine salater */
+.gem-knap { display: inline-flex; align-items: center; gap: 0.25rem; }
+.gem-knap .hjerte::before { content: "♡"; text-decoration: none; display: inline-block; font-size: 1.05em; line-height: 1; }
+.gem-knap[aria-pressed="true"] .hjerte::before { content: "♥"; }
+.gem-knap.pust .hjerte { animation: pust 0.4s ease; }
+@keyframes pust { 40% { transform: scale(1.5); } }
+@media (prefers-reduced-motion: reduce) { .gem-knap.pust .hjerte { animation: none; } }
+.favoritter summary { color: var(--accent); }
+.favorit-liste { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.375rem; }
+.favorit-liste li { display: flex; align-items: stretch; gap: 0.25rem; border: 1px solid var(--kant); border-radius: 0.75rem; background: var(--flade); }
+.favorit-aabn {
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: 0.5rem; text-align: left;
+  font: inherit; font-size: 0.875rem; color: var(--tekst); background: none; border: none;
+  padding: 0.375rem 0.5rem; cursor: pointer; border-radius: 0.75rem;
+}
+.favorit-aabn:hover .favorit-navne { text-decoration: underline; }
+.favorit-aabn:focus-visible, .favorit-fjern:focus-visible { outline: 3px solid var(--blad); outline-offset: -3px; }
+.favorit-ikoner { display: flex; flex-shrink: 0; }
+.favorit-ikoner img { width: 1.625rem; height: 1.625rem; object-fit: contain; }
+.favorit-ikoner img + img { margin-left: -0.25rem; }
+.favorit-navne { min-width: 0; }
+.favorit-fjern {
+  flex-shrink: 0; width: 2.5rem; font-size: 1.25rem; line-height: 1; color: var(--daempet);
+  background: none; border: none; cursor: pointer; border-radius: 0.75rem;
+}
+.favorit-fjern:hover { color: var(--accent); }
+
+/* Installér som app */
+.installer { margin: 0; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.875rem; color: var(--daempet); text-align: center; }
+.installer-luk { font-size: 1.125rem; line-height: 1; color: var(--daempet); background: none; border: none; cursor: pointer; padding: 0.25rem 0.375rem; border-radius: 4px; }
+.installer-luk:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; }
+[hidden] { display: none !important; }

@@ -10,6 +10,11 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Salad shaker">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
@@ -34,9 +39,10 @@
         <g id="flaske"></g>
       </svg>
       <button id="shake" class="shake-knap" type="button">Shake</button>
-      <p class="antal"><span id="antal"></span> · <button id="del" class="del-knap" type="button">Del salat</button> <span id="del-status" class="del-status" aria-live="polite"></span></p>
+      <p class="antal"><span id="antal"></span> · <button id="del" class="del-knap" type="button">Del salat</button> · <button id="gem" class="del-knap gem-knap" type="button" aria-pressed="false"><span class="hjerte" aria-hidden="true"></span><span class="gem-tekst">Gem</span></button> <span id="del-status" class="del-status" aria-live="polite"></span></p>
       <p class="taeller" id="taeller" hidden></p>
       <p class="hint" id="hint" hidden>Du kan også ryste telefonen.</p>
+      <p class="installer" id="installer" hidden><button type="button" id="installer-knap" class="kost-knap">Installér som app</button><span id="installer-ios" hidden>Læg den på hjemmeskærmen: tryk på <strong>Del</strong> og vælg <strong>Føj til hjemmeskærm</strong>.</span> <button type="button" id="installer-luk" class="installer-luk" aria-label="Skjul">×</button></p>
       <div class="kost" id="kost" role="group" aria-label="Kostvalg"></div>
       <p class="kost-note" id="kost-note" hidden>Kostvalgene er vejledende. Tjek altid varedeklarationen, hvis du har allergi.</p>
     </section>
@@ -52,6 +58,11 @@
         <ul id="dressing-liste"></ul>
         <p>Rør det hele sammen, og smag til med salt og peber.</p>
       </div>
+      <details class="hjemme favoritter" id="favoritter">
+        <summary>Mine salater<span id="favorit-antal"></span></summary>
+        <p class="hjemme-intro" id="favorit-tom">Tryk på ♡ Gem ved en salat, du kan lide. Så ligger den her, næste gang du kommer.</p>
+        <ul id="favorit-liste" class="favorit-liste"></ul>
+      </details>
       <details class="hjemme">
         <summary>Det har jeg hjemme<span id="hjemme-antal"></span></summary>
         <p class="hjemme-intro">Markér det, du allerede har. Så vælger Shake blandt det, når det kan. <button type="button" id="hjemme-ryd" class="hjemme-ryd" hidden>Nulstil</button></p>

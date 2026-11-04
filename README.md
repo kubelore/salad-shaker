@@ -11,6 +11,8 @@ Siden er helt statisk. Der er ingen server, ingen database og ingen AI-kald, så
 | `app.js` | Shake-logikken og tegningen af skålen |
 | `ingredienser.json` | **Alle kategorier og ingredienser.** Det er den fil, du redigerer |
 | `billeder/` | Én tegning (SVG) pr. ingrediens |
+| `manifest.webmanifest`, `sw.js` | Gør siden til en app, der kan lægges på hjemmeskærmen og virker uden net. Navn og ikoner står i manifestet |
+| `icon-192.png`, `icon-512.png`, `icon-maskable-512.png` | Ikonerne til appen |
 
 ---
 

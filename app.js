@@ -463,11 +463,15 @@ function taelOp() {
 }
 
 // Del-link: adressen husker den aktuelle salat som numre, fx ?s=3-7-1-9-4-2.
-function opdaterLink() {
+function salatKode() {
   // 0 betyder at kategorien er udeladt.
-  const s = kategorier.map((k) => (udeladt.has(k.id) ? 0 : k.ingredienser.indexOf(sidste[k.id]) + 1)).join("-");
+  return kategorier.map((k) => (udeladt.has(k.id) ? 0 : k.ingredienser.indexOf(sidste[k.id]) + 1)).join("-");
+}
+function opdaterLink() {
+  const s = salatKode();
   const k = [...valgtKost].join(",");
   history.replaceState(null, "", `${location.pathname}?s=${s}${k ? "&kost=" + k : ""}`);
+  visGem();
 }
 function laesLink() {
   const kost = new URLSearchParams(location.search).get("kost");
@@ -477,26 +481,142 @@ function laesLink() {
     visKost();
   }
   const s = new URLSearchParams(location.search).get("s");
-  if (!s) return false;
+  return s ? visKode(s) : false;
+}
+// Læg salaten fra en kode (fx 3-7-1-9-4-2) i skålen. Bruges af del-links og gemte salater.
+function visKode(s, animer = false) {
   const tal = s.split("-").map(Number);
-  let fundet = false;
+  if (!tal.some((t, i) => t === 0 || (kategorier[i] && kategorier[i].ingredienser[t - 1]))) return false;
+  udeladt.clear();
   kategorier.forEach((kat, i) => {
-    if (tal[i] === 0) { udeladt.add(kat.id); fundet = true; return; }
+    if (tal[i] === 0) { udeladt.add(kat.id); return; }
     const ingrediens = kat.ingredienser[tal[i] - 1];
-    if (!ingrediens) return;
-    sidste[kat.id] = ingrediens;
-    fundet = true;
+    if (ingrediens) sidste[kat.id] = ingrediens;
   });
-  if (!fundet) return false;
-  // Kategorier der ikke stod i linket, får en tilfældig.
+  // Kategorier der ikke stod i koden, får en tilfældig.
   for (const kat of kategorier) if (!sidste[kat.id]) vaelg(kat);
+  let nr = 0;
   for (const kat of kategorier) {
     if (!sidste[kat.id]) continue;
-    if (!udeladt.has(kat.id)) tegnKategori(kat, sidste[kat.id]);
+    if (udeladt.has(kat.id)) {
+      kategoriGruppe(kat).replaceChildren();
+      if (kat.id === "dressing") document.getElementById("dressing-opskrift").hidden = true;
+    } else {
+      const gruppe = tegnKategori(kat, sidste[kat.id]);
+      if (animer) drys(gruppe, nr++);
+    }
     opdaterRaekke(kat, sidste[kat.id]);
   }
   opdaterGalleri();
   return true;
+}
+
+// Mine salater: gemte salater i browseren, nyeste først. Gemmes som koden fra del-linket.
+let favoritter = [];
+try { favoritter = (JSON.parse(lager.hent("favoritter")) || []).filter((f) => f && typeof f.s === "string"); } catch (e) {}
+function gemFavoritter() { lager.gem("favoritter", JSON.stringify(favoritter)); }
+function favoritNavne(s) {
+  const tal = s.split("-").map(Number);
+  return kategorier.map((kat, i) => tal[i] > 0 && kat.ingredienser[tal[i] - 1]).filter(Boolean);
+}
+function skiftGem() {
+  const s = salatKode();
+  const i = favoritter.findIndex((f) => f.s === s);
+  if (i >= 0) favoritter.splice(i, 1);
+  else favoritter.unshift({ s, tid: Date.now() });
+  gemFavoritter();
+  visGem();
+  visFavoritter();
+  if (i < 0) genstart(document.getElementById("gem"), "pust");
+}
+function visGem() {
+  const knap = document.getElementById("gem");
+  const gemt = favoritter.some((f) => f.s === salatKode());
+  knap.setAttribute("aria-pressed", gemt);
+  knap.querySelector(".gem-tekst").textContent = gemt ? "Gemt" : "Gem";
+  knap.title = gemt ? "Fjern fra Mine salater" : "Gem i Mine salater";
+}
+function visFavoritter() {
+  const liste = document.getElementById("favorit-liste");
+  document.getElementById("favorit-antal").textContent = favoritter.length ? ` (${favoritter.length})` : "";
+  document.getElementById("favorit-tom").hidden = favoritter.length > 0;
+  liste.replaceChildren(...favoritter.map((f) => {
+    const li = document.createElement("li");
+    const ingredienser = favoritNavne(f.s);
+    const aabn = document.createElement("button");
+    aabn.type = "button";
+    aabn.className = "favorit-aabn";
+    const ikoner = document.createElement("span");
+    ikoner.className = "favorit-ikoner";
+    ingredienser.filter((i) => i.billede).slice(0, 5).forEach((i) => {
+      const img = document.createElement("img");
+      img.src = i.billede;
+      img.alt = "";
+      img.loading = "lazy";
+      ikoner.appendChild(img);
+    });
+    const navne = document.createElement("span");
+    navne.className = "favorit-navne";
+    navne.textContent = ingredienser.map((i) => i.navn).join(", ");
+    aabn.append(ikoner, navne);
+    aabn.addEventListener("click", () => {
+      visKode(f.s, true);
+      genstart(document.getElementById("skaal"), "ryster");
+      visAntal();
+      opdaterLink();
+      document.querySelector(".skaal-kort").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    const fjern = document.createElement("button");
+    fjern.type = "button";
+    fjern.className = "favorit-fjern";
+    fjern.textContent = "×";
+    fjern.setAttribute("aria-label", `Fjern ${navne.textContent} fra Mine salater`);
+    fjern.title = "Fjern";
+    fjern.addEventListener("click", () => {
+      favoritter = favoritter.filter((x) => x !== f);
+      gemFavoritter();
+      visFavoritter();
+      visGem();
+    });
+    li.append(aabn, fjern);
+    return li;
+  }));
+}
+
+// Installér som app: Android/Chrome giver en knap, iPhone får en kort vejledning. Kan skjules.
+function lavInstaller() {
+  const boks = document.getElementById("installer");
+  const app = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+  if (app || lager.hent("installer-skjult")) return;
+  let prompt = null;
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    prompt = e;
+    document.getElementById("installer-ios").hidden = true;
+    document.getElementById("installer-knap").hidden = false;
+    boks.hidden = false;
+  });
+  document.getElementById("installer-knap").addEventListener("click", async () => {
+    if (!prompt) return;
+    prompt.prompt();
+    await prompt.userChoice;
+    prompt = null;
+    boks.hidden = true;
+  });
+  window.addEventListener("appinstalled", () => (boks.hidden = true));
+  document.getElementById("installer-luk").addEventListener("click", () => {
+    boks.hidden = true;
+    lager.gem("installer-skjult", "1");
+  });
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if (ios) {
+    document.getElementById("installer-knap").hidden = true;
+    document.getElementById("installer-ios").hidden = false;
+    boks.hidden = false;
+  }
+}
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
 }
 async function del() {
   const url = location.href;
@@ -659,6 +779,10 @@ hentIngredienser()
     if (!laesLink()) shake(false);
     visAntal();
     document.getElementById("del").addEventListener("click", del);
+    document.getElementById("gem").addEventListener("click", skiftGem);
+    visFavoritter();
+    visGem();
+    lavInstaller();
     document.getElementById("shake").addEventListener("click", () => {
       shake();
       startRystSensor();
