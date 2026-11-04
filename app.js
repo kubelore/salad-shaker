@@ -454,6 +454,7 @@ function shake(talt = true) {
 function visTaeller() {
   const n = Number(lager.hent("rystet")) || 0;
   const el = document.getElementById("taeller");
+  if (!el) return;
   el.textContent = n === 1 ? "Du har rystet 1 salat" : `Du har rystet ${n.toLocaleString("da-DK")} salater`;
   el.hidden = n === 0;
 }
@@ -737,7 +738,8 @@ function skiftKost(id) {
 
 function visAntal() {
   const antal = kategorier.filter((k) => !udeladt.has(k.id)).reduce((sum, k) => sum * Math.max(1, tilladt(k).length), 1);
-  document.getElementById("antal").textContent = `${antal.toLocaleString("da-DK")} mulige salater`;
+  const el = document.getElementById("antal");
+  if (el) el.textContent = `${antal.toLocaleString("da-DK")} mulige salater`;
 }
 
 // Ryst telefonen for at shake. iPhone kræver tilladelse, som kun kan bedes om ved et tryk.
