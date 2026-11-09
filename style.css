@@ -235,6 +235,7 @@ body {
 .besked:empty { display: none; }
 .besked.vis { opacity: 1; transform: none; }
 .shake-bar { position: relative; }
+body.skriver .shake-bar { display: none; }
 
 /* Mobil: alt det vigtige på én skærm, og Shake-knappen sidder fast i bunden inden for tommelfingerens rækkevidde */
 @media (max-width: 759px) {

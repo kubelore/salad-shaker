@@ -466,6 +466,10 @@ function tilSkaalen() {
   });
 }
 
+// Skjul Shake-baren, mens man skriver i et tekstfelt, så den ikke dækker feltet over tastaturet.
+document.addEventListener("focusin", (e) => { if (e.target.matches("input[type=text]")) document.body.classList.add("skriver"); });
+document.addEventListener("focusout", (e) => { if (e.target.matches("input[type=text]")) document.body.classList.remove("skriver"); });
+
 // Kort besked over Shake-knappen, fx når en ingrediens låses.
 function besked(tekst) {
   const el = document.getElementById("besked");
@@ -627,7 +631,9 @@ function visFavoritter() {
       felt.addEventListener("blur", gem);
       aabn.replaceWith(felt);
       omdoeb.hidden = true;
-      felt.focus();
+      // Fokus uden at browseren selv ruller; når tastaturet er kommet frem, lægger vi feltet midt i det synlige område.
+      felt.focus({ preventScroll: true });
+      setTimeout(() => felt.scrollIntoView({ block: "center", behavior: "smooth" }), 350);
     });
     li.append(aabn, omdoeb, fjern);
     return li;
