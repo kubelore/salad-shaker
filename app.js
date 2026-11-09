@@ -454,6 +454,18 @@ function shake() {
 }
 
 
+// Gå altid op til skålen efter Shake, så man ser resultatet. Safari på iPhone kan afbryde en blød rulning,
+// når listen ændrer sig undervejs (fx med "Det har jeg hjemme" åben), så vi tjekker bagefter og hopper resten.
+function tilSkaalen() {
+  if (document.activeElement && document.activeElement !== document.body) document.activeElement.blur();
+  const roligt = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  requestAnimationFrame(() => {
+    window.scrollTo({ top: 0, behavior: roligt ? "auto" : "smooth" });
+    clearTimeout(tilSkaalen.t);
+    tilSkaalen.t = setTimeout(() => { if (window.scrollY > 2) window.scrollTo(0, 0); }, 700);
+  });
+}
+
 // Kort besked over Shake-knappen, fx når en ingrediens låses.
 function besked(tekst) {
   const el = document.getElementById("besked");
@@ -755,10 +767,8 @@ hentIngredienser()
     visGem();
     lavInstaller();
     document.getElementById("shake").addEventListener("click", () => {
-      // Gå altid op til skålen, så man ser salaten blive rystet.
-      const roligt = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      window.scrollTo({ top: 0, behavior: roligt ? "auto" : "smooth" });
       shake();
+      tilSkaalen();
     });
   })
   .catch((fejl) => {
