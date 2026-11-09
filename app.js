@@ -795,6 +795,9 @@ async function startRystSensor() {
   sensorStartet = true;
   window.addEventListener("devicemotion", (e) => {
     const a = e.acceleration;
+    // Vis først "ryst telefonen", når tilladelsen er givet og sensoren faktisk sender målinger.
+    const g = e.accelerationIncludingGravity;
+    if ((a && a.x != null) || (g && g.x != null)) document.getElementById("hint").hidden = false;
     const styrke = a && a.x != null
       ? Math.abs(a.x) + Math.abs(a.y) + Math.abs(a.z)
       : (() => { const g = e.accelerationIncludingGravity || {}; return Math.abs(g.x || 0) + Math.abs(g.y || 0) + Math.abs(g.z || 0) - 10; })();
@@ -824,8 +827,6 @@ hentIngredienser()
     visFavoritter();
     visGem();
     lavInstaller();
-    // Vis "ryst telefonen" på telefoner, der har en bevægelsessensor.
-    if (typeof DeviceMotionEvent !== "undefined" && window.matchMedia("(pointer: coarse)").matches) document.getElementById("hint").hidden = false;
     // Prøv at starte med det samme (Android). Kræver browseren et tryk først (iPhone), sker det ved første Shake.
     startRystSensor();
     document.getElementById("shake").addEventListener("click", () => {
