@@ -255,7 +255,7 @@ function lavLaas(kat) {
     else laast.add(kat.id);
     visLaas(kat);
     const navn = sidste[kat.id] ? sidste[kat.id].navn : kat.navn;
-    besked(laast.has(kat.id) ? `${navn} er låst og bliver, når du trykker Shake` : `${navn} er låst op`);
+    besked(laast.has(kat.id) ? `Behold: ${navn} bliver, når du trykker Shake` : `${navn} skiftes igen ved Shake`);
   });
   return knap;
 }
@@ -268,8 +268,8 @@ function visLaas(kat) {
   knap.innerHTML = er ? LAAS_LUKKET : LAAS_AABEN;
   knap.setAttribute("aria-pressed", er);
   const navn = kat.navn.toLowerCase();
-  knap.setAttribute("aria-label", er ? `Lås ${navn} op` : `Behold ${navn}, når du ryster`);
-  knap.title = er ? "Låst: bliver, når du ryster" : "Lås, så den bliver, når du ryster";
+  knap.setAttribute("aria-label", er ? `Behold ikke ${navn}` : `Behold ${navn}, når du ryster`);
+  knap.title = er ? "Behold: bliver, når du ryster" : "Behold, når du ryster";
   li.classList.toggle("laast", er);
 }
 

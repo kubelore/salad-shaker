@@ -321,7 +321,7 @@ body {
 .laas:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; }
 .laas[aria-pressed="true"] { color: var(--accent-tekst); background: var(--accent); }
 .liste li.laast .ikon { box-shadow: 0 0 0 2px var(--accent); }
-.liste li.laast .kat::after { content: " · låst"; color: var(--accent); font-weight: 700; }
+.liste li.laast .kat::after { content: " · behold"; color: var(--accent); font-weight: 700; }
 
 .pil {
   width: 2.5rem;
