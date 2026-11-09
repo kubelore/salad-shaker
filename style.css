@@ -397,8 +397,9 @@ body.skriver .shake-bar { display: none; }
 @media (hover: hover) { .favorit-fjern:hover { color: var(--accent); } }
 
 /* Installér som app: nederst på siden, adskilt fra salaten */
-.installer { margin: 0 0 0.75rem; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.25rem 0.5rem; font-size: 0.8125rem; color: var(--daempet); }
-.installer-knap { font: inherit; font-weight: 700; color: var(--blad); background: none; border: none; padding: 0.25rem; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.installer { margin: 0 0 0.75rem; font-size: 0.9375rem !important; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.25rem 0.5rem; font-size: 0.8125rem; color: var(--daempet); }
+.installer-knap { font: inherit; font-weight: 700; color: var(--blad); background: none; border: none; padding: 0.25rem; min-height: 2.75rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.375rem; text-decoration: underline; text-underline-offset: 3px; }
+.installer-knap svg { width: 1.125rem; height: 1.125rem; flex-shrink: 0; }
 .installer-knap:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; border-radius: 4px; }
 .installer-luk { font-size: 1rem; line-height: 1; color: var(--daempet); background: none; border: none; cursor: pointer; padding: 0.25rem 0.375rem; border-radius: 4px; }
 .installer-luk:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; }
@@ -423,3 +424,28 @@ body.skriver .shake-bar { display: none; }
 @media (prefers-reduced-motion: reduce) { .gem-knap.pust svg { animation: none; } }
 .del-status { position: absolute; top: 100%; left: 0; right: 0; margin-top: 0.25rem; text-align: center; color: var(--blad); font-weight: 700; font-size: 0.8125rem; }
 .ansvar .installer span { display: inline; }
+
+
+/* Vejledning: læg på hjemmeskærmen */
+.vejledning {
+  width: min(26rem, calc(100% - 32px)); border: none; border-radius: 1.25rem; padding: 1.5rem 1.25rem 1.25rem;
+  background: var(--flade); color: var(--tekst); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+.vejledning::backdrop { background: rgba(17, 25, 21, 0.45); }
+.vejledning h2 { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 1.375rem; color: var(--blad); }
+.vejledning-intro { margin: 0.375rem 0 1rem; color: var(--daempet); font-size: 0.9375rem; }
+.trin { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
+.trin li { display: grid; grid-template-columns: 2.75rem 1fr; gap: 0.75rem; align-items: center; font-size: 0.9375rem; line-height: 1.4; }
+.trin-ikon { width: 2.75rem; height: 2.75rem; border-radius: 0.75rem; background: var(--bg); color: #0A84FF; display: grid; place-items: center; }
+.trin-ikon svg { width: 1.5rem; height: 1.5rem; }
+.trin-tekst { font-weight: 700; font-size: 0.8125rem; }
+.vejledning form { margin: 1.25rem 0 0; }
+.vejledning-ok {
+  width: 100%; min-height: 2.75rem; font: inherit; font-weight: 700; border-radius: 99px; cursor: pointer;
+  border: 1px solid var(--kant); background: var(--bg); color: var(--tekst);
+}
+/* Ét lille puf over Shake efter et par ryst */
+.puf { margin: 0; display: flex; align-items: stretch; max-width: 22rem; border-radius: 0.75rem; background: var(--flade); border: 1px solid var(--kant); box-shadow: 0 6px 18px var(--skygge); }
+.puf-vis { flex: 1; font: inherit; font-size: 0.875rem; color: var(--tekst); background: none; border: none; padding: 0.5rem 0.75rem; min-height: 2.75rem; text-align: left; cursor: pointer; }
+.puf-vis strong { color: var(--blad); }
+.puf-luk { width: 2.75rem; font-size: 1.125rem; color: var(--daempet); background: none; border: none; cursor: pointer; }

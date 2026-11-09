@@ -640,38 +640,56 @@ function visFavoritter() {
   }));
 }
 
-// Installér som app: Android/Chrome giver en knap, iPhone får en kort vejledning. Kan skjules.
+// Læg på hjemmeskærmen. Android/Chrome kan vise sin egen "Installér"-boks. iPhone kan ikke, så der viser vi
+// en lille vejledning i tre trin. Linjen står nederst på siden, og efter et par Shakes får man et enkelt venligt puf.
+const erIos = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+const erApp = () => window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+let installerPrompt = null;
+function kanInstallere() {
+  return !erApp() && (installerPrompt || erIos || window.matchMedia("(pointer: coarse)").matches);
+}
+async function installer() {
+  if (installerPrompt) {
+    installerPrompt.prompt();
+    await installerPrompt.userChoice;
+    installerPrompt = null;
+    return;
+  }
+  document.getElementById("trin-ios").hidden = !erIos;
+  document.getElementById("trin-android").hidden = erIos;
+  const d = document.getElementById("vejledning");
+  if (d.showModal) d.showModal();
+  else d.setAttribute("open", "");
+}
+function visInstaller() {
+  document.getElementById("installer").hidden = !kanInstallere() || !!lager.hent("installer-skjult");
+}
 function lavInstaller() {
-  const boks = document.getElementById("installer");
-  const app = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
-  if (app || lager.hent("installer-skjult")) return;
-  let prompt = null;
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
-    prompt = e;
-    document.getElementById("installer-ios").hidden = true;
-    document.getElementById("installer-knap").hidden = false;
-    boks.hidden = false;
+    installerPrompt = e;
+    visInstaller();
   });
-  document.getElementById("installer-knap").addEventListener("click", async () => {
-    if (!prompt) return;
-    prompt.prompt();
-    await prompt.userChoice;
-    prompt = null;
-    boks.hidden = true;
-  });
-  window.addEventListener("appinstalled", () => (boks.hidden = true));
+  window.addEventListener("appinstalled", visInstaller);
+  document.getElementById("installer-knap").addEventListener("click", installer);
   document.getElementById("installer-luk").addEventListener("click", () => {
-    boks.hidden = true;
     lager.gem("installer-skjult", "1");
+    visInstaller();
   });
-  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  if (ios) {
-    document.getElementById("installer-knap").hidden = true;
-    document.getElementById("installer-ios").hidden = false;
-    boks.hidden = false;
-  }
+  // Luk vejledningen ved tryk udenfor.
+  const d = document.getElementById("vejledning");
+  d.addEventListener("click", (e) => { if (e.target === d) d.close(); });
+  visInstaller();
 }
+// Ét puf, én gang: efter tredje Shake foreslår vi at lægge den på hjemmeskærmen.
+let antalShakes = 0;
+function maaskePuf() {
+  if (++antalShakes !== 3 || !kanInstallere() || lager.hent("installer-puf")) return;
+  lager.gem("installer-puf", "1");
+  const puf = document.getElementById("puf");
+  puf.hidden = false;
+}
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
 }
@@ -775,6 +793,7 @@ hentIngredienser()
     document.getElementById("shake").addEventListener("click", () => {
       shake();
       tilSkaalen();
+      maaskePuf();
     });
   })
   .catch((fejl) => {
