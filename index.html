@@ -27,7 +27,7 @@
     <section class="skaal-kort" aria-label="Din salat">
       <header class="top">
         <h1>Salad shaker</h1>
-        <p class="intro">Tryk på Shake, så vælger vi én ingrediens fra hver kategori.</p>
+        <p class="intro">Én tilfældig ingrediens fra hver kategori.</p>
       </header>
       <svg id="skaal" class="skaal" viewBox="0 55 410 230" role="img" aria-labelledby="skaal-titel">
         <title id="skaal-titel">Skål med salat</title>
@@ -38,28 +38,34 @@
         <path class="skaal-kant" d="M30 132 C 82 170, 318 170, 370 132"></path>
         <g id="flaske"></g>
       </svg>
-      <button id="shake" class="shake-knap" type="button">Shake</button>
+      <div class="shake-bar">
+        <button id="shake" class="shake-knap" type="button">Shake</button>
+        <p class="hint" id="hint" hidden>Du kan også ryste telefonen</p>
+      </div>
       <div class="handlinger">
         <button id="del" class="handling" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Del salat</button>
         <button id="gem" class="handling gem-knap" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.1A4.4 4.4 0 0 1 12 7.2a4.4 4.4 0 0 1 7.5 2.7C19.5 15.4 12 20 12 20Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg><span class="gem-tekst">Gem</span></button>
         <span id="del-status" class="del-status" aria-live="polite"></span>
       </div>
-      <p class="hint" id="hint" hidden>Du kan også ryste telefonen.</p>
-      <div class="kost" id="kost" role="group" aria-label="Kostvalg"></div>
-      <p class="kost-note" id="kost-note" hidden>Kostvalgene er vejledende. Tjek altid varedeklarationen, hvis du har allergi.</p>
     </section>
 
     <section class="opskrift" aria-labelledby="opskrift-titel">
       <div class="opskrift-top">
-        <h2 id="opskrift-titel">Din salat</h2>
+        <h2 id="opskrift-titel" class="skjult">Din salat</h2>
         <div class="personer-vaelger"><span id="personer-label">Personer</span><div class="personer" id="personer" role="group" aria-labelledby="personer-label"></div></div>
       </div>
+      <p class="laas-forklaring"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor" stroke="currentColor" stroke-width="2.2"/><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Låste ingredienser bliver ved næste Shake.</p>
       <ol id="liste" class="liste" aria-live="polite"></ol>
       <div id="dressing-opskrift" class="dressing-opskrift" hidden>
         <h3>Sådan laver du <span id="dressing-navn"></span> <span class="dressing-til">til <span id="dressing-til"></span></span></h3>
         <ul id="dressing-liste"></ul>
         <p>Rør det hele sammen, og smag til med salt og peber.</p>
       </div>
+      <details class="hjemme" id="kost-valg">
+        <summary>Kostvalg<span id="kost-antal"></span></summary>
+        <p class="hjemme-intro">Kostvalgene er vejledende, så tjek altid varedeklarationen, hvis du har allergi.</p>
+        <div class="kost" id="kost" role="group" aria-label="Kostvalg"></div>
+      </details>
       <details class="hjemme favoritter" id="favoritter">
         <summary>Mine salater<span id="favorit-antal"></span></summary>
         <p class="hjemme-intro" id="favorit-tom">Tryk på ♡ Gem ved en salat, du kan lide. Så ligger den her, næste gang du kommer.</p>
@@ -72,11 +78,6 @@
       </details>
     </section>
   </main>
-
-  <section class="galleri" aria-labelledby="galleri-titel">
-    <h2 id="galleri-titel">Ingredienserne</h2>
-    <div id="galleri" class="galleri-grid"></div>
-  </section>
 
   <footer class="ansvar">
     <p class="installer" id="installer" hidden><button type="button" id="installer-knap" class="installer-knap">Installér som app</button><span id="installer-ios" hidden>Læg den på hjemmeskærmen: tryk på <strong>Del</strong> og vælg <strong>Føj til hjemmeskærm</strong>.</span> <button type="button" id="installer-luk" class="installer-luk" aria-label="Skjul">×</button></p>
