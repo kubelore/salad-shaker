@@ -36,7 +36,7 @@
         { "navn": "Fennikel", "maengde": [0.25, "stk"], "tip": "Snit den så tyndt som muligt.", "billede": "billeder/fennikel.webp" },
         { "navn": "Broccoli", "maengde": [75, "g"], "tip": "Del i små buketter, og blanchér dem 1 minut, eller brug dem rå.", "billede": "billeder/broccoli.webp" },
         { "navn": "Ristede løg", "indeholder": ["mælk"], "maengde": [0.5, "stk"], "tip": "Skær løget i tynde ringe, og steg dem i en klat smør ved middel varme i 10-15 min. Vend dem jævnligt, til de er gyldne og karamelliserede. Drys med lidt salt.", "billede": "billeder/ristede-loeg.webp" },
-        { "navn": "Pinjekerner", "maengde": [1, "spsk"], "tip": "Rist dem på en tør pande ved middel varme, til de er gyldne. De brænder hurtigt, så bliv ved panden.", "emoji": "🌰" }
+        { "navn": "Pinjekerner", "maengde": [1, "spsk"], "tip": "Rist dem på en tør pande ved middel varme, til de er gyldne. De brænder hurtigt, så bliv ved panden.", "billede": "billeder/pinjekerner.webp" }
       ]
     },
     {
