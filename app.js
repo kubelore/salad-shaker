@@ -279,7 +279,7 @@ function opdaterRaekke(kat, ingrediens) {
     li.dataset.kat = kat.id;
     const tekst = document.createElement("span");
     tekst.className = "tekst";
-    tekst.innerHTML = '<span class="kat"></span><span class="navn"></span><span class="maengde"></span><span class="tip"></span>';
+    tekst.innerHTML = '<span class="kat"></span><span class="navn"></span><span class="maengde"></span>';
     tekst.querySelector(".kat").innerHTML = '<span class="kat-navn"></span> <span class="nr"></span>';
     tekst.querySelector(".kat-navn").textContent = kat.navn;
     const pile = document.createElement("span");
@@ -291,7 +291,9 @@ function opdaterRaekke(kat, ingrediens) {
     ikonKnap.className = "udelad";
     ikonKnap.append(document.createElement("span"), Object.assign(document.createElement("span"), { className: "maerke" }));
     ikonKnap.addEventListener("click", () => skiftUdeladt(kat));
-    li.append(ikonKnap, tekst, pile);
+    // Tippet står i sin egen række under navn og knapper, så det kan bruge hele bredden.
+    const tip = Object.assign(document.createElement("span"), { className: "tip" });
+    li.append(ikonKnap, tekst, pile, tip);
     liste.appendChild(li);
   }
   li.querySelector(".udelad").firstChild.replaceWith(lavIkon(ingrediens));
@@ -349,10 +351,12 @@ function lavHjemme() {
   const boks = document.getElementById("hjemme-liste");
   for (const kat of kategorier) {
     if (kat.id === "dressing") continue;
-    const gruppe = document.createElement("div");
+    // Hver kategori kan foldes ud for sig, så listen ikke bliver en lang væg af knapper.
+    const gruppe = document.createElement("details");
     gruppe.className = "hjemme-gruppe";
-    const h = document.createElement("h4");
-    h.textContent = kat.navn;
+    const h = document.createElement("summary");
+    h.innerHTML = '<span class="gruppe-navn"></span><span class="gruppe-antal"></span>';
+    h.querySelector(".gruppe-navn").textContent = kat.navn;
     const knapper = document.createElement("div");
     knapper.className = "hjemme-knapper";
     for (const i of kat.ingredienser) {
@@ -383,6 +387,10 @@ function lavHjemme() {
 }
 function visHjemme() {
   for (const k of document.querySelectorAll("#hjemme-liste .kost-knap")) k.setAttribute("aria-pressed", hjemme.has(k.dataset.navn));
+  for (const g of document.querySelectorAll("#hjemme-liste .hjemme-gruppe")) {
+    const n = g.querySelectorAll('.kost-knap[aria-pressed="true"]').length;
+    g.querySelector(".gruppe-antal").textContent = n ? String(n) : "";
+  }
   document.getElementById("hjemme-antal").textContent = hjemme.size ? ` (${hjemme.size})` : "";
   document.getElementById("hjemme-ryd").hidden = hjemme.size === 0;
 }
@@ -400,8 +408,6 @@ function skiftUdeladt(kat) {
     genstart(tegnKategori(kat, sidste[kat.id]), "ny");
   }
   visUdeladt(kat);
-  opdaterGalleri();
-  visAntal();
   opdaterLink();
 }
 function visUdeladt(kat) {
@@ -441,26 +447,35 @@ function shake(talt = true) {
     drys(tegnKategori(kat, ingrediens), nr++);
     opdaterRaekke(kat, ingrediens);
   }
-  opdaterGalleri();
   genstart(document.getElementById("skaal"), "ryster");
   if (talt) {
-    if (navigator.vibrate) navigator.vibrate([25, 60, 25, 60, 40]);
-    taelOp();
+    vibrer();
   }
   opdaterLink();
 }
 
-// Tæller for rystede salater, gemt i browseren.
-function visTaeller() {
-  const n = Number(lager.hent("rystet")) || 0;
-  const el = document.getElementById("taeller");
-  if (!el) return;
-  el.textContent = n === 1 ? "Du har rystet 1 salat" : `Du har rystet ${n.toLocaleString("da-DK")} salater`;
-  el.hidden = n === 0;
-}
-function taelOp() {
-  lager.gem("rystet", (Number(lager.hent("rystet")) || 0) + 1);
-  visTaeller();
+
+// Lille vibration ved Shake. Android bruger navigator.vibrate. iPhone har ikke den funktion, men Safari (iOS 18+)
+// giver et lille dunk, når en kontakt (<input switch>) slås til og fra. Det virker kun ved et tryk, ikke ved rysten.
+let iosKontakt = null;
+function vibrer() {
+  if (navigator.vibrate) {
+    try { navigator.vibrate([25, 60, 25, 60, 40]); } catch (e) {}
+    return;
+  }
+  if (!iosKontakt) {
+    const label = document.createElement("label");
+    label.setAttribute("aria-hidden", "true");
+    label.style.cssText = "position:fixed;left:-100px;top:0;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none";
+    const boks = document.createElement("input");
+    boks.type = "checkbox";
+    boks.setAttribute("switch", "");
+    boks.tabIndex = -1;
+    label.appendChild(boks);
+    document.body.appendChild(label);
+    iosKontakt = label;
+  }
+  iosKontakt.click();
 }
 
 // Del-link: adressen husker den aktuelle salat som numre, fx ?s=3-7-1-9-4-2.
@@ -508,7 +523,6 @@ function visKode(s, animer = false) {
     }
     opdaterRaekke(kat, sidste[kat.id]);
   }
-  opdaterGalleri();
   return true;
 }
 
@@ -563,7 +577,6 @@ function visFavoritter() {
     aabn.addEventListener("click", () => {
       visKode(f.s, true);
       genstart(document.getElementById("skaal"), "ryster");
-      visAntal();
       opdaterLink();
       document.querySelector(".skaal-kort").scrollIntoView({ behavior: "smooth", block: "start" });
     });
@@ -657,41 +670,9 @@ function skiftEn(kat, retning) {
   genstart(gruppe, "ny");
   const li = opdaterRaekke(kat, ingrediens);
   genstart(li, retning < 0 ? "skiftet-tilbage" : "skiftet");
-  opdaterGalleri();
   opdaterLink();
 }
 
-// Store billeder af de valgte ingredienser nederst på siden (uden dressing).
-function opdaterGalleri() {
-  const galleri = document.getElementById("galleri");
-  galleri.replaceChildren(
-    ...kategorier
-      .filter((kat) => kat.id !== "dressing" && sidste[kat.id] && !udeladt.has(kat.id))
-      .map((kat) => {
-        const ingrediens = sidste[kat.id];
-        const fig = document.createElement("figure");
-        fig.className = "kort";
-        const ramme = document.createElement("div");
-        ramme.className = "ramme";
-        if (ingrediens.billede) {
-          const img = document.createElement("img");
-          img.src = ingrediens.billede;
-          img.alt = ingrediens.navn;
-          img.loading = "lazy";
-          ramme.appendChild(img);
-        } else {
-          ramme.textContent = ingrediens.emoji || "•";
-          ramme.classList.add("emoji");
-        }
-        const tekst = document.createElement("figcaption");
-        tekst.innerHTML = '<span class="kat"></span><span class="navn"></span>';
-        tekst.querySelector(".kat").textContent = kat.navn;
-        tekst.querySelector(".navn").textContent = ingrediens.navn;
-        fig.append(ramme, tekst);
-        return fig;
-      })
-  );
-}
 
 // Knapper til kostvalg. Valget huskes i browseren.
 function lavKostKnapper() {
@@ -710,14 +691,14 @@ function lavKostKnapper() {
 }
 function visKost() {
   for (const knap of document.querySelectorAll("#kost .kost-knap")) knap.setAttribute("aria-pressed", valgtKost.has(knap.dataset.kost));
-  document.getElementById("kost-note").hidden = valgtKost.size === 0;
+  const valgte = KOST.filter((k) => valgtKost.has(k.id)).map((k) => k.navn);
+  document.getElementById("kost-antal").textContent = valgte.length ? ` (${valgte.join(", ")})` : "";
 }
 function skiftKost(id) {
   if (valgtKost.has(id)) valgtKost.delete(id);
   else valgtKost.add(id);
   lager.gem("kost", JSON.stringify([...valgtKost]));
   visKost();
-  visAntal();
   // Skift kun de ingredienser ud, der ikke passer længere.
   let nr = 0;
   for (const kat of kategorier) {
@@ -732,15 +713,9 @@ function skiftKost(id) {
     if (!udeladt.has(kat.id)) drys(tegnKategori(kat, ny), nr++);
     opdaterRaekke(kat, ny);
   }
-  opdaterGalleri();
   opdaterLink();
 }
 
-function visAntal() {
-  const antal = kategorier.filter((k) => !udeladt.has(k.id)).reduce((sum, k) => sum * Math.max(1, tilladt(k).length), 1);
-  const el = document.getElementById("antal");
-  if (el) el.textContent = `${antal.toLocaleString("da-DK")} mulige salater`;
-}
 
 // Ryst telefonen for at shake. iPhone kræver tilladelse, som kun kan bedes om ved et tryk.
 let sensorStartet = false;
@@ -776,10 +751,7 @@ hentIngredienser()
     lavKostKnapper();
     lavPersoner();
     lavHjemme();
-    visAntal();
-    visTaeller();
     if (!laesLink()) shake(false);
-    visAntal();
     document.getElementById("del").addEventListener("click", del);
     document.getElementById("gem").addEventListener("click", skiftGem);
     visFavoritter();
