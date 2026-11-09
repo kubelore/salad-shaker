@@ -55,7 +55,7 @@ body {
   font-family: var(--font-display);
   font-weight: 800;
   font-size: clamp(2.25rem, 7vw, 3.5rem);
-  line-height: 1;
+  line-height: 1.1;
   letter-spacing: -0.02em;
   margin: 0;
   color: var(--blad);
@@ -239,7 +239,7 @@ body.skriver .shake-bar { display: none; }
 
 /* Mobil: alt det vigtige på én skærm, og Shake-knappen sidder fast i bunden inden for tommelfingerens rækkevidde */
 @media (max-width: 759px) {
-  .side { padding-block: 1rem calc(6.5rem + env(safe-area-inset-bottom, 0px)); gap: 1.25rem; }
+  .side { padding-block: calc(1.75rem + env(safe-area-inset-top, 0px)) calc(6.5rem + env(safe-area-inset-bottom, 0px)); gap: 1.25rem; }
   .top h1 { font-size: 2.25rem; }
   .intro { font-size: 0.9375rem; margin-top: 0.25rem; }
   .hoved { gap: 0.75rem; }
