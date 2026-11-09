@@ -755,6 +755,9 @@ hentIngredienser()
     visGem();
     lavInstaller();
     document.getElementById("shake").addEventListener("click", () => {
+      // Gå altid op til skålen, så man ser salaten blive rystet.
+      const roligt = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: roligt ? "auto" : "smooth" });
       shake();
     });
   })
