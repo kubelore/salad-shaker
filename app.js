@@ -268,8 +268,8 @@ function visLaas(kat) {
   knap.innerHTML = er ? LAAS_LUKKET : LAAS_AABEN;
   knap.setAttribute("aria-pressed", er);
   const navn = kat.navn.toLowerCase();
-  knap.setAttribute("aria-label", er ? `Behold ikke ${navn}` : `Behold ${navn}, når du ryster`);
-  knap.title = er ? "Behold: bliver, når du ryster" : "Behold, når du ryster";
+  knap.setAttribute("aria-label", er ? `Behold ikke ${navn}` : `Behold ${navn} ved Shake`);
+  knap.title = er ? "Behold: bliver ved Shake" : "Behold ved Shake";
   li.classList.toggle("laast", er);
 }
 
@@ -439,7 +439,7 @@ function drys(gruppe, nr) {
 }
 
 // Shake hele salaten (låste kategorier bliver liggende).
-function shake(talt = true) {
+function shake() {
   let nr = 0;
   for (const kat of kategorier) {
     if (udeladt.has(kat.id)) continue;
@@ -450,34 +450,9 @@ function shake(talt = true) {
     opdaterRaekke(kat, ingrediens);
   }
   genstart(document.getElementById("skaal"), "ryster");
-  if (talt) {
-    vibrer();
-  }
   opdaterLink();
 }
 
-
-// Lille vibration ved Shake. Android bruger navigator.vibrate. iPhone har ikke den funktion, men Safari (iOS 18+)
-// giver et lille dunk, når en kontakt (<input switch>) slås til og fra. Det virker kun ved et tryk, ikke ved rysten,
-// og kun når "Systemhaptik" er slået til på telefonen.
-function vibrer() {
-  if (navigator.vibrate) {
-    try { navigator.vibrate([25, 60, 25, 60, 40]); } catch (e) {}
-    return;
-  }
-  try {
-    const label = document.createElement("label");
-    label.ariaHidden = "true";
-    label.style.display = "none";
-    const kontakt = document.createElement("input");
-    kontakt.type = "checkbox";
-    kontakt.setAttribute("switch", "");
-    label.appendChild(kontakt);
-    document.head.appendChild(label);
-    label.click();
-    document.head.removeChild(label);
-  } catch (e) {}
-}
 
 // Kort besked over Shake-knappen, fx når en ingrediens låses.
 function besked(tekst) {
@@ -767,41 +742,13 @@ function skiftKost(id) {
 }
 
 
-// Ryst telefonen for at shake. iPhone kræver tilladelse, som kun kan bedes om ved et tryk.
-let sensorStartet = false;
-let sidsteRyst = 0;
-async function startRystSensor() {
-  if (sensorStartet || typeof DeviceMotionEvent === "undefined") return;
-  if (!window.matchMedia("(pointer: coarse)").matches) return;
-  try {
-    if (typeof DeviceMotionEvent.requestPermission === "function") {
-      if ((await DeviceMotionEvent.requestPermission()) !== "granted") return;
-    }
-  } catch (e) {
-    return;
-  }
-  sensorStartet = true;
-  window.addEventListener("devicemotion", (e) => {
-    const a = e.acceleration;
-    const styrke = a && a.x != null
-      ? Math.abs(a.x) + Math.abs(a.y) + Math.abs(a.z)
-      : (() => { const g = e.accelerationIncludingGravity || {}; return Math.abs(g.x || 0) + Math.abs(g.y || 0) + Math.abs(g.z || 0) - 10; })();
-    const nu = Date.now();
-    if (styrke > 28 && nu - sidsteRyst > 1200) {
-      sidsteRyst = nu;
-      shake();
-    }
-  });
-  document.getElementById("hint").hidden = false;
-}
-
 hentIngredienser()
   .then((data) => {
     kategorier = data.kategorier;
     lavKostKnapper();
     lavPersoner();
     lavHjemme();
-    if (!laesLink()) shake(false);
+    if (!laesLink()) shake();
     document.getElementById("del").addEventListener("click", del);
     document.getElementById("gem").addEventListener("click", skiftGem);
     visFavoritter();
@@ -809,9 +756,7 @@ hentIngredienser()
     lavInstaller();
     document.getElementById("shake").addEventListener("click", () => {
       shake();
-      startRystSensor();
     });
-    if (typeof DeviceMotionEvent !== "undefined" && typeof DeviceMotionEvent.requestPermission !== "function") startRystSensor();
   })
   .catch((fejl) => {
     document.getElementById("liste").outerHTML = '<p class="fejl">Ingredienserne kunne ikke indlæses. Tjek at ingredienser.json er gyldig JSON.</p>';

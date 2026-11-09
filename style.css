@@ -224,7 +224,7 @@ body {
 .hjemme-knapper { display: flex; flex-wrap: wrap; gap: 0.375rem; padding-bottom: 0.75rem; }
 .hjemme-knapper .kost-knap { font-size: 0.875rem; min-height: 2.5rem; padding: 0.25rem 0.75rem; }
 
-/* Shake og "ryst telefonen" hører sammen og står samlet */
+/* Shake-knappen og den korte besked over den */
 .shake-bar { display: grid; justify-items: center; gap: 0.375rem; }
 .besked {
   position: absolute; left: 16px; right: 16px; bottom: calc(100% - 0.75rem); margin: 0 auto; width: fit-content; max-width: 22rem;
@@ -235,11 +235,10 @@ body {
 .besked:empty { display: none; }
 .besked.vis { opacity: 1; transform: none; }
 .shake-bar { position: relative; }
-.hint { margin: 0; color: var(--daempet); font-size: 0.8125rem; text-align: center; }
 
 /* Mobil: alt det vigtige på én skærm, og Shake-knappen sidder fast i bunden inden for tommelfingerens rækkevidde */
 @media (max-width: 759px) {
-  .side { padding-block: 1rem calc(7.5rem + env(safe-area-inset-bottom, 0px)); gap: 1.25rem; }
+  .side { padding-block: 1rem calc(6.5rem + env(safe-area-inset-bottom, 0px)); gap: 1.25rem; }
   .top h1 { font-size: 2.25rem; }
   .intro { font-size: 0.9375rem; margin-top: 0.25rem; }
   .hoved { gap: 0.75rem; }
