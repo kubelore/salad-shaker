@@ -131,7 +131,7 @@ body {
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
-.shake-knap:hover { filter: brightness(1.06); }
+@media (hover: hover) { .shake-knap:hover { filter: brightness(1.06); } }
 .shake-knap:active { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 60%, black); }
 .shake-knap:focus-visible { outline: 3px solid var(--blad); outline-offset: 4px; }
 
@@ -226,6 +226,15 @@ body {
 
 /* Shake og "ryst telefonen" hører sammen og står samlet */
 .shake-bar { display: grid; justify-items: center; gap: 0.375rem; }
+.besked {
+  position: absolute; left: 16px; right: 16px; bottom: calc(100% - 0.75rem); margin: 0 auto; width: fit-content; max-width: 22rem;
+  padding: 0.5rem 0.875rem; border-radius: 0.75rem; background: var(--tekst); color: var(--bg);
+  font-size: 0.875rem; text-align: center; box-shadow: 0 6px 18px var(--skygge);
+  opacity: 0; transform: translateY(6px); transition: opacity 0.2s ease, transform 0.2s ease; pointer-events: none;
+}
+.besked:empty { display: none; }
+.besked.vis { opacity: 1; transform: none; }
+.shake-bar { position: relative; }
 .hint { margin: 0; color: var(--daempet); font-size: 0.8125rem; text-align: center; }
 
 /* Mobil: alt det vigtige på én skærm, og Shake-knappen sidder fast i bunden inden for tommelfingerens rækkevidde */
@@ -295,7 +304,7 @@ body {
   font-size: 0.875rem; font-weight: 700; line-height: 1;
   background: var(--flade); color: var(--accent); border: 1px solid var(--kant);
 }
-.udelad:hover .maerke { background: var(--accent); color: var(--accent-tekst); border-color: var(--accent); }
+@media (hover: hover) { .udelad:hover .maerke { background: var(--accent); color: var(--accent-tekst); border-color: var(--accent); } }
 .liste li.udeladt .udelad .maerke { background: var(--blad); color: var(--flade); border-color: var(--blad); }
 .liste li.udeladt .ikon { opacity: 0.25; filter: grayscale(1); }
 .liste li.udeladt .navn { color: var(--daempet); font-weight: 400; font-style: italic; }
@@ -308,13 +317,11 @@ body {
   display: grid; place-items: center; cursor: pointer; padding: 0;
 }
 .laas svg { width: 1.125rem; height: 1.125rem; }
-.laas:hover { color: var(--accent); }
+@media (hover: hover) { .laas:hover { color: var(--accent); } }
 .laas:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; }
 .laas[aria-pressed="true"] { color: var(--accent-tekst); background: var(--accent); }
 .liste li.laast .ikon { box-shadow: 0 0 0 2px var(--accent); }
 .liste li.laast .kat::after { content: " · låst"; color: var(--accent); font-weight: 700; }
-.laas-forklaring { display: flex; align-items: center; gap: 0.375rem; margin: 0.25rem 0 0.25rem; font-size: 0.8125rem; color: var(--daempet); }
-.laas-forklaring svg { width: 0.875rem; height: 0.875rem; flex-shrink: 0; color: var(--accent); }
 
 .pil {
   width: 2.5rem;
@@ -331,7 +338,7 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 .pil svg { width: 1.125rem; height: 1.125rem; }
-.pil:hover { border-color: var(--accent); }
+@media (hover: hover) { .pil:hover { border-color: var(--accent); } }
 .pil:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; }
 .pil:active { transform: scale(0.94); }
 .liste li.skiftet .navn { animation: ind-hoejre 0.3s ease-out; }
@@ -347,7 +354,7 @@ body {
   padding: 0.375rem 0.875rem; min-height: 2.75rem; border-radius: 99px; cursor: pointer;
   border: 1px solid var(--kant); background: var(--flade); color: var(--tekst);
 }
-.kost-knap:hover { border-color: var(--blad); }
+@media (hover: hover) { .kost-knap:hover { border-color: var(--blad); } }
 .kost-knap:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; }
 .kost-knap[aria-pressed="true"] { background: var(--blad); border-color: var(--blad); color: var(--flade); }
 .kost-knap[aria-pressed="true"]::before { content: "✓ "; }
@@ -370,17 +377,24 @@ body {
   font: inherit; font-size: 0.875rem; color: var(--tekst); background: none; border: none;
   padding: 0.375rem 0.5rem; cursor: pointer; border-radius: 0.75rem;
 }
-.favorit-aabn:hover .favorit-navne { text-decoration: underline; }
+@media (hover: hover) { .favorit-aabn:hover .favorit-navne { text-decoration: underline; } }
 .favorit-aabn:focus-visible, .favorit-fjern:focus-visible { outline: 3px solid var(--blad); outline-offset: -3px; }
 .favorit-ikoner { display: flex; flex-shrink: 0; }
 .favorit-ikoner img { width: 1.625rem; height: 1.625rem; object-fit: contain; }
 .favorit-ikoner img + img { margin-left: -0.25rem; }
 .favorit-navne { min-width: 0; }
+/* Navn og ingredienser øverst, de små billeder under, så teksten får hele bredden */
+.favorit-aabn { flex-direction: column; align-items: flex-start; gap: 0.25rem; padding: 0.5rem 0.625rem; }
+.favorit-navne { order: -1; }
+.favorit-navne strong { display: block; font-size: 0.9375rem; }
+.favorit-navne small { display: block; font-size: 0.8125rem; color: var(--daempet); }
+.favorit-omdoeb svg { width: 1.125rem; height: 1.125rem; }
+.favorit-felt { flex: 1; min-width: 0; font: inherit; font-size: 1rem; padding: 0.5rem 0.625rem; margin: 0.25rem; border: 1px solid var(--blad); border-radius: 0.5rem; background: var(--flade); color: var(--tekst); }
 .favorit-fjern {
   flex-shrink: 0; width: 2.5rem; font-size: 1.25rem; line-height: 1; color: var(--daempet);
   background: none; border: none; cursor: pointer; border-radius: 0.75rem;
 }
-.favorit-fjern:hover { color: var(--accent); }
+@media (hover: hover) { .favorit-fjern:hover { color: var(--accent); } }
 
 /* Installér som app: nederst på siden, adskilt fra salaten */
 .installer { margin: 0 0 0.75rem; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.25rem 0.5rem; font-size: 0.8125rem; color: var(--daempet); }
@@ -400,7 +414,7 @@ body {
   touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
 .handling svg { width: 1rem; height: 1rem; flex-shrink: 0; }
-.handling:hover { color: var(--tekst); }
+@media (hover: hover) { .handling:hover { color: var(--tekst); } }
 .handling:focus-visible { outline: 3px solid var(--blad); outline-offset: 2px; }
 .gem-knap[aria-pressed="true"] svg { color: var(--accent); }
 .gem-knap[aria-pressed="true"] path { fill: currentColor; }

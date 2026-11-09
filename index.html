@@ -39,6 +39,7 @@
         <g id="flaske"></g>
       </svg>
       <div class="shake-bar">
+        <p class="besked" id="besked" role="status" aria-live="polite"></p>
         <button id="shake" class="shake-knap" type="button">Shake</button>
         <p class="hint" id="hint" hidden>Du kan også ryste telefonen</p>
       </div>
@@ -54,7 +55,6 @@
         <h2 id="opskrift-titel" class="skjult">Din salat</h2>
         <div class="personer-vaelger"><span id="personer-label">Personer</span><div class="personer" id="personer" role="group" aria-labelledby="personer-label"></div></div>
       </div>
-      <p class="laas-forklaring"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor" stroke="currentColor" stroke-width="2.2"/><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Låste ingredienser bliver ved næste Shake.</p>
       <ol id="liste" class="liste" aria-live="polite"></ol>
       <div id="dressing-opskrift" class="dressing-opskrift" hidden>
         <h3>Sådan laver du <span id="dressing-navn"></span> <span class="dressing-til">til <span id="dressing-til"></span></span></h3>

@@ -254,6 +254,8 @@ function lavLaas(kat) {
     if (laast.has(kat.id)) laast.delete(kat.id);
     else laast.add(kat.id);
     visLaas(kat);
+    const navn = sidste[kat.id] ? sidste[kat.id].navn : kat.navn;
+    besked(laast.has(kat.id) ? `${navn} er låst og bliver, når du trykker Shake` : `${navn} er låst op`);
   });
   return knap;
 }
@@ -456,26 +458,34 @@ function shake(talt = true) {
 
 
 // Lille vibration ved Shake. Android bruger navigator.vibrate. iPhone har ikke den funktion, men Safari (iOS 18+)
-// giver et lille dunk, når en kontakt (<input switch>) slås til og fra. Det virker kun ved et tryk, ikke ved rysten.
-let iosKontakt = null;
+// giver et lille dunk, når en kontakt (<input switch>) slås til og fra. Det virker kun ved et tryk, ikke ved rysten,
+// og kun når "Systemhaptik" er slået til på telefonen.
 function vibrer() {
   if (navigator.vibrate) {
     try { navigator.vibrate([25, 60, 25, 60, 40]); } catch (e) {}
     return;
   }
-  if (!iosKontakt) {
+  try {
     const label = document.createElement("label");
-    label.setAttribute("aria-hidden", "true");
-    label.style.cssText = "position:fixed;left:-100px;top:0;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none";
-    const boks = document.createElement("input");
-    boks.type = "checkbox";
-    boks.setAttribute("switch", "");
-    boks.tabIndex = -1;
-    label.appendChild(boks);
-    document.body.appendChild(label);
-    iosKontakt = label;
-  }
-  iosKontakt.click();
+    label.ariaHidden = "true";
+    label.style.display = "none";
+    const kontakt = document.createElement("input");
+    kontakt.type = "checkbox";
+    kontakt.setAttribute("switch", "");
+    label.appendChild(kontakt);
+    document.head.appendChild(label);
+    label.click();
+    document.head.removeChild(label);
+  } catch (e) {}
+}
+
+// Kort besked over Shake-knappen, fx når en ingrediens låses.
+function besked(tekst) {
+  const el = document.getElementById("besked");
+  el.textContent = tekst;
+  el.classList.add("vis");
+  clearTimeout(besked.t);
+  besked.t = setTimeout(() => el.classList.remove("vis"), 2600);
 }
 
 // Del-link: adressen husker den aktuelle salat som numre, fx ?s=3-7-1-9-4-2.
@@ -572,7 +582,12 @@ function visFavoritter() {
     });
     const navne = document.createElement("span");
     navne.className = "favorit-navne";
-    navne.textContent = ingredienser.map((i) => i.navn).join(", ");
+    const liste = ingredienser.map((i) => i.navn).join(", ");
+    if (f.navn) {
+      navne.innerHTML = '<strong class="favorit-titel"></strong><small></small>';
+      navne.querySelector("strong").textContent = f.navn;
+      navne.querySelector("small").textContent = liste;
+    } else navne.textContent = liste;
     aabn.append(ikoner, navne);
     aabn.addEventListener("click", () => {
       visKode(f.s, true);
@@ -584,7 +599,7 @@ function visFavoritter() {
     fjern.type = "button";
     fjern.className = "favorit-fjern";
     fjern.textContent = "×";
-    fjern.setAttribute("aria-label", `Fjern ${navne.textContent} fra Mine salater`);
+    fjern.setAttribute("aria-label", `Fjern ${f.navn || liste} fra Mine salater`);
     fjern.title = "Fjern";
     fjern.addEventListener("click", () => {
       favoritter = favoritter.filter((x) => x !== f);
@@ -592,7 +607,42 @@ function visFavoritter() {
       visFavoritter();
       visGem();
     });
-    li.append(aabn, fjern);
+    // Giv salaten et navn: navnet bliver til et tekstfelt, der gemmes ved Enter eller når man trykker udenfor.
+    const omdoeb = document.createElement("button");
+    omdoeb.type = "button";
+    omdoeb.className = "favorit-fjern favorit-omdoeb";
+    omdoeb.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4ZM14 6l4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>';
+    omdoeb.setAttribute("aria-label", f.navn ? `Omdøb ${f.navn}` : "Giv salaten et navn");
+    omdoeb.title = "Giv et navn";
+    omdoeb.addEventListener("click", () => {
+      const felt = document.createElement("input");
+      felt.type = "text";
+      felt.className = "favorit-felt";
+      felt.value = f.navn || "";
+      felt.placeholder = "Navn, fx Fredagssalat";
+      felt.maxLength = 40;
+      felt.enterKeyHint = "done";
+      felt.setAttribute("aria-label", "Navn på salaten");
+      let faerdig = false;
+      const gem = () => {
+        if (faerdig) return;
+        faerdig = true;
+        const navn = felt.value.trim();
+        if (navn) f.navn = navn;
+        else delete f.navn;
+        gemFavoritter();
+        visFavoritter();
+      };
+      felt.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") gem();
+        if (e.key === "Escape") { faerdig = true; visFavoritter(); }
+      });
+      felt.addEventListener("blur", gem);
+      aabn.replaceWith(felt);
+      omdoeb.hidden = true;
+      felt.focus();
+    });
+    li.append(aabn, omdoeb, fjern);
     return li;
   }));
 }
