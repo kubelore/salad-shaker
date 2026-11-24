@@ -1,7 +1,7 @@
 // Service worker: gør Salad shaker installerbar og lader den virke uden net.
 // Sidens egne filer hentes fra nettet først (så rettelser slår igennem med det samme) og gemmes til offline.
 // Billeder og skrifttyper vises fra lageret med det samme og opdateres i baggrunden.
-const LAGER = "salad-shaker-v1";
+const LAGER = "salad-shaker-v2";
 const KERNE = ["/", "index.html", "style.css", "app.js", "ingredienser.json", "manifest.webmanifest",
   "icon-192.png", "icon-512.png", "apple-touch-icon.png", "favicon-32.png"];
 

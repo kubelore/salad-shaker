@@ -808,9 +808,9 @@ async function startRystSensor() {
     }
   });
 }
-// Kort vibration i takt med skålens rystelse (0,6 s). Kun Android: iPhone har ikke navigator.vibrate, så der sker intet.
+// Vibration i takt med skålens rystelse (0,6 s). Mange Android-motorer mærkes ikke under ca. 100 ms. Kun Android: iPhone har ikke navigator.vibrate, så der sker intet.
 function vibrer() {
-  if (typeof navigator.vibrate === "function") navigator.vibrate([40, 60, 40, 60, 40]);
+  if (typeof navigator.vibrate === "function") navigator.vibrate([150, 80, 150]);
 }
 // Shake og gå op til skålen. Bruges både af knappen og når man ryster telefonen.
 function shakeOgVis() {
