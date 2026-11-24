@@ -778,7 +778,7 @@ function skiftKost(id) {
 }
 
 
-// Ryst telefonen for at shake (uden vibration). iPhone kræver tilladelse, som kun kan bedes om ved et tryk,
+// Ryst telefonen for at shake. iPhone kræver tilladelse, som kun kan bedes om ved et tryk,
 // så der spørges første gang man trykker på Shake. Android lytter som regel med det samme.
 let sensorStartet = false;
 let sidsteRyst = 0;
@@ -808,8 +808,13 @@ async function startRystSensor() {
     }
   });
 }
+// Kort vibration i takt med skålens rystelse (0,6 s). Kun Android: iPhone har ikke navigator.vibrate, så der sker intet.
+function vibrer() {
+  if (typeof navigator.vibrate === "function") navigator.vibrate([40, 60, 40, 60, 40]);
+}
 // Shake og gå op til skålen. Bruges både af knappen og når man ryster telefonen.
 function shakeOgVis() {
+  vibrer();
   shake();
   tilSkaalen();
   maaskePuf();
